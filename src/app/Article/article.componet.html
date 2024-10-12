@@ -1,0 +1,149 @@
+<p-toast></p-toast>
+<p-tabView>
+    <p-tabPanel header="Създай статия">
+        <p-button label="Добави снимка" (click)="addPicture()" />
+        <p-dialog header="Изтрий акаунт" 
+            [(visible)]="dialogAddImage" 
+            position="center" >
+
+            <p-fileUpload 
+            name="demo[]" 
+            url="http://localhost:8080/K-Konsult/file/upload/{{article_title}}" 
+            (onUpload)="onUpload($event)" 
+            [multiple]="true" 
+            accept="image/*" 
+            maxFileSize="1000000">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">
+                            {{ file.name }} - {{ file.size }} bytes
+                        </li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+
+        </p-dialog>
+        <p></p>
+        <input type="text" pInputText [(ngModel)]="article_title" />
+        <p>Описание</p>
+        <textarea 
+            rows="5"
+            cols="30" 
+            pInputTextarea 
+            [(ngModel)]="article_content">
+        </textarea>
+        <p></p>
+        <p-button label="Създай статия!" (click)="createArticle()"/>
+    </p-tabPanel>
+    <p-tabPanel header="Промени статия" (click)="getArticles()">
+        <p>Имот</p>
+        <p-listbox 
+            [options]="articlesList" 
+            [(ngModel)]="selectedArticles"
+            optionLabel="name" 
+            [filter]="true" 
+            [style]="{ width: '15rem' }" 
+            [listStyle]="{'max-height': '220px'}" 
+            (onChange)="getArticleContent()"/>
+        <p></p>
+        <p-button label="Добави снимка" (click)="addNewPicture()" />
+            
+        <p-dialog header="Изтрий акаунт" 
+            [(visible)]="dialogAddNewImage" 
+            position="center" >
+
+            <p-fileUpload 
+            name="demo[]" 
+            url="http://localhost:8080/K-Konsult/file/upload/{{article.title}}" 
+            (onUpload)="onUpload($event)" 
+            [multiple]="true" 
+            accept="image/*" 
+            maxFileSize="1000000">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">
+                            {{ file.name }} - {{ file.size }} bytes
+                        </li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+
+        </p-dialog>
+    <div class="galery">
+       <p-galleria [numVisible]="2" [value]="images"
+        [showItemNavigatorsOnHover]="true" 
+        [showItemNavigators]="true" 
+        [circular]="true"
+         > 
+            <ng-template  pTemplate="item" let-item > 
+                <img 
+                    [src]="item.previewImageSrc"  
+                    [alt]="item.alt"  
+                    [title]="item.title"  
+                    style="width: auto; height: 300px;" 
+                    (click)="openGalleryModal()"
+                /> 
+            </ng-template> 
+            <ng-template pTemplate="thumbnail" let-item width="20px"> 
+                <div class="grid grid-nogutter justify-content-center"> 
+                    <img 
+                        [src]="item.thumbnailImageSrc"  
+                        [alt]="item.alt"  
+                        [title]="item.title"  
+                        width=10% /> 
+                </div> 
+            </ng-template> 
+      
+        </p-galleria> 
+    </div>
+    <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+        <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+          [showItemNavigators]="true" [circular]="true">
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+              style="width: auto; height: 600px;" />
+          </ng-template>
+        </p-galleria>
+      </p-dialog>
+    <p></p>
+    <p-button label="Изтрии снимка" (click)="deleteImageDialog()" />
+    <p-dialog header="Изтрий акаунт" 
+    [(visible)]="deleteImageDialogVisivle" 
+    position="center" >
+    <p></p>
+    <p-listbox 
+        [options]="imagesList" 
+        [(ngModel)]="selectImage"
+        optionLabel="file" 
+        [filter]="true" 
+        [style]="{ width: '15rem' }" 
+        [listStyle]="{'max-height': '220px'}" />
+    <p></p>
+    <p-button label="Изтрии снимка" (click)="deleteImage()" />
+    </p-dialog>
+        <p></p>
+        <textarea 
+        rows="5"
+        cols="30" 
+        pInputTextarea 
+        [(ngModel)]="article.content">
+    </textarea>
+    <p></p>
+    <p-button label="Промени статия!" (click)="updateArticle()"/>
+    </p-tabPanel>
+    <p-tabPanel header="Изтрий статия" (click)="getArticles()">
+        <p>Имот</p>
+        <p-listbox 
+            [options]="articlesList" 
+            [(ngModel)]="selectedArticles"
+            optionLabel="name" 
+            [filter]="true" 
+            [style]="{ width: '15rem' }" 
+            [listStyle]="{'max-height': '220px'}" 
+            (onChange)="getArticleContent()"/>
+        <p></p>
+        <label> {{article.content}}</label>
+        <p></p>
+        <p-button label="Изтрий статия!" (click)="deleteArticle()"/>
+    </p-tabPanel>
+</p-tabView>

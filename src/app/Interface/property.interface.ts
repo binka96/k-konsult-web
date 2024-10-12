@@ -1,0 +1,21 @@
+export interface PropertyDto {
+nameProperty: string,
+type: string,
+town: string,
+neighborhood: string,
+category: string,
+price: number,
+pricePerQuadrature: number,
+quadrature: number,
+construction: string,
+typeOfConstruction: string,
+akt: string,
+description: string,
+yearOfConstruction: number,
+floar: number,
+floars: number,
+elevator: boolean,
+owenerName: string,
+ownerLastName: string,
+ownerPhone: string
+}

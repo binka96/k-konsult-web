@@ -1,0 +1,45 @@
+<h1>
+    {{article.title}}
+</h1>
+
+<div class="galery">
+    <p-galleria [numVisible]="2" [value]="images"
+     [showItemNavigatorsOnHover]="true" 
+     [showItemNavigators]="true" 
+     [circular]="true"
+      > 
+         <ng-template  pTemplate="item" let-item > 
+             <img 
+                 [src]="item.previewImageSrc"  
+                 [alt]="item.alt"  
+                 [title]="item.title"  
+                 style="width: auto; height: 300px;" 
+                 (click)="openGalleryModal()"
+             /> 
+         </ng-template> 
+         <ng-template pTemplate="thumbnail" let-item width="20px"> 
+             <div class="grid grid-nogutter justify-content-center"> 
+                 <img 
+                     [src]="item.thumbnailImageSrc"  
+                     [alt]="item.alt"  
+                     [title]="item.title"  
+                     width=10% /> 
+             </div> 
+         </ng-template> 
+   
+     </p-galleria> 
+ </div>
+ <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+     <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+       [showItemNavigators]="true" [circular]="true">
+       <ng-template pTemplate="item" let-item>
+         <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+           style="width: auto; height: 600px;" />
+       </ng-template>
+     </p-galleria>
+    </p-dialog>
+
+    <p>
+        {{article.content}}
+    </p>
+

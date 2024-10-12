@@ -1,0 +1,18 @@
+<p-toast></p-toast>
+<p>firstName</p>
+<input type="text" pInputText [(ngModel)]="firstName" />
+<p>lastName</p>
+<input type="text" pInputText [(ngModel)]="lastName" />
+<p>email</p>
+<input type="text" pInputText [(ngModel)]="email" />
+<p>phone</p>
+<input type="text" pInputText [(ngModel)]="phone" />
+<p></p>
+<textarea class="float-lable"
+        rows="5"
+        cols="30" 
+        pInputTextarea 
+        id="float-input" 
+        [(ngModel)]="comment">           
+    </textarea>
+<p-button  label="Направи запитване" (click)="createInquery()" ></p-button>

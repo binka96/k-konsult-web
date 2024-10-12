@@ -1,0 +1,305 @@
+<p-toast></p-toast>
+<p-tabView>
+    <p-tabPanel header="Добави имот">
+
+        <div class="card flex justify-content-center">
+            <p-button label="Добави снимка" (click)="addPicture()" />
+            <p-dialog header="Изтрий акаунт" 
+                [(visible)]="dialogAddImage" 
+                position="center" >
+
+                <p-fileUpload 
+                name="demo[]" 
+                url="http://localhost:8080/K-Konsult/file/upload/{{nameProperty}}" 
+                (onUpload)="onUpload($event)" 
+                [multiple]="true" 
+                accept="image/*" 
+                maxFileSize="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">
+                                {{ file.name }} - {{ file.size }} bytes
+                            </li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+
+            </p-dialog>
+        </div>
+        <p>Име на имота</p>
+        <input type="text" pInputText [(ngModel)]="nameProperty" />
+        <p>Тип</p>
+        <p-listbox 
+            [options]="typeProperty" 
+            [(ngModel)]="selectedType"
+            optionLabel="type" 
+            [filter]="true" 
+            [style]="{ width: '15rem' }" 
+            [listStyle]="{'max-height': '220px'}" />
+        <p>Град</p>
+        <p-listbox 
+        [options]="cities" 
+        [(ngModel)]="selectedCity" 
+        optionLabel="name" 
+        [filter]="true" 
+        [style]="{ width: '15rem' }" 
+        [listStyle]="{'max-height': '220px'}" />
+        <p>Квартал</p>
+        <p-listbox 
+        [options]="neighborhoods" 
+        [(ngModel)]="selectedNeighborhood" 
+        optionLabel="neighborhood" 
+        [filter]="true" 
+        [style]="{ width: '15rem' }" 
+        [listStyle]="{'max-height': '220px'}" />
+        <p>Категория</p>
+        <p-listbox 
+        [options]="categories" 
+        [(ngModel)]="selectedCategory" 
+        optionLabel="type" 
+        [style]="{ width: '15rem' }" 
+        [listStyle]="{'max-height': '220px'}" />
+        <p>Цена от</p>
+        <p-inputNumber 
+                    [(ngModel)]="price" 
+                    inputId="locale-user" 
+                    [minFractionDigits]="2" />
+        <p>Цена на кв.м</p>
+        <p-inputNumber 
+                    [(ngModel)]="pricePerQuadrature" 
+                    inputId="locale-user" 
+                    [minFractionDigits]="2" />
+        <p>Площ</p>
+        <p-inputNumber 
+                    [(ngModel)]="quadrature" 
+                    inputId="locale-user" 
+                    [minFractionDigits]="2" />
+        <p>Строителство</p>
+        <input type="text" pInputText [(ngModel)]="construction" />
+        <p>Тип Строителство</p>
+        <p-listbox 
+        [options]="typeOfConstructions" 
+        [(ngModel)]="selectedTypeOfConstruction" 
+        optionLabel="type" 
+        [style]="{ width: '15rem' }" 
+        [listStyle]="{'max-height': '220px'}" />
+        <p>Акт</p>
+        <input type="text" pInputText [(ngModel)]="akt" />
+        <p>Описание</p>
+        <textarea 
+            rows="5"
+            cols="30" 
+            pInputTextarea 
+            [(ngModel)]="description">
+        </textarea>
+        <p>Година на стройтелство</p>
+        <p-inputNumber 
+            inputId="integeronly" 
+            [(ngModel)]="yearOfConstruction" /> 
+        <p>Етаж</p>
+        <p-inputNumber 
+                inputId="integeronly" 
+                [(ngModel)]="floor" /> 
+        <p>Етажи</p>
+        <p-inputNumber 
+           inputId="integeronly" 
+           [(ngModel)]="floors" /> 
+        <p>Асансьор</p>
+        <p-checkbox 
+            [(ngModel)]="elevator" 
+            [binary]="true" 
+            inputId="binary" />
+        <p>Име на собстеника</p>
+        <input type="text" pInputText [(ngModel)]="ownerName" />
+        <p>Фамилия на собстеника</p>
+        <input type="text" pInputText [(ngModel)]="ownerLastName" />
+        <p>Телефон на собстеника</p>
+        <input type="text" pInputText [(ngModel)]="ownerPhone" />
+        <p></p>
+        <p-button label="Добави имот" (click)="createProperty()" />
+
+
+    </p-tabPanel>
+    <p-tabPanel header="Промени имот" (click)="getAllPrpoperty()">
+        <p>Имот</p>
+        <p-listbox 
+            [options]="nameProperties" 
+            [(ngModel)]="selectednameProperties"
+            optionLabel="name" 
+            [filter]="true" 
+            [style]="{ width: '15rem' }" 
+            [listStyle]="{'max-height': '220px'}" 
+            (onChange)="getPropertyInformationUpdate()"/>
+        <div class="card flex justify-content-center">
+            
+            <p-button label="Добави снимка" (click)="addNewPicture()" />
+            
+            <p-dialog header="Изтрий акаунт" 
+                [(visible)]="dialogAddNewImage" 
+                position="center" >
+
+                <p-fileUpload 
+                name="demo[]" 
+                url="http://localhost:8080/K-Konsult/file/upload/{{property.nameProperty}}" 
+                (onUpload)="onUpload($event)" 
+                [multiple]="true" 
+                accept="image/*" 
+                maxFileSize="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">
+                                {{ file.name }} - {{ file.size }} bytes
+                            </li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+
+            </p-dialog>
+        </div>
+        <div class="galery">
+           <p-galleria [numVisible]="2" [value]="images"
+            [showItemNavigatorsOnHover]="true" 
+            [showItemNavigators]="true" 
+            [circular]="true"
+             > 
+                <ng-template  pTemplate="item" let-item > 
+                    <img 
+                        [src]="item.previewImageSrc"  
+                        [alt]="item.alt"  
+                        [title]="item.title"  
+                        style="width: auto; height: 300px;" 
+                        (click)="openGalleryModal()"
+                    /> 
+                </ng-template> 
+                <ng-template pTemplate="thumbnail" let-item width="20px"> 
+                    <div class="grid grid-nogutter justify-content-center"> 
+                        <img 
+                            [src]="item.thumbnailImageSrc"  
+                            [alt]="item.alt"  
+                            [title]="item.title"  
+                            width=10% /> 
+                    </div> 
+                </ng-template> 
+          
+            </p-galleria> 
+        </div>
+        <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+            <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+              [showItemNavigators]="true" [circular]="true">
+              <ng-template pTemplate="item" let-item>
+                <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+                  style="width: auto; height: 600px;" />
+              </ng-template>
+            </p-galleria>
+          </p-dialog>
+        <p></p>
+        <p-button label="Изтрии снимка" (click)="deleteImageDialog()" />
+        <p-dialog header="Изтрий акаунт" 
+        [(visible)]="deleteImageDialogVisivle" 
+        position="center" >
+        <p></p>
+        <p-listbox 
+            [options]="imagesList" 
+            [(ngModel)]="selectImage"
+            optionLabel="file" 
+            [filter]="true" 
+            [style]="{ width: '15rem' }" 
+            [listStyle]="{'max-height': '220px'}" />
+        <p></p>
+        <p-button label="Изтрии снимка" (click)="deleteImage()" />
+        </p-dialog>
+        <p>Име на имота</p>
+        <label>{{property.nameProperty}}</label>
+        <p>Тип</p>
+        <label>{{property.type}}</label>
+        <p>Град</p>
+        <label>{{property.town}}</label>
+        <p>Квартал</p>
+        <label>{{property.neighborhood}}</label>
+        <p>Категория</p>
+        <p-listbox 
+        [options]="categories" 
+        [(ngModel)]="selectedCategory" 
+        optionLabel="type" 
+        [style]="{ width: '15rem' }" 
+        [listStyle]="{'max-height': '220px'}" />
+        <p>Цена</p>
+        <p-inputNumber 
+                    [(ngModel)]="property.price" 
+                    inputId="locale-user" 
+                    [minFractionDigits]="2" />
+        <p>Цена на кв.м</p>
+        <p-inputNumber 
+                    [(ngModel)]="property.pricePerQuadrature" 
+                    inputId="locale-user" 
+                    [minFractionDigits]="2" />
+        <p>Площ</p>
+        <p-inputNumber 
+                    [(ngModel)]="property.quadrature" 
+                    inputId="locale-user" 
+                    [minFractionDigits]="2" />
+        <p>Строителство</p>
+        <input type="text" pInputText [(ngModel)]="property.construction" />
+        <p>Тип Строителство</p>
+        <label>{{property.typeOfConstruction}}</label>
+        <p>Акт</p>
+        <input type="text" pInputText [(ngModel)]="property.akt" />
+        <p>Описание</p>
+        <textarea 
+            rows="5"
+            cols="30" 
+            pInputTextarea 
+            [(ngModel)]="property.description">
+        </textarea>
+        <p>Година на стройтелство</p>
+        <p-inputNumber 
+            inputId="integeronly" 
+            [(ngModel)]="property.yearOfConstruction" /> 
+        <p>Етаж</p>
+        <p-inputNumber 
+                inputId="integeronly" 
+                [(ngModel)]="property.floar" /> 
+        <p>Етажи</p>
+        <p-inputNumber 
+           inputId="integeronly" 
+           [(ngModel)]="property.floars" /> 
+        <p>Асансьор</p>
+        <p-checkbox 
+            [(ngModel)]="elevator" 
+            [binary]="true" 
+            inputId="binary" />
+        <p>Име на собстеника</p>
+        <input type="text" pInputText [(ngModel)]="property.owenerName"/>
+        <p>Фамилия на собстеника</p>
+        <input type="text" pInputText [(ngModel)]="property.ownerLastName" />
+        <p>Телефон на собстеника</p>
+        <input type="text" pInputText [(ngModel)]="property.ownerPhone" />
+        <p></p>
+        <p-button label="Добави имот"  />
+    </p-tabPanel>
+    <p-tabPanel header="Изтрий имот" (click)="getAllPrpoperty()">
+        <p>Имот</p>
+        <p-listbox 
+            [options]="nameProperties" 
+            [(ngModel)]="selectednameProperties"
+            optionLabel="name" 
+            [filter]="true" 
+            [style]="{ width: '15rem' }" 
+            [listStyle]="{'max-height': '220px'}" 
+            (onChange)="getPropertyInformation()"/>
+        <p-scrollPanel [style]="{ width: '100%', height: '150px' }">
+            <p>Имот</p>
+            <p>
+                {{property.nameProperty}}
+            </p>
+            <p >
+                {{property.town}} {{property.neighborhood}} {{property.type}}
+            </p>
+            <p>
+                {{property.description}}
+            </p>
+        </p-scrollPanel>
+        <p></p>
+        <p-button label="Изтрий имот" (click)="deleteProperty()" />
+    </p-tabPanel>
+</p-tabView>

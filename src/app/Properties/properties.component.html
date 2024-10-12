@@ -1,0 +1,54 @@
+<p>Град</p>
+<p-dropdown 
+[options]="cities" 
+[(ngModel)]="selectedCity" 
+optionLabel="name" 
+[filter]="true" 
+[checkmark]="true"
+[style]="{ width: '15rem' }" 
+ />
+<p>Квартал</p>
+<p-dropdown 
+[options]="neighborhoods" 
+[(ngModel)]="selectedNeighborhood"
+[checkmark]="true"
+optionLabel="neighborhood" 
+[filter]="true" 
+[style]="{ width: '15rem' }" 
+/>
+<p>Цена от</p>
+<p-inputNumber 
+    [(ngModel)]="priceFrom" 
+    inputId="locale-user" 
+    [minFractionDigits]="2" />
+<p>Цена до</p>
+<p-inputNumber 
+    [(ngModel)]="priceTo" 
+    inputId="locale-user" 
+   [minFractionDigits]="2" />
+<p>
+    <p-button label="Търси"  (click)="filter()"/>
+</p>
+<p>
+    <p-button label="Изчисти филтрите"  (click)="clearFilters()"/>
+</p>
+   <p-dataView #dv [value]="propertiesFilter" [rows]="5" [paginator]="true">
+    <ng-template pTemplate="list" let-propertiesFilter>
+        <div *ngFor="let item of propertiesFilter">
+            <p-card [header]="item.nameProperty" >
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="http://localhost:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" />
+                </ng-template>
+                <p>
+                    {{item.description}}
+                </p>
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-3 mt-1">
+                        <p-button label="Повече информация" [routerLink]="['/PropertyInformation/',  item.nameProperty ]" />
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+        
+    </ng-template>
+</p-dataView>

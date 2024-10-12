@@ -1,0 +1,28 @@
+<input type="text" pInputText [(ngModel)]="username" />
+<p></p>
+<label >{{name}}</label>
+<p></p>
+<label >{{lastname}}</label>
+<p></p>
+<p-password [(ngModel)]="password_old" [toggleMask]="true" [feedback]="false"/>
+<p></p>
+<p-password [(ngModel)]="password_new" [toggleMask]="true" [feedback]="false"/>
+<p></p>
+<p-password [(ngModel)]="password_new2" [toggleMask]="true" [feedback]="false"/>
+<p></p>
+<p-button label="Изтрий профил" (click)="showDeleteDialog()" />
+<p></p>
+<p-button label="Промени парола" (click)="changePassword()" />
+
+<p-dialog header="Изтрий акаунт" 
+[(visible)]="dialogDeleteAcount" 
+position="center" >
+<p></p>
+<label   [textContent]="username" ></label>
+<p></p>
+<p-password  [(ngModel)]="password" placeholder="Парола" [feedback]="false" [toggleMask]="true"/>
+<p></p>
+<p-button  label="Delete Acount" (click)="deleteMyAcount()"></p-button>
+</p-dialog>
+
+<p-toast></p-toast>

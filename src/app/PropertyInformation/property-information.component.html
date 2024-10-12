@@ -1,0 +1,82 @@
+
+<p-toast></p-toast>
+<h1>
+    {{property.nameProperty}}
+</h1>
+
+<div class="galery">
+    <p-galleria [numVisible]="2" [value]="images"
+     [showItemNavigatorsOnHover]="true" 
+     [showItemNavigators]="true" 
+     [circular]="true"
+      > 
+         <ng-template  pTemplate="item" let-item > 
+             <img 
+                 [src]="item.previewImageSrc"  
+                 [alt]="item.alt"  
+                 [title]="item.title"  
+                 style="width: auto; height: 300px;" 
+                 (click)="openGalleryModal()"
+             /> 
+         </ng-template> 
+         <ng-template pTemplate="thumbnail" let-item width="20px"> 
+             <div class="grid grid-nogutter justify-content-center"> 
+                 <img 
+                     [src]="item.thumbnailImageSrc"  
+                     [alt]="item.alt"  
+                     [title]="item.title"  
+                     width=10% /> 
+             </div> 
+         </ng-template> 
+   
+     </p-galleria> 
+ </div>
+ <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+     <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+       [showItemNavigators]="true" [circular]="true">
+       <ng-template pTemplate="item" let-item>
+         <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+           style="width: auto; height: 600px;" />
+       </ng-template>
+     </p-galleria>
+    </p-dialog>
+
+    <p>
+        {{property.town}}
+    </p>
+
+
+    <p>
+        {{property.type}}
+    </p>
+
+    <p>
+        {{property.typeOfConstruction}}
+    </p>
+
+    <p>
+        {{property.description}}
+    </p>
+    <p-button label="Направи запитване" (click)="openDialogInquery()"></p-button>
+
+    <p-dialog header="Направи запитване" 
+        [(visible)]="dialogMakeInquiry" 
+        position="center" >
+        <p>firstName</p>
+        <input type="text" pInputText [(ngModel)]="firstName" />
+        <p>lastName</p>
+        <input type="text" pInputText [(ngModel)]="lastName" />
+        <p>email</p>
+        <input type="text" pInputText [(ngModel)]="email" />
+        <p>phone</p>
+        <input type="text" pInputText [(ngModel)]="phone" />
+        <p></p>
+        <textarea class="float-lable"
+                rows="5"
+                cols="30" 
+                pInputTextarea 
+                id="float-input" 
+                [(ngModel)]="comment">           
+            </textarea>
+        <p-button  label="Направи запитване" (click)="createInquery()"></p-button>
+    </p-dialog>

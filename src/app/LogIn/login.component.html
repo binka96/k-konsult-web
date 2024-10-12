@@ -1,0 +1,7 @@
+<router-outlet />
+<p-toast></p-toast>
+<input type="text" pInputText [(ngModel)]="username" />
+<p></p>
+<p-password [(ngModel)]="password" [toggleMask]="true" [feedback]="false"/>
+<p></p>
+<p-button label="Log In" (click)="login()"/>

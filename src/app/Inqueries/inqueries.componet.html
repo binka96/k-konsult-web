@@ -1,0 +1,20 @@
+<p-toast></p-toast>
+<p-dataView #dv [value]="inquies" [rows]="5" [paginator]="true">
+    <ng-template pTemplate="list" let-inquies>
+        <div *ngFor="let item of inquies">
+            <p-card [header]="item.inquiryId" >
+                <p>
+                    {{item.comment}}
+                </p>
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-3 mt-1">
+                        <p-button  label=" Submited" (click)="deleteInquiry(item.inquiryId)">
+                            <i class="pi pi-check" style="color: green"></i>
+                        </p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+        
+    </ng-template>
+</p-dataView>
