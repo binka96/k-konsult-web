@@ -3,12 +3,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenubarModule } from 'primeng/menubar';
 import {MenuItem, MessageService} from 'primeng/api';
-import { Button } from 'primeng/button';
+import { Button, ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { TokenService } from './Service/token.service';
 import { UserService } from './Service/user.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './Service/token-interceptor.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { CommonModule } from '@angular/common';
+import { RippleModule } from 'primeng/ripple';
+import {SlideMenuModule} from 'primeng/slidemenu';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,7 +22,10 @@ import { TokenInterceptor } from './Service/token-interceptor.service';
             RouterLinkActive,
             MenubarModule ,
             MegaMenuModule ,
-            Button
+            ButtonModule ,
+            CommonModule,
+            RippleModule ,
+            SlideMenuModule
   ],
   providers: [MessageService , UserService ,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
@@ -32,12 +40,18 @@ export class AppComponent implements OnInit{
   typeProperties: string = "cat";
   username: string = "SIGN IN";
   access: string  = "";
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   constructor( private router: Router ,  
                private messageService: MessageService,
                private tokenService: TokenService ,
-               private userService: UserService)
+               private userService: UserService  , 
+               private deviceService: DeviceDetectorService)
   {
-
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
     this.sesstion();
@@ -71,7 +85,7 @@ export class AppComponent implements OnInit{
 
 
   reloadApplication() {
-    window.location.reload();
+    //window.location.reload();
   }
 
   loggin(){

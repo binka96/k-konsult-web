@@ -1,4 +1,50 @@
-<p-menubar [model]="items" (click)="reloadApplication()" >
-    <p-button  label="Logout" icon="pi pi-power-off" routerLink="/Log"></p-button>
-</p-menubar>
-<router-outlet />
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+    <div class="body">
+    <div class = "header">
+        <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">
+        <p-menubar [model]="items" (click)="reloadApplication()" >
+        </p-menubar>
+        <p-button class="enter-button" routerLink="/Log"></p-button>
+    </div>
+    <router-outlet />
+    <div class="footer">
+        <div class="house_image"></div>
+        <img class="logo_footer"  src="/assets/images/LogoImage.png" routerLink="/">
+        <img class="img_phone"  src="/assets/images/phone.png">
+        <img class="img_email"  src="/assets/images/email.png">
+        <label class="text1">Наш брокер е на разположение 7 дни в седмицата.</label>
+        <label class="text2">Заповядайте в нашия офис на бул. Гоце Делчев 102, бл22, офис 7.</label>
+        <label class="text3">Ние сме ключът за мечтания дом!</label>
+        <label class="text4">КОНТАКТИ</label>
+        <label class="text5">0883394409 / 0887736319</label>
+        <label class="text6">k.konsult13&#64;gmail.com / kirilova.k.konsult&#64;gmail.com</label>
+    </div>
+</div>
+</div>
+
+<!-- HTML for Desktop Aplication -->
+<div *ngIf="isMobile" class="phone"  >
+    <div class = "header">
+        <p-slideMenu  #menu [model]="items"  [popup]="true"  (click)="reloadApplication()">
+        </p-slideMenu>
+        <button class="menubar" type="button" pButton icon="pi pi-list"  (click)="menu.toggle($event)"></button>
+        <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">
+        <p-button class="enter-button" routerLink="/Log">
+            <img  class="img-buttom" src="/assets/images/enterButton.png">
+        </p-button>
+    </div>
+    <router-outlet />
+    <div class="footer">
+        <div class="house_image"></div>
+        <img class="logo_footer"  src="/assets/images/LogoImage.png" routerLink="/">
+        <img class="img_phone"  src="/assets/images/phone.png">
+        <img class="img_email"  src="/assets/images/email.png">
+        <label class="text1">Наш брокер е на разположение 7 дни в седмицата.</label>
+        <label class="text2">Заповядайте в нашия офис на бул. Гоце Делчев 102, бл22, офис 7.</label>
+        <label class="text3">Ние сме ключът за мечтания дом!</label>
+        <label class="text4">КОНТАКТИ</label>
+        <label class="text5">0883394409 / 0887736319</label>
+        <label class="text6">k.konsult13&#64;gmail.com / kirilova.k.konsult&#64;gmail.com</label>
+    </div>
+</div>
