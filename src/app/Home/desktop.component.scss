@@ -1,26 +1,78 @@
 .desktop{
     
-@keyframes fade-in {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
+    @keyframes appear-from-left {
+        0% {
+          opacity: 0;
+          transform: translateX(-80px);
+        }
+        100% {
+          opacity: 1;
+          transform: translatex(0);
+        }
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+
+    @keyframes appear-from-up {
+        0% {
+          opacity: 0;
+          transform: translateY(-80px);
+        }
+        100% {
+          opacity: 1;
+          transform: translatey(0);
+        }
     }
-  }
+
+    @keyframes appear-from-right {
+        0% {
+          opacity: 0;
+          transform: translateX( 80px);
+        }
+        100% {
+          opacity: 1;
+          transform: translatex(0);
+        }
+    }
+
+    @keyframes appear-from-down {
+        0% {
+            opacity: 0;
+            transform: translateY(80px);
+          }
+          100% {
+            opacity: 1;
+            transform: translatey(0);
+          }
+    }
   
-   .header2, .grey-area2, .grey-area3, .grey-area4 , .header3 , .group30 , .group31, .group32 , .group43 , .group42  , .group29 , .img-buttomInqiyre {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
   
   // Active class for scroll animation
-  .active {
-    animation: fade-in 0.6s forwards;
+  .active .header2, .grey-area2 , .grey-area3 , .group30 , .group31 ,.group43 , .group42  {
+    opacity: 0;
+    transform: translateY(20px);
+    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: appear-from-left 1.6s forwards;
   }    
+
+  .active1 , .header3 {
+    opacity: 0;
+    transform: translateY(20px);
+    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: appear-from-up 1.6s forwards;
+  }   
+
+  .active2 , .grey-area4 , .group32 ,  .group29{
+    opacity: 0;
+    transform: translateY(20px);
+    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: appear-from-right 1.6s forwards;
+  }   
+
+  .active3 , .img-buttomInqiyre  {
+    opacity: 0;
+    transform: translateY(20px);
+    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: appear-from-down 1.6s forwards;
+  }   
 
     .header1{
         background-image: url('/assets/images/Home/home_header1.png');
@@ -34,6 +86,8 @@
     }
 
     .text1{
+        animation: appear-from-left 1.5s forwards;
+        animation-delay: 0.0s;
         color: white;
         font-size:  calc( 15.0vw * 0.6);
         position: absolute;
@@ -47,6 +101,8 @@
     }
 
     .grey-area1{
+        animation: appear-from-left 1.5s forwards;
+        animation-delay: 0.0s;
         background-image: url('/assets/images/Home/grey-area1.png');
         background-size: cover;
         background-position: center;
@@ -59,6 +115,8 @@
     }
 
     .text2{
+        animation: appear-from-left 1.5s forwards;
+        animation-delay: 0.0s;
         color: white;
         font-size:  calc( 9.0vw * 0.3);
         position: absolute;
