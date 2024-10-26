@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenubarModule } from 'primeng/menubar';
@@ -13,6 +13,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import {SlideMenuModule} from 'primeng/slidemenu';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
@@ -25,14 +26,16 @@ import {SlideMenuModule} from 'primeng/slidemenu';
             ButtonModule ,
             CommonModule,
             RippleModule ,
-            SlideMenuModule
+            SlideMenuModule,
+            ToastModule
   ],
   providers: [MessageService , UserService ,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     TokenService , TokenInterceptor
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent implements OnInit{
   items: MenuItem[] | undefined;

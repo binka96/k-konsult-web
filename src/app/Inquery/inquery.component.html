@@ -1,18 +1,38 @@
-<p-toast></p-toast>
-<p>firstName</p>
-<input type="text" pInputText [(ngModel)]="firstName" />
-<p>lastName</p>
-<input type="text" pInputText [(ngModel)]="lastName" />
-<p>email</p>
-<input type="text" pInputText [(ngModel)]="email" />
-<p>phone</p>
-<input type="text" pInputText [(ngModel)]="phone" />
-<p></p>
-<textarea class="float-lable"
-        rows="5"
-        cols="30" 
-        pInputTextarea 
-        id="float-input" 
-        [(ngModel)]="comment">           
-    </textarea>
-<p-button  label="Направи запитване" (click)="createInquery()" ></p-button>
+<!-- HTML for Desktop Aplication -->
+<div *ngIf="isDesktop" class="desktop">
+    <p-toast></p-toast> <!-- Тук -->
+    <div class="grey_background">
+      <div class="image_background">
+        <div class="grey-area">
+          <label class="text1">Направи запитване!</label>
+          <input class="nameTB" type="text" pInputText [(ngModel)]="firstName" placeholder="Име" />
+          <input class="lastNameTb" type="text" pInputText [(ngModel)]="lastName" placeholder="Фамилия" />
+          <input class="emailTb" type="text" pInputText [(ngModel)]="email" placeholder="Емайл"/>
+          <input class="phoneTb" type="text" pInputText [(ngModel)]="phone" placeholder="Телефон"/>
+          <textarea class="commentTb" rows="5" cols="30" pInputTextarea id="float-input" [(ngModel)]="comment"></textarea>
+        </div>
+      </div>
+      <div class="line">
+    </div>
+    </div>
+    <p-button class="inqiyre-button" (click)="createInquery()"></p-button>
+</div>
+<!-- HTML for Phone Aplication -->
+<div *ngIf="isMobile" class="phone">
+    <p-toast></p-toast> <!-- Тук -->
+    <div class="grey_background">
+      <div class="image_background">
+        <div class="grey-area">
+          <label class="text1">Направи запитване!</label>
+          <input class="nameTB" type="text" pInputText [(ngModel)]="firstName" placeholder="Име" />
+          <input class="lastNameTb" type="text" pInputText [(ngModel)]="lastName" placeholder="Фамилия" />
+          <input class="emailTb" type="text" pInputText [(ngModel)]="email" placeholder="Емайл"/>
+          <input class="phoneTb" type="text" pInputText [(ngModel)]="phone" placeholder="Телефон"/>
+          <textarea class="commentTb" rows="5" cols="30" pInputTextarea id="float-input" [(ngModel)]="comment"></textarea>
+        </div>
+      </div>
+      <div class="line">
+    </div>
+    </div>
+    <p-button class="inqiyre-button" (click)="createInquery()"></p-button>
+</div>

@@ -34,8 +34,6 @@ export class Home implements OnInit{
   isDesktop: boolean;
   constructor( private router: Router ,  
                private messageService: MessageService,
-               private tokenService: TokenService ,
-               private userService: UserService  , 
                private deviceService: DeviceDetectorService)
   {
     this.isMobile = this.deviceService.isMobile();

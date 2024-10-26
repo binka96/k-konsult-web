@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {MenuItem, MessageService} from 'primeng/api';
@@ -13,6 +13,10 @@ import { ToastModule } from 'primeng/toast';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenService } from '../Service/token.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { CommonModule } from '@angular/common';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+
 @Component({
   selector: 'app-root-inquery',
   standalone: true,
@@ -22,14 +26,17 @@ import { TokenService } from '../Service/token.service';
             ButtonModule,
             FormsModule , 
             ToastModule,
-            InputTextModule 
+            InputTextModule ,
+            CommonModule,
+           
   ],
   providers: [MessageService , InquiryService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     TokenService , TokenInterceptor
   ] ,
   templateUrl: './inquery.component.html',
-  styleUrl: './inquery.component.scss'
+  styleUrl: './inquery.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Inquery implements OnInit{
 
@@ -50,16 +57,22 @@ export class Inquery implements OnInit{
     time:"",
     jdprConferm: false
   }  ;
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   constructor(private messageService: MessageService , 
-              private inqueryService : InquiryService
-
-) {}
+              private inqueryService : InquiryService ,
+              private deviceService: DeviceDetectorService
+) {
+  this.isMobile = this.deviceService.isMobile();
+  this.isTablet = this.deviceService.isTablet();
+  this.isDesktop = this.deviceService.isDesktop();
+}
   ngOnInit(){
-    
   }
   
   createInquery(){
-    
+
     if(this.firstName!== undefined && this.lastName !== undefined && this.email !==undefined && this.phone!== undefined && this.comment !== undefined){
       this.new_inquiry.name = this.firstName;
       this.new_inquiry.lastName = this.lastName;
