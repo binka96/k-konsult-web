@@ -41,7 +41,7 @@ export class Home implements OnInit{
     this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
-    this.elements = Array.from(document.querySelectorAll(' .header2,  .grey-area2, .grey-area3, .grey-area4 , .header3 , .group30 , .group31, .group32 , .group43 , .group42  , .group29 , .img-buttomInqiyre'));
+    this.elements = Array.from(document.querySelectorAll(' .header2,  .grey-area2, .grey-area3, .grey-area4, .group30 , .group31, .group32 , .group43 , .group42  , .group29 , .img-buttomInqiyre'));
   }
   
 
