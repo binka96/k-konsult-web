@@ -21,7 +21,7 @@ export const routes: Routes = [
     {title: 'K-Konsult', path: '', component: Home}, 
     {title: "Блог", path: 'Blog', component: Blog },
     {title: "За нас", path: 'Contact', component: Contact },
-    {title: "Партниьори", path: 'Partners', component: Partners },
+    {title: "Партньори", path: 'Partners', component: Partners },
     {title: "Запитвания", path: 'Inquery', component: Inquery },
     {title: "Моят Профил", path: 'MyProfile', component: MyProfile },
     {title: "Регистрация", path: 'Registration', component: Registration },

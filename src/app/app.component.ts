@@ -82,7 +82,7 @@ export class AppComponent implements OnInit{
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"}
+      { label: "Партньори" ,routerLink: "/Partners"}
     ];
   }
 
@@ -117,7 +117,7 @@ export class AppComponent implements OnInit{
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"},
+      { label: "Партньори" ,routerLink: "/Partners"},
       { label: "Управлениие",
         items: [
           { label: 'Имоти', routerLink: "/Property" },
@@ -157,7 +157,7 @@ export class AppComponent implements OnInit{
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"}
+      { label: "Партньори" ,routerLink: "/Partners"}
     ];
   }
   sesstion(){
