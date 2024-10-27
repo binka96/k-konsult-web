@@ -3,7 +3,7 @@
         <div *ngFor="let item of articles">
             <p-card [header]="item.title" >
                 <ng-template pTemplate="header">
-                    <img alt="Card" src="http://localhost:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" />
+                    <img alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" />
                 </ng-template>
                 <p>
                     {{item.content}}

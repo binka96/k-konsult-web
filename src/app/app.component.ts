@@ -161,7 +161,7 @@ export class AppComponent implements OnInit{
     ];
   }
   sesstion(){
-    const currentUsername = localStorage.getItem('currentUsername');
+    const currentUsername = "localStorage.getItem('currentUsername');"
     if(this.tokenService.getToken()!==undefined && this.tokenService.getToken()!== null&&currentUsername!==null){
     this.userService.sessionRequest(currentUsername.toString()).subscribe({
       next: (response)=>{
