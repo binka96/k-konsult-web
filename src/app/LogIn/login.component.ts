@@ -14,6 +14,7 @@ import { AppComponent } from '../app.component';
 import { TokenService } from '../Service/token.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'login-root',
@@ -42,18 +43,25 @@ export class LogIn {
   user: UserDto = {
     username : "" , password: "" 
   };
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   constructor(private userService: UserService , 
               private messageService: MessageService , 
               private router: Router ,
               private appComponent: AppComponent ,
-              private tokenService: TokenService){
+              private tokenService: TokenService,
+              private deviceService: DeviceDetectorService){
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
     
   }
 
   login(){
-    //const currentUsername = localStorage.getItem('currentUsername');
+    const currentUsername = localStorage.getItem('currentUsername');
     if(this.username!==undefined && this.password!== undefined){
       this.user.username = this.username;
       this.user.password = this.password;
@@ -116,7 +124,7 @@ export class LogIn {
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"},
+      { label: "Партньори" ,routerLink: "/Partners"},
       { label: "Управлениие",
         items: [
           { label: 'Имоти', routerLink: "/Property" },

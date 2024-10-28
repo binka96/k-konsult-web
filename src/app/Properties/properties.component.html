@@ -1,54 +1,128 @@
-<p>Град</p>
-<p-dropdown 
-[options]="cities" 
-[(ngModel)]="selectedCity" 
-optionLabel="name" 
-[filter]="true" 
-[checkmark]="true"
-[style]="{ width: '15rem' }" 
- />
-<p>Квартал</p>
-<p-dropdown 
-[options]="neighborhoods" 
-[(ngModel)]="selectedNeighborhood"
-[checkmark]="true"
-optionLabel="neighborhood" 
-[filter]="true" 
-[style]="{ width: '15rem' }" 
-/>
-<p>Цена от</p>
-<p-inputNumber 
-    [(ngModel)]="priceFrom" 
-    inputId="locale-user" 
-    [minFractionDigits]="2" />
-<p>Цена до</p>
-<p-inputNumber 
-    [(ngModel)]="priceTo" 
-    inputId="locale-user" 
-   [minFractionDigits]="2" />
-<p>
-    <p-button label="Търси"  (click)="filter()"/>
-</p>
-<p>
-    <p-button label="Изчисти филтрите"  (click)="clearFilters()"/>
-</p>
-   <p-dataView #dv [value]="propertiesFilter" [rows]="5" [paginator]="true">
-    <ng-template pTemplate="list" let-propertiesFilter>
-        <div *ngFor="let item of propertiesFilter">
-            <p-card [header]="item.nameProperty" >
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="http://localhost:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" />
-                </ng-template>
-                <p>
-                    {{item.description}}
-                </p>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Повече информация" [routerLink]="['/PropertyInformation/',  item.nameProperty ]" />
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+    <div [ngStyle]="background" class="background">
+        <label class="text">Намери своя нов дом днес</label>
+        <p-dropdown class="townLB"
+        [options]="cities" 
+        [(ngModel)]="selectedCity" 
+        optionLabel="name" 
+        [filter]="true" 
+        [checkmark]="true"
+        placeholder="Град"
+        [style]="{ width: 'calc(40vw * 0.4)' }" 
+         />
+        <p-dropdown 
+        class="neiberhoodLB"
+        [options]="neighborhoods" 
+        [(ngModel)]="selectedNeighborhood"
+        [checkmark]="true"
+        optionLabel="neighborhood" 
+        placeholder="Квартал"
+        [filter]="true" 
+        [style]="{ width: 'calc(40vw * 0.4)' }" 
+        />
+        <p-inputNumber 
+            class="priceFrom"
+            [(ngModel)]="priceFrom" 
+            inputId="locale-user" 
+            [minFractionDigits]="2" 
+            placeholder="Цена от"
+            [style]="{ width: 'calc(40vw * 0.4)' }" />
+            
+        <p-inputNumber 
+            class="priceTo"
+            [(ngModel)]="priceTo" 
+            inputId="locale-user" 
+           [minFractionDigits]="2"
+           placeholder="Цена до"
+           [style]="{ width: 'calc(40vw * 0.4)' }"  />
+        <p-button class="search-button"  (click)="filter()"/>
+        <p-button  class="clearfilter-button"  (click)="clearFilters()"/>
+    </div>
+    <div class="property">
+        <div class="lane-left"></div>
+        <div class="lane-right"></div>
+        <label [ngStyle]="text2" class="text2">{{pageText}}</label>
+        <p></p>
+        <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
+            <ng-template pTemplate="list" let-propertiesFilter>
+                <div class="properties-container">
+                    <div *ngFor="let item of propertiesFilter" class="property-item">
+                        <img class="picture" alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                        <p class="text-card">
+                            {{item.price}} €
+                        </p>
+                        <p class="text-location">
+                            {{item.neighborhood}} 
+                        </p>
                     </div>
-                </ng-template>
-            </p-card>
-        </div>
-        
-    </ng-template>
-</p-dataView>
+                </div>
+            </ng-template>
+        </p-dataView>
+        <div class="lane"></div>
+    </div>
+</div>
+<!-- HTML for Phone Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <div [ngStyle]="background"  class="background">
+        <label class="text">Намери своя нов дом днес</label>
+        <p-dropdown class="townLB"
+        [options]="cities" 
+        [(ngModel)]="selectedCity" 
+        optionLabel="name" 
+        [filter]="true" 
+        [checkmark]="true"
+        placeholder="Град"
+        [style]="{ width: 'calc(110vw * 0.4)' }" 
+         />
+        <p-dropdown 
+        class="neiberhoodLB"
+        [options]="neighborhoods" 
+        [(ngModel)]="selectedNeighborhood"
+        [checkmark]="true"
+        optionLabel="neighborhood" 
+        placeholder="Квартал"
+        [filter]="true" 
+        [style]="{ width: 'calc(110vw * 0.4)' }" 
+        />
+        <p-inputNumber 
+            class="priceFrom"
+            [(ngModel)]="priceFrom" 
+            inputId="locale-user" 
+            [minFractionDigits]="2" 
+            placeholder="Цена от"
+            [style]="{ width: 'calc(20vw * 0.2)' }"   />
+            
+        <p-inputNumber 
+            class="priceTo"
+            [(ngModel)]="priceTo" 
+            inputId="locale-user" 
+           [minFractionDigits]="2"
+           placeholder="Цена до"
+           [style]="{ width: 'calc(130vw * 0.4)' }"            />
+        <p-button class="search-button"  (click)="filter()"/>
+        <p-button  class="clearfilter-button"  (click)="clearFilters()"/>
+    </div>
+    <div class="property">
+        <div class="lane-left"></div>
+        <div class="lane-right"></div>
+        <label [ngStyle]="text2"  [class]="text2" class="text2">{{pageText}}</label>
+        <p></p>
+        <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
+            <ng-template pTemplate="list" let-propertiesFilter>
+                <div class="properties-container">
+                    <div *ngFor="let item of propertiesFilter" class="property-item">
+                        <img class="picture" alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                        <p class="text-card">
+                            {{item.price}} €
+                        </p>
+                        <p class="text-location">
+                            {{item.neighborhood}} 
+                        </p>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+        <div class="lane"></div>
+    </div>
+</div>

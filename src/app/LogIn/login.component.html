@@ -1,7 +1,30 @@
-<router-outlet />
-<p-toast></p-toast>
-<input type="text" pInputText [(ngModel)]="username" />
-<p></p>
-<p-password [(ngModel)]="password" [toggleMask]="true" [feedback]="false"/>
-<p></p>
-<p-button label="Log In" (click)="login()"/>
+<!-- HTML for Desktop Aplication -->
+<div *ngIf="isDesktop" class="desktop">
+    <router-outlet />
+    <p-toast></p-toast>
+    <div class="background">
+        <div class="grey_area">
+            <div class="logo_image"></div>
+            <label class="text1">Username:</label>
+            <input class="usernameTB" type="text" pInputText [(ngModel)]="username" />
+            <label class="text2">Password:</label>
+            <p-password class="passwordTB"   [(ngModel)]="password" [toggleMask]="true" [feedback]="false"/>
+            <p-button class="log-button"  (click)="login()"/>
+        </div>
+    </div>
+</div>
+<!-- HTML for Phome Aplication -->
+<div *ngIf="isMobile" class="phone">
+    <router-outlet />
+    <p-toast></p-toast>
+    <div class="background">
+        <div class="grey_area">
+            <div class="logo_image"></div>
+            <label class="text1">Username:</label>
+            <input class="usernameTB" type="text" pInputText [(ngModel)]="username" />
+            <label class="text2">Password:</label>
+            <p-password class="passwordTB"   [(ngModel)]="password" [toggleMask]="true" [feedback]="false"/>
+            <p-button class="log-button"  (click)="login()"/>
+        </div>
+    </div>
+</div>

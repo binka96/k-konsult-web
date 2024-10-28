@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenubarModule } from 'primeng/menubar';
 import {MenuItem, MessageService} from 'primeng/api';
-import { Button } from 'primeng/button';
+import { Button, ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { TokenService } from './Service/token.service';
 import { UserService } from './Service/user.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './Service/token-interceptor.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { CommonModule } from '@angular/common';
+import { RippleModule } from 'primeng/ripple';
+import {SlideMenuModule} from 'primeng/slidemenu';
+import { ToastModule } from 'primeng/toast';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,14 +23,19 @@ import { TokenInterceptor } from './Service/token-interceptor.service';
             RouterLinkActive,
             MenubarModule ,
             MegaMenuModule ,
-            Button
+            ButtonModule ,
+            CommonModule,
+            RippleModule ,
+            SlideMenuModule,
+            ToastModule
   ],
   providers: [MessageService , UserService ,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     TokenService , TokenInterceptor
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent implements OnInit{
   items: MenuItem[] | undefined;
@@ -32,12 +43,18 @@ export class AppComponent implements OnInit{
   typeProperties: string = "cat";
   username: string = "SIGN IN";
   access: string  = "";
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   constructor( private router: Router ,  
                private messageService: MessageService,
                private tokenService: TokenService ,
-               private userService: UserService)
+               private userService: UserService  , 
+               private deviceService: DeviceDetectorService)
   {
-
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
     this.sesstion();
@@ -65,7 +82,7 @@ export class AppComponent implements OnInit{
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"}
+      { label: "Партньори" ,routerLink: "/Partners"}
     ];
   }
 
@@ -100,7 +117,7 @@ export class AppComponent implements OnInit{
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"},
+      { label: "Партньори" ,routerLink: "/Partners"},
       { label: "Управлениие",
         items: [
           { label: 'Имоти', routerLink: "/Property" },
@@ -140,11 +157,11 @@ export class AppComponent implements OnInit{
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партниьори" ,routerLink: "/Partners"}
+      { label: "Партньори" ,routerLink: "/Partners"}
     ];
   }
   sesstion(){
-    const currentUsername = localStorage.getItem('currentUsername');
+    const currentUsername = "localStorage.getItem('currentUsername');"
     if(this.tokenService.getToken()!==undefined && this.tokenService.getToken()!== null&&currentUsername!==null){
     this.userService.sessionRequest(currentUsername.toString()).subscribe({
       next: (response)=>{

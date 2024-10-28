@@ -1,0 +1,137 @@
+.phone {
+    width: calc(198.5vw * 0.5);
+    height:calc(305.5vw * 0.5);;
+    position: relative;
+
+    @import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+    // ------------- VARIABLES ------------- //
+    $parallax-offset: 0vh;
+    $transition-speed: 1.2s;
+    $content-offset: 40vh;
+
+    $slide-number: 7;
+
+    .lane-left{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(8vw * 0.5);
+        left: calc(0vw * -0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(45.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .lane-right{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(7vw * 0.5);
+        left:  calc(153vw * 0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(45.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+    .text2{
+        color: black;
+        font-size: calc( 7.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(2vw * 0.4);
+        left: calc(75.5vw * 0.4);
+    } 
+  
+
+    .background {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: absolute;
+        width: calc(198.5vw * 0.5);
+        height:calc(260.5vw * 0.5);;
+        transform: translateY($parallax-offset);
+        transition: transform $transition-speed ease-in-out;
+        
+        &.hidden {
+            opacity: 0; // Скрива елемента
+            transform: translateY(100%); // Изтласква елемента надолу
+        }
+
+        &:before {
+            content: "";
+            height:calc(260.5vw * 0.5);;
+            width: calc(198.5vw * 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    // Set stacking context of slides 
+    @for $i from 1 to ($slide-number + 1) {
+        .background:nth-child(#{$i}) {
+            z-index: ($slide-number + 1) - $i; 
+        }
+    }
+
+    .content {
+        &-wrapper {
+            width: calc(198.5vw * 0.5);
+            height:calc(260.5vw * 0.5);;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-flow: column nowrap;
+            color: #000000;
+            font-family: Montserrat;
+            text-transform: uppercase;
+            transition: transform $transition-speed ease-in-out;
+        }
+
+        &-title {
+            font-size: 12vh;
+            line-height: 1.4;
+        }
+    }
+
+// ------------- SET TRANSFORM VALUES ------------- //
+
+// ------------- SET TRANSFORM VALUES ------------- //
+
+.background.up-scroll {
+    transform: translate3d(0,-$parallax-offset / 2,0);
+    .content-wrapper {
+      transform: translateY($parallax-offset / 2);
+    }
+
+  }
+  
+  .background.down-scroll {
+    transform: translate3d(0,-(100vh + $parallax-offset),0);
+    .content-wrapper {
+      transform: translateY($content-offset);
+    }
+
+  }
+
+    .picture{
+        background-size: cover;
+        background-position: top;
+        width: calc(196.5vw * 0.5);
+        height:auto;
+        z-index: 1;
+        position: relative;
+    }
+
+    .text3{
+
+        color: black;
+        font-size: calc( 7.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        width: calc(50.5vw * 0.5);
+        height: calc(50.5vw * 0.5);;
+    }
+}

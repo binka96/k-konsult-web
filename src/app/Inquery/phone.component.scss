@@ -1,0 +1,120 @@
+.phone{
+    .grey_background{
+        background-image: url('/assets/images/grey_backgroung.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: -9px;
+        left: -9px;
+        height:  calc(200vw * 0.8); // височина (смята ширината на екрана * 0,4)
+        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+       
+    }
+
+    .image_background{
+        background-image: url('/assets/images/Inqyire/inqyireImage.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(20vw * 0.4);
+        left: calc(15.5vw * 0.4);
+        height:  calc(180vw * 0.8); // височина (смята ширината на екрана * 0,4)
+        width:  calc(170.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        border-radius: 10%;
+        opacity: 0.7;
+        
+    }
+
+    .grey-area{
+        background-image: url('/assets/images/grey-area1.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        //top: calc(0vw * -0.4);
+        //left: calc(23.5vw * 0.4);
+        height:  calc(180vw * 0.8); // височина (смята ширината на екрана * 0,4)
+        width:  calc(170.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        border-radius: 10%;
+        
+    }
+
+    .text1{
+        color: white;
+        font-size: calc( 12.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(10vw * 0.4);
+        left: calc(24.5vw * 0.4);
+    }
+
+    .nameTB{
+        color: black;
+        font-size: calc( 5.0vw * 0.8);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(20vw * 0.4);
+        left: calc(30vw * 0.4);
+    }
+
+    .lastNameTb{
+        color: black;
+        font-size: calc( 5.0vw * 0.8);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(30vw * 0.4);
+        left: calc(30vw * 0.4);  
+    }
+ 
+
+    .emailTb{
+        color: black;
+        font-size: calc( 5.0vw * 0.8);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(40vw * 0.4);
+        left: calc(30vw * 0.4);
+    }
+ 
+
+    .phoneTb{
+        color: black;
+        font-size: calc( 5.0vw * 0.8);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(50vw * 0.4);
+        left: calc(30vw * 0.4);
+    }
+ 
+    .commentTb{
+        color: black;
+        font-size: calc( 5.0vw * 0.8);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(60vw * 0.4);
+        left: calc(30vw * 0.4);
+        height: calc(133.5vw * 0.4);
+        width: calc(157.5vw * 0.4);
+    }
+    .line{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(31vw * 0.5);
+        left: calc(0vw * -0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .inqiyre-button{
+        background-image: url('/assets/images/buttonInqiyre.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(36.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(130vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(354vw * 0.5);
+        left: calc(31vw * 0.5);
+    }
+
+}

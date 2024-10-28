@@ -1,0 +1,174 @@
+//*************************************************************************************
+//*************************************************************************************
+// PHONE //////////////
+.phone{
+    .header{
+        background: black;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: -8px;
+        left: -8px  ;
+        height:  calc(62vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(199vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .logo{
+      height:  calc( 48vw * 0.4); // височина (смята ширината на екрана * 0,4)
+      width:  calc(48vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+      position: relative;
+      top:  calc( 11vw * 0.2); // позиция отгоре
+      left: calc( 50vw * 0.4); // позиция отляво
+    }
+    
+    .menubar{
+        transform: translate(calc(8vw * 0.4), calc(8vw * -0.4)); 
+        z-index: 9999;
+        background-color: transparent;
+        border: none;
+        opacity: 0.8;
+      }
+
+    ::ng-deep .p-menubar {
+        background-color: inherit;
+        border: none;
+        box-shadow: none !important;
+        position: relative;
+        top:  calc( 0.5vw * -0.6); // позиция отгоре (смята ширината на екрана * 0,6)
+        left: calc( 15vw * 0.4);  // позиция отляво
+        height:  calc( 22vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(120vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+      }
+    
+      ::ng-deep .p-menubar .p-menuitem-text {
+        color: black;
+        font-size: 34px;
+      }
+    
+      ::ng-deep .custom-icon-color .pi {
+        color: black; // сменете цвета на иконата на червен, може да използвате който и да е цвят
+      }
+      
+        
+    ::ng-deep .p-button {
+        //isplay: flex;
+        //object-fit: contain;
+        background-color: inherit;
+        border: none;
+    }
+    .enter-button{
+        position: absolute;
+        top:  calc( 7.5vw * 0.6); // позиция отгоре
+        left: calc( 170vw * 0.4); // позиция отляво
+
+      }
+    .img-buttom{
+        height:  calc( 24vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(42.0vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .text1{
+        color: white;
+        font-size: 34px;
+        position: absolute;
+        top:  calc( 7.5vw * 0.6); // позиция отгоре
+        left: calc( 170vw * 0.4); // позиция отляво
+    }
+
+    .footer{
+        background-image: url('/assets/images/footerImage.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: -11px;
+        left: -9px  ;
+        height:  calc(82vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(199vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: -1;
+      }
+
+      .house_image{
+        background-image: url('/assets/images/house.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height:  calc(82vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(45vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: -1;
+      }
+
+      .logo_footer{
+        height:  calc( 24vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(24vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top:  calc( 2vw * 0.6); // позиция отгоре
+        left: calc( 210vw * 0.4); // позиция отляво
+      }
+
+      .img_phone{
+        height:  calc(7.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(7.0vw * 0.4); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top:  calc( 40vw * 0.6); // позиция отгоре
+        left: calc( 60vw * 0.4); // позиция отляво
+      }
+
+      .img_email{
+        height:  calc( 8vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(8vw * 0.4); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top:  calc( 45.5vw * 0.6); // позиция отгоре
+        left: calc( 59.5vw * 0.4); // позиция отляво
+      }
+
+  .text1{
+    color: white;
+    font-size: calc( 8.0vw * 0.3);;
+    position: absolute;
+    top:  calc( 20.5vw * 0.6); // позиция отгоре
+    left: calc( 60vw * 0.4); // позиция отляво
+    }
+
+
+  .text2{
+      color: white;
+      font-size: calc( 8.0vw * 0.3);;
+      position: absolute;
+      top:  calc( 25.5vw * 0.6); // позиция отгоре
+      left: calc( 60vw * 0.4); // позиция отляво
+  }
+
+
+  .text3{
+    color: white;
+    font-size: calc( 8.0vw * 0.3);;
+    position: absolute;
+    top:  calc( 30.5vw * 0.6); // позиция отгоре
+    left: calc( 60vw * 0.4); // позиция отляво
+}
+
+.text4{
+  color: white;
+  font-size: calc( 5.0vw * 0.3);;
+  position: absolute;
+  top:  calc( 37.0vw * 0.6); // позиция отгоре
+  left: calc( 69vw * 0.4); // позиция отляво
+}
+
+.text5{
+  color: white;
+  font-size: calc( 5.0vw * 0.3);;
+  position: absolute;
+  top:  calc( 41.0vw * 0.6); // позиция отгоре
+  left: calc( 69vw * 0.4); // позиция отляво
+}
+
+.text6{
+  color: white;
+  font-size: calc( 5.0vw * 0.3);;
+  position: absolute;
+  top:  calc( 46.5vw * 0.6); // позиция отгоре
+  left: calc( 69vw * 0.4); // позиция отляво
+}
+    
+}

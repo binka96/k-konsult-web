@@ -8,7 +8,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://localhost:8080/K-Konsult/file/upload/{{article_title}}" 
+            url="http://192.168.247.130:8080/K-Konsult/file/upload/{{article_title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -54,7 +54,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://localhost:8080/K-Konsult/file/upload/{{article.title}}" 
+            url="http://192.168.247.130:8080/K-Konsult/file/upload/{{article.title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -147,3 +147,6 @@
         <p-button label="Изтрий статия!" (click)="deleteArticle()"/>
     </p-tabPanel>
 </p-tabView>
+
+
+
