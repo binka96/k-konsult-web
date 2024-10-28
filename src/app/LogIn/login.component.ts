@@ -61,7 +61,7 @@ export class LogIn {
   }
 
   login(){
-    //const currentUsername = localStorage.getItem('currentUsername');
+    const currentUsername = localStorage.getItem('currentUsername');
     if(this.username!==undefined && this.password!== undefined){
       this.user.username = this.username;
       this.user.password = this.password;

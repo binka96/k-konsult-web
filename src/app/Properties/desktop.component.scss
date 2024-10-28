@@ -1,6 +1,5 @@
 .desktop{
     .background{
-        background-image: url('/assets/images/searchFon.png');
         background-size: cover;
         background-position: top;
         position: relative;
@@ -103,9 +102,6 @@
         color: black;
         font-size: calc( 7.0vw * 0.6);
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
-        position: relative;
-        top: calc(2vw * 0.4);
-        left: calc(75.5vw * 0.4);
     }
 
     .properties-container {

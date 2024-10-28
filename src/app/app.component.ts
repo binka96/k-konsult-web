@@ -88,7 +88,7 @@ export class AppComponent implements OnInit{
 
 
   reloadApplication() {
-    //window.location.reload();
+    window.location.reload();
   }
 
   loggin(){

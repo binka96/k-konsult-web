@@ -46,7 +46,10 @@ export class Properties implements OnInit{
   title = 'k-konsult-web-properties';
   properties: PropertyInfoDto[] = [];
   propertiesFilter: PropertyInfoDto[] = [];
+  pageText: string = "";
   selectedType : any;
+  text2 : any = {};
+  background: any = {};
   cities : any[] = [
     {"name": "Самоков"},
     {"name": "Сандански"},
@@ -85,6 +88,21 @@ export class Properties implements OnInit{
   ngOnInit(){
     const p_type  = this.route.snapshot.paramMap.get('type');
     const p_category  = this.route.snapshot.paramMap.get('category');
+    if(p_category==="all"){
+      this.pageText = "Всички имоти"
+      this.text2 = {  'position': 'relative' ,  'top': 'calc(2vw * 0.4)' ,'left': 'calc(90.5vw * 0.4)'};
+      this.background = { 'background-image': " url('/assets/images/searchFon.png')"}
+    }
+    if(p_category==="Продажби"){
+      this.pageText = "Продажби на имоти"
+      this.text2 = {  'position': 'relative' ,  'top': 'calc(2vw * 0.4)' ,'left': 'calc(75.5vw * 0.4)'};
+      this.background = { 'background-image': " url('/assets/images/searchFon.png')"}
+    }
+    if(p_category==="Наеми"){
+      this.pageText = "Имоти под наем"
+      this.text2 = {  'position': 'relative' ,  'top': 'calc(2vw * 0.4)' ,'left': 'calc(85.5vw * 0.4)'};
+      this.background = { 'background-image': " url('/assets/images/rentPicture.png')"}
+    }
     if(p_category === "all"){
       this.getAllProperty();
     }

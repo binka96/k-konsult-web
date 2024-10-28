@@ -26,7 +26,7 @@
 <!-- HTML for Phone Aplication -->
 <div *ngIf="isMobile" class="phone"  >
     <div class = "header">
-        <p-slideMenu  #menu [model]="items"  [popup]="true"  (click)="reloadApplication()">
+        <p-slideMenu  #menu [model]="items"  [popup]="true"  >
         </p-slideMenu>
         <button class="menubar" type="button" pButton icon="pi pi-list"  (click)="menu.toggle($event)"></button>
         <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">

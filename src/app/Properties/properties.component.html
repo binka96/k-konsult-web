@@ -1,6 +1,6 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
-    <div class="background">
+    <div [ngStyle]="background" class="background">
         <label class="text">Намери своя нов дом днес</label>
         <p-dropdown class="townLB"
         [options]="cities" 
@@ -42,7 +42,7 @@
     <div class="property">
         <div class="lane-left"></div>
         <div class="lane-right"></div>
-        <label class="text2">Продажби на имоти</label>
+        <label [ngStyle]="text2" class="text2">{{pageText}}</label>
         <p></p>
         <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
             <ng-template pTemplate="list" let-propertiesFilter>
@@ -64,7 +64,7 @@
 </div>
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
-    <div class="background">
+    <div [ngStyle]="background"  class="background">
         <label class="text">Намери своя нов дом днес</label>
         <p-dropdown class="townLB"
         [options]="cities" 
@@ -106,7 +106,7 @@
     <div class="property">
         <div class="lane-left"></div>
         <div class="lane-right"></div>
-        <label class="text2">Продажби на имоти</label>
+        <label [ngStyle]="text2"  [class]="text2" class="text2">{{pageText}}</label>
         <p></p>
         <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
             <ng-template pTemplate="list" let-propertiesFilter>
