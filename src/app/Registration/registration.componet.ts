@@ -17,6 +17,7 @@ import { response } from 'express';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -44,8 +45,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Registration implements OnInit {
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   title = 'Registration';
-  constructor(private messageService: MessageService , private userService: UserService) {}
+  constructor(private messageService: MessageService , private userService: UserService , 
+    private deviceService: DeviceDetectorService
+  ) {
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
+  }
   username: string | undefined;
   password1: string | undefined;
   password2: string | undefined;
