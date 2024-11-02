@@ -1,0 +1,627 @@
+.desktop{
+    overflow-x: hidden;
+    
+    height:  auto; // височина (смята ширината на екрана * 0,4)
+    .addProperty{
+        position: relative;
+        height: calc(174.5vw * 0.5);
+        max-width: calc(198.5vw * 0.5);
+    }
+    .lane-left{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(8vw * 0.5);
+        left: calc(1vw * -0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(80.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .lane-right{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(7vw * 0.5);
+        left:  calc(117vw * 0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(80.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+    .text{
+        color: black;
+        font-size: calc( 7.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(1.5vw * 0.4);
+        left: calc(106.5vw * 0.4);
+    }
+    .galery {
+        width:calc(250vw * 0.4);
+        background-color: transparent;
+        //max-width: 100vw; // Ограничете максималната ширина на видеото до ширината на прозореца
+        height: auto;
+        transform: translate(0px, 10.2px);
+    }
+    ::ng-deep .galery .p-galleria-thumbnail-items {
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s;    }
+
+
+::ng-deep .p-tabview .p-tabview-nav {
+    font-size: 32px; /* Change font size */
+    border: none;
+}
+
+.textbody{
+    color: black;
+    font-size: calc( 5.0vw * 0.5);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+}
+.textPropertyName{
+    color: black;
+    font-size: calc( 4.0vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+    position: absolute;
+    top: calc(0.5vw * 0.4);
+    left: calc(45.0vw * 0.4);
+    border-color: black;
+    border-radius: 5px;
+    width: calc(45vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+.tybediv{
+    position: absolute;
+    top: calc(0vw * 0.4);
+    left: calc(100.0vw * 0.4);
+}
+.tybelb{
+    position: absolute;
+    top: calc(12vw * 0.4);
+    left: calc(105.0vw * 0.4);
+}
+.towndiv{
+    position: absolute;
+    top: calc(0.5vw * -0.4);
+    left: calc(156.0vw * 0.4);
+}
+.townlb{
+    position: absolute;
+    top: calc(12vw * 0.4);
+    left: calc(150.0vw * 0.4);
+}
+.neighborhoodText{
+    position: absolute;
+    top: calc(0.5vw * -0.4);
+    left: calc(192.0vw * 0.4);
+}
+.neighborhoodlb{
+    position: absolute;
+    top: calc(12vw * 0.4);
+    left: calc(190.0vw * 0.4);
+}
+.categoryText{
+    position: absolute;
+    top: calc(10vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+.categoryTextlb{
+    font-size: calc( 4.0vw * 0.4);
+    position: absolute;
+    top: calc(12vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+.priceText{
+    position: absolute;
+    top: calc(33vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+
+.pricetb{
+    position: absolute;
+    top: calc(33vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+.pricePerQuadratureText{
+    position: absolute;
+    top: calc(46vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+.pricePerQuadraturetb{
+    position: absolute;
+    top: calc(46vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+.quadratureText{
+    position: absolute;
+    top: calc(58vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+.quadraturetb{
+    position: absolute;
+    top: calc(58vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+.constructionText{
+    position: absolute;
+    top: calc(70vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+
+.constructionTb{
+    color: black;
+    font-size: calc( 4.0vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+    position: absolute;
+    top: calc(70vw * 0.4);
+    left: calc(45.0vw * 0.4);
+    border-color: black;
+    border-radius: 5px;
+    width: calc(45vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+
+.typeOfConstructionsText{
+    position: absolute;
+    top: calc(45vw * 0.4);
+    left: calc(140.0vw * 0.4);
+    width: calc(145vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+.typeOfConstructionslb{
+    position: absolute;
+    top: calc(55vw * 0.4);
+    left: calc(144.0vw * 0.4);
+}
+
+.aktText{
+    position: absolute;
+    top: calc(83vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+
+
+.yearOfConstructionText{
+    position: absolute;
+    top: calc(96vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+.floorText{
+    position: absolute;
+    top: calc(108vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+
+.floorsText{
+    position: absolute;
+    top: calc(120vw * 0.4);
+    left: calc(0.0vw * 0.4);
+}
+.aktTb{
+    color: black;
+    font-size: calc( 4.0vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+    position: absolute;
+    top: calc(83vw * 0.4);
+    left: calc(45.0vw * 0.4);
+    border-color: black;
+    border-radius: 5px;
+    width: calc(45vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+.typeOfConstructionsTb{
+    position: absolute;
+    top: calc(148vw * -0.4);
+    left: calc(144.0vw * 0.4);
+}
+
+.yearOfConstructionTb{
+    position: absolute;
+    top: calc(96vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+
+.floorTb{
+    position: absolute;
+    top: calc(108vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+
+.floorsTb{
+    position: absolute;
+    top: calc(120vw * 0.4);
+    left: calc(45.0vw * 0.4);
+}
+.description{
+    position: absolute;
+    top: calc(75vw * 0.4);
+    left: calc(100.0vw * 0.4);
+}
+.descriptionTB{
+    font-size: calc( 3.0vw * 0.4);
+    position: absolute;
+    top: calc(84vw * 0.4);
+    left: calc(100.0vw * 0.4);
+    border-color: black;
+
+}
+
+.ownerNameText{
+    position: absolute;
+    top: calc(135vw * 0.4);
+    left: calc(0.0vw * 0.4);
+    width: calc(45vw * 0.4);
+}
+
+.ownerNameTb{
+    color: black;
+    font-size: calc( 4.0vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+    position: absolute;
+    top: calc(138.5vw * 0.4);
+    left: calc(45.0vw * 0.4);
+    border-color: black;
+    border-radius: 5px;
+    width: calc(45vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+
+.ownerLastNameText{
+    position: absolute;
+    top: calc(135vw * 0.4);
+    left: calc(100.0vw * 0.4);
+    width: calc(45vw * 0.4);
+}
+
+.ownerLastNameTb{
+    color: black;
+    font-size: calc( 4.0vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+    position: absolute;
+    top: calc(138.5vw * 0.4);
+    left: calc(140.0vw * 0.4);
+    border-color: black;
+    border-radius: 5px;
+    width: calc(45vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+
+.ownerPhoneText{
+    position: absolute;
+    top: calc(154.5vw * 0.4);
+    left: calc(0.0vw * 0.4);
+    width: calc(45vw * 0.4);
+}
+
+.ownerPhoneTB{
+    color: black;
+    font-size: calc( 4.0vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+    position: absolute;
+    top: calc(158.5vw * 0.4);
+    left: calc(45.0vw * 0.4);
+    border-color: black;
+    border-radius: 5px;
+    width: calc(45vw * 0.4);
+    height: calc(6.5vw * 0.4);
+}
+
+.buttonAddImage{
+    background-image: url('/assets/images/addPicture.png');
+    background-size: cover;
+    background-position: center;
+    height:  calc(20.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(70vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    position: absolute;
+    top: calc(120vw * 0.5);
+    left: calc(100vw * 0.5);
+}
+
+.buttonAddProperty{
+    background-image: url('/assets/images/addProperty.png');
+    background-size: cover;
+    background-position: center;
+    height:  calc(50.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(122vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    position: absolute;
+    top: calc(136vw * 0.5);
+    left: calc(40vw * 0.5);
+    z-index: 1;
+}
+
+.updateProperty{
+    position: relative;
+    height: calc(192.5vw * 0.5);
+    max-width: calc(198.5vw * 0.5);
+}
+
+.galery{
+    background-color: rgb(253, 253, 253);
+    width: calc(66vw * 0.5);
+    position: absolute;
+   
+    top: calc(0.0vw * 0.5);
+    left: calc(110vw * 0.5);
+}
+
+.pictureTb{
+    position: absolute;
+    top: calc(0.0vw * 0.5);
+    left: calc(85vw * 0.5);
+}
+
+
+.namePropertytb{
+    position: absolute;
+    top: calc(25.0vw * 0.5);
+    left: calc(0vw * 0.5);
+}
+
+.textBodyUpdateProperty{
+    color: black;
+    font-style: italic;
+    font-size: calc( 3.5vw * 0.4);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+}
+
+.namePropertyTextInfo{
+    position: absolute;
+    top: calc(26.5vw * 0.5);
+    left: calc(35vw * 0.5);
+}
+
+.divType{
+    position: absolute;
+    top: calc(32.0vw * 0.5);
+    left: calc(0vw * 0.5);
+}
+
+.ltype{
+    position: absolute;
+    top: calc(33.0vw * 0.5);
+    left: calc(11vw * 0.5);
+}
+.divTown{
+    position: absolute;
+    top: calc(39.0vw * 0.5);
+    left: calc(0vw * 0.5);
+}
+
+.lTown{
+    position: absolute;
+    top: calc(40.5vw * 0.5);
+    left: calc(13vw * 0.5);
+}
+
+.divNeiberhoods{
+    position: absolute;
+    top: calc(47.0vw * 0.5);
+    left: calc(0vw * 0.5);
+}
+
+.lNeiberhoods{
+    position: absolute;
+    top: calc(48.5vw * 0.5);
+    left: calc(21vw * 0.5);
+}
+
+.divCategory{
+    position: absolute;
+    top: calc(55.0vw * 0.5);
+    left: calc(0vw * 0.5); 
+}
+
+.lCategory{
+    position: absolute;
+    top: calc(54.0vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divPrice{
+    position: absolute;
+    top: calc(67.0vw * 0.5);
+    left: calc(0vw * 0.5); 
+}
+
+.bPrice{
+    position: absolute;
+    top: calc(67.2vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divPricePerQuadrature{
+    position: absolute;
+    top: calc(74.0vw * 0.5);
+    left: calc(0vw * 0.5); 
+}
+
+.lPricePerQuadrature{
+    position: absolute;
+    top: calc(74.5vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divQuadrature{
+    position: absolute;
+    top: calc(80.5vw * 0.5);
+    left: calc(0vw * 0.5);   
+}
+
+.lQuadrature{
+    position: absolute;
+    top: calc(81vw * 0.5);
+    left: calc(35vw * 0.5);   
+}
+
+.divConstruction{
+    position: absolute;
+    top: calc(87.5vw * 0.5);
+    left: calc(0vw * 0.5);    
+}
+
+.lConstruction{
+    position: absolute;
+    top: calc(88.5vw * 0.5);
+    left: calc(35vw * 0.5);    
+}
+
+.divtypeOfConstruction{
+    position: absolute;
+    top: calc(95.5vw * 0.5);
+    left: calc(0vw * 0.5);  
+}
+
+.ltypeOfConstruction{
+    position: absolute;
+    top: calc(97vw * 0.5);
+    left: calc(45vw * 0.5);    
+}
+
+.divAkt{
+    position: absolute;
+    top: calc(102.5vw * 0.5);
+    left: calc(0vw * 0.5);  
+}
+
+.lAkt{
+    position: absolute;
+    top: calc(103.5vw * 0.5);
+    left: calc(35vw * 0.5);  
+}
+
+.divDescription{
+    position: absolute;
+    top: calc(102.5vw * 0.5);
+    left: calc(85vw * 0.5);  
+}
+
+.lDescription{
+
+    position: absolute;
+    top: calc(110.5vw * 0.5);
+    left: calc(85vw * 0.5);  
+    font-size: calc( 3.0vw * 0.4);
+    border-color: black;
+}
+
+.divYear{
+    position: absolute;
+    top: calc(110.5vw * 0.5);
+    left: calc(0vw * 0.5); 
+    width: calc(55.5vw * 0.5); 
+}
+
+.lYear{
+    position: absolute;
+    top: calc(113.5vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divFloor{
+    position: absolute;
+    top: calc(124.5vw * 0.5);
+    left: calc(0vw * 0.5); 
+}
+
+.lFloor{
+    position: absolute;
+    top: calc(124.5vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divFloors{
+    position: absolute;
+    top: calc(132.5vw * 0.5);
+    left: calc(0vw * 0.5); 
+}
+
+.lFloors{
+    position: absolute;
+    top: calc(133.5vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divOwenerName{
+    position: absolute;
+    top: calc(145.5vw * 0.5);
+    left: calc(0vw * 0.5); 
+    width: calc(45.5vw * 0.5); 
+}
+
+.lOwenerName{
+    position: absolute;
+    top: calc(148.5vw * 0.5);
+    left: calc(35vw * 0.5); 
+}
+
+.divOwenerLastName{
+    position: absolute;
+    top: calc(145.5vw * 0.5);
+    left: calc(65vw * 0.5); 
+    width: calc(45.5vw * 0.5); 
+}
+
+.lOwenerLastName{
+    position: absolute;
+    top: calc(148.5vw * 0.5);
+    left: calc(100vw * 0.5); 
+}
+
+.divPhone{
+    position: absolute;
+    top: calc(145.5vw * 0.5);
+    left: calc(130vw * 0.5); 
+    width: calc(45.5vw * 0.5); 
+}
+
+.lPhone{
+    position: absolute;
+    top: calc(148.5vw * 0.5);
+    left: calc(165vw * 0.5); 
+}
+
+.buttonAddNewPicture{
+    background-image: url('/assets/images/addPicture.png');
+    background-size: cover;
+    background-position: center;
+    height:  calc(10.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(35vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    position: absolute;
+    top: calc(6vw * 0.5);
+    left: calc(72vw * 0.5);
+    z-index: 1;
+}
+
+.buttonDeletePicture{
+    background-image: url('/assets/images/deleteImage.png');
+    background-size: cover;
+    background-position: center;
+    height:  calc(10.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(35vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    position: absolute;
+    top: calc(17vw * 0.5);
+    left: calc(72vw * 0.5);
+    z-index: 1;
+}
+
+.buttonUpdateProperty{
+    background-image: url('/assets/images/updateProperty.png');
+    background-size: cover;
+    background-position: center;
+    height:  calc(50.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(122vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    position: absolute;
+    top: calc(152vw * 0.5);
+    left: calc(40vw * 0.5);
+    z-index: 1;
+}
+
+
+/*::ng-deep .p-button {
+    display: flex;
+    object-fit: contain;
+    background-color: blue;
+    border: none;
+}*/
+}

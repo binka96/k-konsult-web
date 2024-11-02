@@ -25,6 +25,7 @@ import { response } from 'express';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 
@@ -60,6 +61,9 @@ import { TokenService } from '../Service/token.service';
 })
 export class Property implements OnInit {
   title = 'Inquiers';
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   dialogAddImage : boolean = false;
   dialogAddNewImage : boolean = false
   upload_image: boolean = true;
@@ -149,8 +153,15 @@ export class Property implements OnInit {
   imagesList : any[] = [];
   selectImage: any = "";
   properties: string[] = [];
+  activeIndex: number = 0;
   constructor(private messageService: MessageService , 
-              private propertyService: PropertyService  ) {}
+              private propertyService: PropertyService ,
+              private deviceService: DeviceDetectorService ) {
+
+              this.isMobile = this.deviceService.isMobile();
+              this.isTablet = this.deviceService.isTablet();
+              this.isDesktop = this.deviceService.isDesktop();}
+              
 
   ngOnInit() {
      

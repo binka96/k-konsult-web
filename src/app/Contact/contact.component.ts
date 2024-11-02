@@ -27,7 +27,6 @@ this.isDesktop = this.deviceService.isDesktop();
 checkIfMobile() {
   this.checkIfMobile();
 
-  this.isMobile = window.innerWidth <= 768; // Можете да промените 768 на желаната ширина
 }
 
   ngOnInit(){
@@ -38,7 +37,6 @@ checkIfMobile() {
 
 
 
-     
      @HostListener('window:scroll', [])
      onWindowScroll() {
        const windowHeight = window.innerHeight;
@@ -52,6 +50,5 @@ checkIfMobile() {
          }
        });
      }
-  
 }
 

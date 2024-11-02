@@ -1,10 +1,15 @@
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label class="text">Имоти</label>  
 <p-toast></p-toast>
-<p-tabView>
-    <p-tabPanel header="Добави имот">
+
+<p-tabView  >
+  <p-tabPanel header="Добави имот"  >
 
         <div class="card flex justify-content-center">
-            <p-button label="Добави снимка" (click)="addPicture()" />
-            <p-dialog header="Изтрий акаунт" 
+            <p-dialog header="Добави снимка" 
                 [(visible)]="dialogAddImage" 
                 position="center" >
 
@@ -26,113 +31,127 @@
 
             </p-dialog>
         </div>
-        <p>Име на имота</p>
-        <input type="text" pInputText [(ngModel)]="nameProperty" />
-        <p>Тип</p>
+    <div class="addProperty">
+        <div class="textbody">Име на имота:</div>
+        <input class="textPropertyName" type="text" pInputText [(ngModel)]="nameProperty" />
+        <div class="textbody tybediv">Тип на имота:</div>
         <p-listbox 
+            class="tybelb"        
             [options]="typeProperty" 
             [(ngModel)]="selectedType"
             optionLabel="type" 
             [filter]="true" 
             [style]="{ width: '15rem' }" 
-            [listStyle]="{'max-height': '220px'}" />
-        <p>Град</p>
+            [listStyle]="{'max-height': '150px'}" />
+        <div class="textbody towndiv">Град:</div>
         <p-listbox 
+        class="townlb"
         [options]="cities" 
         [(ngModel)]="selectedCity" 
         optionLabel="name" 
         [filter]="true" 
         [style]="{ width: '15rem' }" 
-        [listStyle]="{'max-height': '220px'}" />
-        <p>Квартал</p>
-        <p-listbox 
+        [listStyle]="{'max-height': '150px'}" />
+        <div class="textbody neighborhoodText">Квартал:</div>
+        <p-listbox class="neighborhoodlb"
         [options]="neighborhoods" 
         [(ngModel)]="selectedNeighborhood" 
         optionLabel="neighborhood" 
         [filter]="true" 
         [style]="{ width: '15rem' }" 
-        [listStyle]="{'max-height': '220px'}" />
-        <p>Категория</p>
-        <p-listbox 
+        [listStyle]="{'max-height': '150px'}" />
+        <div class="textbody categoryText">Категория:</div>
+        <p-listbox class="categoryTextlb"
         [options]="categories" 
         [(ngModel)]="selectedCategory" 
         optionLabel="type" 
-        [style]="{ width: '15rem' }" 
-        [listStyle]="{'max-height': '220px'}" />
-        <p>Цена от</p>
-        <p-inputNumber 
+        [style]="{ 'width': '21.5rem' , 'border-color': 'black'  }" 
+        [listStyle]="{'max-height': '110px '  , 
+                    'border-color': 'black' , 'border-radius':'5px'  }" />
+        <div class="textbody priceText" >Цена:</div>
+        <p-inputNumber class="pricetb" 
                     [(ngModel)]="price" 
                     inputId="locale-user" 
-                    [minFractionDigits]="2" />
-        <p>Цена на кв.м</p>
-        <p-inputNumber 
+                    [minFractionDigits]="2"
+                    [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
+                    'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }" />
+        <div class="textbody pricePerQuadratureText">Цена на кв.м:</div>
+        <p-inputNumber class="pricePerQuadraturetb"
                     [(ngModel)]="pricePerQuadrature" 
                     inputId="locale-user" 
-                    [minFractionDigits]="2" />
-        <p>Площ</p>
-        <p-inputNumber 
+                    [minFractionDigits]="2" 
+                    [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
+                    'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }" />
+        <div class="textbody quadratureText">Площ:</div>
+        <p-inputNumber class="quadraturetb"
                     [(ngModel)]="quadrature" 
                     inputId="locale-user" 
-                    [minFractionDigits]="2" />
-        <p>Строителство</p>
-        <input type="text" pInputText [(ngModel)]="construction" />
-        <p>Тип Строителство</p>
-        <p-listbox 
+                    [minFractionDigits]="2" 
+                    [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
+                    'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }" />
+        <div class="textbody constructionText">Строителство:</div>
+        <input class="constructionTb" type="text" pInputText [(ngModel)]="construction" />
+        <div class="textbody typeOfConstructionsText">Тип Строителство: </div>
+        <p-listbox class="typeOfConstructionslb"
         [options]="typeOfConstructions" 
         [(ngModel)]="selectedTypeOfConstruction" 
         optionLabel="type" 
-        [style]="{ width: '15rem' }" 
-        [listStyle]="{'max-height': '220px'}" />
-        <p>Акт</p>
-        <input type="text" pInputText [(ngModel)]="akt" />
-        <p>Описание</p>
-        <textarea 
-            rows="5"
-            cols="30" 
+        [style]="{ width: '22rem' , 'border-color': 'black' }" 
+        [listStyle]="{'max-height': '220px' , 'font-size': 'calc( 4.0vw * 0.4)' ,  }" />
+        <div class="textbody aktText">Акт:</div>
+        <input class="aktTb" type="text" pInputText [(ngModel)]="akt" />
+        <div class="textbody yearOfConstructionText">Година:</div>
+        <p-inputNumber  class="yearOfConstructionTb"
+            inputId="integeronly" 
+            [(ngModel)]="yearOfConstruction"
+            [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
+                    'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }"  /> 
+        <div class="textbody floorText">Етаж:</div>
+        <p-inputNumber  class="floorTb"
+                inputId="integeronly" 
+                [(ngModel)]="floor" 
+                [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
+                    'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }"  /> 
+        <div class="textbody floorsText">Етажи:</div>
+        <p-inputNumber class="floorsTb"
+           inputId="integeronly" 
+           [(ngModel)]="floors" 
+           [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
+                    'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }"  /> 
+        <div class="textbody description">Описание:</div>
+        <textarea class="descriptionTB"
+            rows="11"
+            cols="70" 
             pInputTextarea 
             [(ngModel)]="description">
         </textarea>
-        <p>Година на стройтелство</p>
-        <p-inputNumber 
-            inputId="integeronly" 
-            [(ngModel)]="yearOfConstruction" /> 
-        <p>Етаж</p>
-        <p-inputNumber 
-                inputId="integeronly" 
-                [(ngModel)]="floor" /> 
-        <p>Етажи</p>
-        <p-inputNumber 
-           inputId="integeronly" 
-           [(ngModel)]="floors" /> 
-        <p>Асансьор</p>
-        <p-checkbox 
-            [(ngModel)]="elevator" 
-            [binary]="true" 
-            inputId="binary" />
-        <p>Име на собстеника</p>
-        <input type="text" pInputText [(ngModel)]="ownerName" />
-        <p>Фамилия на собстеника</p>
-        <input type="text" pInputText [(ngModel)]="ownerLastName" />
-        <p>Телефон на собстеника</p>
-        <input type="text" pInputText [(ngModel)]="ownerPhone" />
-        <p></p>
-        <p-button label="Добави имот" (click)="createProperty()" />
+        <div class="textbody ownerNameText">Име на собстеника:</div>
+        <input class="ownerNameTb" type="text" pInputText [(ngModel)]="ownerName" />
+        <div class="textbody ownerLastNameText">Фамилия на собстеника:</div>
+        <input class="ownerLastNameTb" type="text" pInputText [(ngModel)]="ownerLastName" />
+        <div class="textbody ownerPhoneText">Телефон на собстеника:</div>
+        <input class="ownerPhoneTB" type="text" pInputText [(ngModel)]="ownerPhone" />
+        <p-button class="buttonAddImage" (click)="addPicture()" />
+        <p-button  class="buttonAddProperty" (click)="createProperty()" />
 
+    </div>
 
     </p-tabPanel>
     <p-tabPanel header="Промени имот" (click)="getAllPrpoperty()">
-        <p>Имот</p>
-        <p-listbox 
+        <div class="updateProperty">
+        <div class="textbody">Имот:</div>
+        <p-listbox class="textPropertyName"
             [options]="nameProperties" 
             [(ngModel)]="selectednameProperties"
             optionLabel="name" 
             [filter]="true" 
             [style]="{ width: '15rem' }" 
-            [listStyle]="{'max-height': '220px'}" 
+            [listStyle]="{'max-height': '150px'}" 
             (onChange)="getPropertyInformationUpdate()"/>
-        <div class="card flex justify-content-center">
+            <p-button class="buttonAddNewPicture" (click)="addNewPicture()" />
+            <div class="card flex justify-content-center">
             
-            <p-button label="Добави снимка" (click)="addNewPicture()" />
+           
             
             <p-dialog header="Изтрий акаунт" 
                 [(visible)]="dialogAddNewImage" 
@@ -156,7 +175,8 @@
 
             </p-dialog>
         </div>
-        <div class="galery">
+        <div class="textbody pictureTb">Снимки:</div>
+        <div class="galery ">
            <p-galleria [numVisible]="2" [value]="images"
             [showItemNavigatorsOnHover]="true" 
             [showItemNavigators]="true" 
@@ -167,12 +187,12 @@
                         [src]="item.previewImageSrc"  
                         [alt]="item.alt"  
                         [title]="item.title"  
-                        style="width: auto; height: 300px;" 
+                        style="width: calc(66vw * 0.5); height: auto;  border-radius: calc(2.0vw * 0.5);" 
                         (click)="openGalleryModal()"
                     /> 
                 </ng-template> 
                 <ng-template pTemplate="thumbnail" let-item width="20px"> 
-                    <div class="grid grid-nogutter justify-content-center"> 
+                    <div class="grid grid-nogutter justify-content-center "> 
                         <img 
                             [src]="item.thumbnailImageSrc"  
                             [alt]="item.alt"  
@@ -188,12 +208,12 @@
               [showItemNavigators]="true" [circular]="true">
               <ng-template pTemplate="item" let-item>
                 <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
-                  style="width: auto; height: 600px;" />
+                  style="width: 350px; height: auto;" />
               </ng-template>
             </p-galleria>
           </p-dialog>
         <p></p>
-        <p-button label="Изтрии снимка" (click)="deleteImageDialog()" />
+        <p-button class="buttonDeletePicture" (click)="deleteImageDialog()" />
         <p-dialog header="Изтрий акаунт" 
         [(visible)]="deleteImageDialogVisivle" 
         position="center" >
@@ -208,74 +228,70 @@
         <p></p>
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog>
-        <p>Име на имота</p>
-        <label>{{property.nameProperty}}</label>
-        <p>Тип</p>
-        <label>{{property.type}}</label>
-        <p>Град</p>
-        <label>{{property.town}}</label>
-        <p>Квартал</p>
-        <label>{{property.neighborhood}}</label>
-        <p>Категория</p>
-        <p-listbox 
+        <div class="textbody namePropertytb">Име на имота:</div>
+        <label class="textBodyUpdateProperty namePropertyTextInfo">"property.nameProperty"</label>
+        <div class="textbody divType">Тип:</div>
+        <label class="textBodyUpdateProperty ltype">"property.type"</label>
+        <div class="textbody divTown">Град:</div>
+        <label class="textBodyUpdateProperty lTown">"property.town"</label>
+        <div class="textbody divNeiberhoods">Квартал:</div>
+        <label class="textBodyUpdateProperty lNeiberhoods">"property.neighborhood"</label>
+        <div class="textbody divCategory">Категория:</div>
+        <p-listbox class="lCategory"
         [options]="categories" 
         [(ngModel)]="selectedCategory" 
         optionLabel="type" 
-        [style]="{ width: '15rem' }" 
+        [style]="{ width: '14.5rem' }" 
         [listStyle]="{'max-height': '220px'}" />
-        <p>Цена</p>
-        <p-inputNumber 
+        <div class="textbody divPrice">Цена:</div>
+        <p-inputNumber class="bPrice"
                     [(ngModel)]="property.price" 
                     inputId="locale-user" 
                     [minFractionDigits]="2" />
-        <p>Цена на кв.м</p>
-        <p-inputNumber 
+        <div class="textbody divPricePerQuadrature">Цена на кв.м:</div>
+        <p-inputNumber class="lPricePerQuadrature"
                     [(ngModel)]="property.pricePerQuadrature" 
                     inputId="locale-user" 
                     [minFractionDigits]="2" />
-        <p>Площ</p>
-        <p-inputNumber 
+        <div class="textbody divQuadrature">Площ:</div>
+        <p-inputNumber class="lQuadrature"
                     [(ngModel)]="property.quadrature" 
                     inputId="locale-user" 
                     [minFractionDigits]="2" />
-        <p>Строителство</p>
-        <input type="text" pInputText [(ngModel)]="property.construction" />
-        <p>Тип Строителство</p>
-        <label>{{property.typeOfConstruction}}</label>
-        <p>Акт</p>
-        <input type="text" pInputText [(ngModel)]="property.akt" />
-        <p>Описание</p>
-        <textarea 
-            rows="5"
-            cols="30" 
+        <div class="textbody divConstruction">Строителство:</div>
+        <input class="lConstruction" type="text" pInputText [(ngModel)]="property.construction" />
+        <div class="textbody divtypeOfConstruction">Тип Строителство:</div>
+        <label class="textBodyUpdateProperty ltypeOfConstruction">"property.typeOfConstruction"</label>
+        <div class="textbody divAkt">Акт:</div>
+        <input class="lAkt" type="text" pInputText [(ngModel)]="property.akt" />
+        <div class="textbody divDescription">Описание на имота:</div>
+        <textarea class="lDescription"
+            rows="11"
+            cols="70" 
             pInputTextarea 
             [(ngModel)]="property.description">
         </textarea>
-        <p>Година на стройтелство</p>
-        <p-inputNumber 
+        <div class="textbody divYear">Година на стройтелство:</div>
+        <p-inputNumber class="lYear"
             inputId="integeronly" 
             [(ngModel)]="property.yearOfConstruction" /> 
-        <p>Етаж</p>
-        <p-inputNumber 
+        <div class="textbody divFloor">Етаж:</div>
+        <p-inputNumber class="lFloor"
                 inputId="integeronly" 
                 [(ngModel)]="property.floar" /> 
-        <p>Етажи</p>
-        <p-inputNumber 
+        <div class="textbody divFloors">Етажи:</div>
+        <p-inputNumber class="lFloors"
            inputId="integeronly" 
            [(ngModel)]="property.floars" /> 
-        <p>Асансьор</p>
-        <p-checkbox 
-            [(ngModel)]="elevator" 
-            [binary]="true" 
-            inputId="binary" />
-        <p>Име на собстеника</p>
-        <input type="text" pInputText [(ngModel)]="property.owenerName"/>
-        <p>Фамилия на собстеника</p>
-        <input type="text" pInputText [(ngModel)]="property.ownerLastName" />
-        <p>Телефон на собстеника</p>
-        <input type="text" pInputText [(ngModel)]="property.ownerPhone" />
+        <div class="textbody divOwenerName">Име на собстеника:</div>
+        <input class="lOwenerName" type="text" pInputText [(ngModel)]="property.owenerName"/>
+        <div class="textbody divOwenerLastName">Фамилия на собстеника:</div>
+        <input class="lOwenerLastName" type="text" pInputText [(ngModel)]="property.ownerLastName" />
+        <div class="textbody divPhone">Телефон на собстеника:</div>
+        <input class="lPhone" type="text" pInputText [(ngModel)]="property.ownerPhone" />
         <p></p>
-        <p-button label="Добави имот"  />
+        <p-button class="buttonUpdateProperty" />
+    </div>
     </p-tabPanel>
     <p-tabPanel header="Изтрий имот" (click)="getAllPrpoperty()">
         <p>Имот</p>
@@ -303,3 +319,4 @@
         <p-button label="Изтрий имот" (click)="deleteProperty()" />
     </p-tabPanel>
 </p-tabView>
+</div>

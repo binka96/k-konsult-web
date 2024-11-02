@@ -1,0 +1,152 @@
+.phone{
+    height:  calc(315.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(115.5vw * 0.4); ;
+    .lane-left{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(8vw * 0.5);
+        left: calc(4vw * -0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(60.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .lane-right{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(7vw * 0.5);
+        left:  calc(123vw * 0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(70.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+    .text{
+        color: black;
+        font-size: calc( 7.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(1.5vw * 0.4);
+        left: calc(76.5vw * 0.4);
+    } 
+
+    .text1{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(25.5vw * 0.4);
+        left: calc(10.0vw * 0.4);
+    } 
+    .textBox1{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(12.5vw * 0.4);
+        left: calc(125.0vw * 0.4);
+        border-color: black;
+        border-radius: 5px;
+        width: calc(105vw * 0.4);
+        height: calc(11.5vw * 0.4);
+    }
+
+    .text2{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(40.5vw * 0.4);
+        left: calc(10.0vw * 0.4);
+
+    } 
+
+    .textBox2{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        border-radius: 5px;
+        top: calc(25.5vw * 0.4);
+        left: calc(125.0vw * 0.4);
+        width: calc(105vw * 0.4);
+        height: calc(19.5vw * 0.4);
+    }
+
+    .text3{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(55.5vw * 0.4);
+        left: calc(10.0vw * 0.4);
+    } 
+
+    .textBox3{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        border-radius: 5px;
+        top: calc(40.5vw * 0.4);
+        left: calc(125.0vw * 0.4);
+        width: calc(105vw * 0.4);
+        height: calc(19.5vw * 0.4);
+    }
+
+
+    .text4{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(71.5vw * 0.4);
+        left: calc(8.0vw * 0.4);
+    } 
+
+    .textBox4{
+        color: black;
+        font-size: calc( 6.0vw * 0.6);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        position: relative;
+        border-radius: 5px;
+        top: calc(57.5vw * 0.4);
+        left: calc(125.0vw * 0.4);
+        width: calc(105vw * 0.4);
+        height: calc(19.5vw * 0.4);
+    }
+
+    .lane{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(142vw * 0.5);
+        left:  calc(4vw * -0.5);;
+        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .delete-button{
+        background-image: url('/assets/images/deleteAcount.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(50.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(122vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(223vw * 0.5);
+        left: calc(40vw * 0.5);
+    }
+
+    .changePassword-button{
+        background-image: url('/assets/images/changePassword.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(50.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(122vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(253vw * 0.5);
+        left: calc(40vw * 0.5);
+    }
+}
