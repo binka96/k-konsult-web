@@ -3,7 +3,7 @@
         <div *ngFor="let item of articles">
             <p-card [header]="item.title" >
                 <ng-template pTemplate="header">
-                    <img alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" />
+                    <img alt="Card" src="http://192.168.182.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" />
                 </ng-template>
                 <p>
                     {{item.content}}
@@ -29,7 +29,7 @@
             <div class="content-wrapper">
                 <p-card [header]="item.title">
                     <ng-template pTemplate="header">
-                        <img class="picture" alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" [routerLink]="['/news/',  item.title ]" />
+                        <img class="picture" alt="Card" src="http://192.168.182.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" [routerLink]="['/news/',  item.title ]" />
                     </ng-template>
                     <p>{{item.content}}</p>
                 </p-card>
@@ -51,7 +51,7 @@
                 <div class="content-wrapper">
                     <p-card [header]="item.title">
                         <ng-template pTemplate="header">
-                            <img class="picture" alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" [routerLink]="['/news/',  item.title ]" />
+                            <img class="picture" alt="Card" src="http://192.168.182.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" [routerLink]="['/news/',  item.title ]" />
                         </ng-template>
                         <div style="width: calc(180.5vw * 0.5);">
                             <label >{{item.content}}</label>

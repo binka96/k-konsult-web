@@ -24,6 +24,7 @@ import { PropertyService } from '../Service/property.service';
 import { TokenService } from '../Service/token.service';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -62,9 +63,18 @@ export class Article implements OnInit {
   deleteImageDialogVisivle: boolean = false;
   imagesList : any[] = [];
   selectImage: any = "";
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   constructor(private messageService: MessageService,
               private articleService: ArticleService ,
-              private propertyService: PropertyService ) {}
+              private propertyService: PropertyService,
+              private deviceService: DeviceDetectorService  ) {
+
+              this.isMobile = this.deviceService.isMobile();
+              this.isTablet = this.deviceService.isTablet();
+              this.isDesktop = this.deviceService.isDesktop();
+              }
   article_title !: string;
   article_content !: string;
   article: ArticleDto = { title: "" , content: ""}
@@ -124,8 +134,8 @@ export class Article implements OnInit {
             this.images = [];
             for (let i = 0; i < response.length; i++) {
               this.images.push({ 
-                 previewImageSrc: "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
-                 thumbnailImageSrc:  "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
+                 previewImageSrc: "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
+                 thumbnailImageSrc:  "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
                  alt: "Description for Image "+i+", title: Title "+i
                 }); 
              }

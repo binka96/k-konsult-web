@@ -6,7 +6,7 @@ import { TokenService } from "./token.service";
 
 @Injectable()
 export class ArticleService{
-    Url ='http://192.168.247.130:8080/K-Konsult/Article'
+    Url ='http://192.168.182.130:8080/K-Konsult/Article'
     constructor (private httpClient: HttpClient , 
                  private tokenService: TokenService
     ){    }

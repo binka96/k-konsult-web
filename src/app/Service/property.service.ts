@@ -7,8 +7,8 @@ import { TokenService } from "./token.service";
 
 @Injectable()
 export class PropertyService{
-    Url ='http://192.168.247.130:8080/K-Konsult/Property'
-    UrlFile = 'http://192.168.247.130:8080/K-Konsult/file'
+    Url ='http://192.168.182.130:8080/K-Konsult/Property'
+    UrlFile = 'http://192.168.182.130:8080/K-Konsult/file'
     constructor (private httpClient: HttpClient , 
         private tokenService: TokenService
     ){    }

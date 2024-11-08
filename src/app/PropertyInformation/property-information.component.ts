@@ -104,8 +104,8 @@ export class PropertyInformation implements OnInit{
         this.images = [];
         for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
-             thumbnailImageSrc:  "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
+             previewImageSrc: "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
+             thumbnailImageSrc:  "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
          }
