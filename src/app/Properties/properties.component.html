@@ -2,21 +2,22 @@
 <div *ngIf="isDesktop" class="desktop"  >
     <div [ngStyle]="background" class="background">
         <label class="text">Намери своя нов дом днес</label>
-        <p-dropdown class="townLB"
+        <p-cascadeSelect class="townLB"
         [options]="cities" 
         [(ngModel)]="selectedCity" 
-        optionLabel="name" 
-        [filter]="true" 
-        [checkmark]="true"
+        optionGroupLabel="Cname"
+        optionLabel="name"
+        [optionGroupChildren]="['townships', 'place']"
         placeholder="Град"
-        [style]="{ width: 'calc(40vw * 0.4)' }" 
-         />
+        (click)="getNeighberhood()"
+        [style]="{ width: 'calc(40vw * 0.4)' }" />
         <p-dropdown 
+        [disabled]="neighberhoodListVisible"
         class="neiberhoodLB"
         [options]="neighborhoods" 
         [(ngModel)]="selectedNeighborhood"
         [checkmark]="true"
-        optionLabel="neighborhood" 
+        optionLabel="name" 
         placeholder="Квартал"
         [filter]="true" 
         [style]="{ width: 'calc(40vw * 0.4)' }" 
@@ -48,7 +49,7 @@
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
                     <div *ngFor="let item of propertiesFilter" class="property-item">
-                        <img class="picture" alt="Card" src="http://192.168.182.130:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                        <img class="picture" alt="Card" src="http://192.168.236.130:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
                         <p class="text-card">
                             {{item.price}} €
                         </p>
@@ -66,21 +67,22 @@
 <div *ngIf="isMobile" class="phone"  >
     <div [ngStyle]="background"  class="background">
         <label class="text">Намери своя нов дом днес</label>
-        <p-dropdown class="townLB"
-        [options]="cities" 
+        <p-cascadeSelect class="townLB"
+        [options]="citiesWithoutArea" 
         [(ngModel)]="selectedCity" 
-        optionLabel="name" 
-        [filter]="true" 
-        [checkmark]="true"
+        optionGroupLabel="Cname"
+        optionLabel="name"
+        [optionGroupChildren]="[ 'place']"
         placeholder="Град"
-        [style]="{ width: 'calc(110vw * 0.4)' }" 
-         />
+        (click)="getNeighberhood()"
+        [style]="{ width: 'calc(110vw * 0.4)' }" />
         <p-dropdown 
         class="neiberhoodLB"
+        [disabled]="neighberhoodListVisible"
         [options]="neighborhoods" 
         [(ngModel)]="selectedNeighborhood"
         [checkmark]="true"
-        optionLabel="neighborhood" 
+        optionLabel="name" 
         placeholder="Квартал"
         [filter]="true" 
         [style]="{ width: 'calc(110vw * 0.4)' }" 
@@ -112,7 +114,7 @@
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
                     <div *ngFor="let item of propertiesFilter" class="property-item">
-                        <img class="picture" alt="Card" src="http://192.168.182.130:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                        <img class="picture" alt="Card" src="http://192.168.236.130:8080/K-Konsult/file/Get/images/{{item.nameProperty}}/{{item.nameProperty}}.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
                         <p class="text-card">
                             {{item.price}} €
                         </p>

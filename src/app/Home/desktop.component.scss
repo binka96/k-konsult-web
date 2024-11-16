@@ -79,10 +79,9 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: -9px;
-        left: -9px;
+        background-attachment: fixed; 
         height:  calc(150vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
 
     .text1{
@@ -130,11 +129,10 @@
         background-image: url('/assets/images/Home/home_header2.png');
         background-size: cover;
         background-position: center;
+        background-attachment: fixed; 
         position: relative;
-        top: -9px;
-        left: -9px;
         height:  calc(190vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
         z-index: -1;
     }
 
@@ -142,6 +140,7 @@
         background-image: url('/assets/images/Home/up_image.png');
         background-size: cover;
         background-position: center;
+
         position: relative;
         top: calc(50vw * 0.5);
         left: calc(108.5vw * 0.5);;
@@ -153,6 +152,7 @@
         background-image: url('/assets/images/Home/down_image.png');
         background-size: cover;
         background-position: center;
+
         position: absolute;
         top: calc(10vw * 0.5);
         left: calc(0vw * 0.5);;
@@ -188,8 +188,6 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
         height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
@@ -199,8 +197,6 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
         height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
@@ -210,8 +206,6 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
         height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
@@ -221,8 +215,6 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
         height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
@@ -232,8 +224,6 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(5vw * 0.5);
-        left: calc(0.0vw * 0.5);;
         height:  calc(22.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(128vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
@@ -275,9 +265,6 @@
         background-image: url('/assets/images/Home/header3.png');
         background-size: cover;
         background-position: center;
-        position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
         height:  calc(290.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
@@ -338,9 +325,10 @@
 
     .img-buttomInqiyre{
         position: relative;
-        top: calc(73.5vw * 0.5);
+        top: calc(76.5vw * 0.5);
         left: calc(25vw * 0.5);;
         height:  calc(46.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(150vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: 1;
     }
 }

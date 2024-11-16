@@ -4,7 +4,29 @@
         <div *ngFor="let item of inquies">
             <p-card [header]="item.inquiryId" >
                 <p>
-                    {{item.comment}}
+                    Име: {{item.name}}
+                </p>
+                <p>
+                   Фамилия: {{item.lastName}}
+                </p>
+                <p>
+                   Емеил: {{item.email}}
+                </p>
+                <p>
+                   Телефон: {{item.phone}}
+                </p>
+                <p>
+                   Коментар: {{item.comment}}
+                </p>
+                <p *ngIf="item.property">
+                    <ng-container *ngIf="item.property as propertydto">
+                        <p>
+                            Имот: {{ propertydto.name }}
+                        </p>
+                    </ng-container>
+                </p>
+                <p *ngIf="!item.property">
+                    Имотът не е наличен.
                 </p>
                 <ng-template pTemplate="footer">
                     <div class="flex gap-3 mt-1">

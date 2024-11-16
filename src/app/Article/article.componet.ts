@@ -134,8 +134,8 @@ export class Article implements OnInit {
             this.images = [];
             for (let i = 0; i < response.length; i++) {
               this.images.push({ 
-                 previewImageSrc: "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
-                 thumbnailImageSrc:  "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
+                 previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
+                 thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
                  alt: "Description for Image "+i+", title: Title "+i
                 }); 
              }
@@ -186,10 +186,13 @@ export class Article implements OnInit {
     for(let file of event.files) {
         this.uploadedFiles.push(file);
       }
-
-      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+      this.dialogAddNewImage=false;
+      this.getArticleContent();
+      this.messageService.add({severity: 'info', summary: 'File Uploaded'});
     }else{
-      this.messageService.add({severity: 'info', summary: 'Имата който се опитвате да качите няма име!', detail: ''});
+      this.dialogAddNewImage=false;
+      this.getArticleContent();
+      this.messageService.add({severity: 'info', summary: 'Имата който се опитвате да качите няма име!'});
     }
   }
 
@@ -211,6 +214,7 @@ export class Article implements OnInit {
     if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedArticles.name !== undefined){
       this.propertyService.deleteImage(this.selectedArticles.name  , this.selectImage.file).subscribe({
         next: (response)=>{
+          this.getArticleContent();
           this.messageService.add(
             {
               severity: 'info',

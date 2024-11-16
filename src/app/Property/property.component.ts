@@ -26,6 +26,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { PlaceService } from '../Service/place.service';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 
 
@@ -49,9 +51,10 @@ import { DeviceDetectorService } from 'ngx-device-detector';
             FormsModule , 
             DividerModule , 
             DialogModule , 
-            GalleriaModule
+            GalleriaModule ,
+            CascadeSelectModule
             ],
-  providers: [MessageService , PropertyService , 
+  providers: [MessageService , PropertyService , PlaceService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     TokenService , TokenInterceptor
   ] , 
@@ -70,6 +73,7 @@ export class Property implements OnInit {
   uploadedFiles: any[] = [];
   images: any[] = [];
   deleteImageDialogVisivle: boolean = false;
+  neighberhoodListVisible: boolean = true;
     //Property
     nameProperty !: string;
     typeProperty : any[] = [
@@ -82,27 +86,10 @@ export class Property implements OnInit {
       {"type": "Гараж"},
     ];
     selectedType : any;
-    cities : any[] = [
-      {"name": "Самоков"},
-      {"name": "Сандански"},
-      {"name": "София"},
-      {"name": "Перник"},
-      {"name": "Дупница"},
-      {"name": "Благовеград"},
-      {"name": "Костенец"},
-      {"name": "Пловдив"},
-    ]
+    cities : any[] = []
+    citiesWithoutArea: any[]=[]
     selectedCity : any;
-    neighborhoods : any[] = [
-      {"neighborhood": "кв Възраждане"},
-      {"neighborhood": "кв Самоково"},
-      {"neighborhood": "кв Младост"},
-      {"neighborhood": "кв Овча купел"},
-      {"neighborhood": "кв Люлин 1"},
-      {"neighborhood": "кв Люлин 2"},
-      {"neighborhood": "кв Люлин 3"},
-      {"neighborhood": "кв Люлин 4"},
-    ]
+    neighborhoods : any[] = [ ];
     selectedNeighborhood : any;
   
     categories: any[] = [
@@ -156,7 +143,8 @@ export class Property implements OnInit {
   activeIndex: number = 0;
   constructor(private messageService: MessageService , 
               private propertyService: PropertyService ,
-              private deviceService: DeviceDetectorService ) {
+              private deviceService: DeviceDetectorService,
+              private placeService: PlaceService ) {
 
               this.isMobile = this.deviceService.isMobile();
               this.isTablet = this.deviceService.isTablet();
@@ -164,17 +152,24 @@ export class Property implements OnInit {
               
 
   ngOnInit() {
-     
+    this.neighberhoodListVisible = true;
+    this.getAllPlaces();
+    this.getAllPlacesWithoutArea();
+    
   }
   onUpload(event:UploadEvent) {
     if(this.nameProperty!== undefined && this.nameProperty!==""){
     for(let file of event.files) {
         this.uploadedFiles.push(file);
     }
+    this.messageService.add({severity: 'info', summary: 'File Uploaded'});
+    this.dialogAddNewImage=false;
+    this.getPropertyInformationUpdate();
 
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
   }else{
     this.messageService.add({severity: 'info', summary: 'Имата който се опитвате да качите няма име!', detail: ''});
+    this.dialogAddNewImage=false;
+    this.getPropertyInformationUpdate();
   }
 
 }
@@ -191,7 +186,7 @@ createProperty(){
       this.property.nameProperty = this.nameProperty;
       this.property.type = this.selectedType.type;
       this.property.town = this.selectedCity.name;
-      this.property.neighborhood = this.selectedNeighborhood.neighborhood;
+      this.property.neighborhood = this.selectedNeighborhood.name;
       this.property.category = this.selectedCategory.type;
       this.property.price = this.price;
       this.property.pricePerQuadrature = this.pricePerQuadrature;
@@ -276,8 +271,8 @@ getPropertyInformationUpdate(){
       this.images = [];
       for (let i = 0; i < response.length; i++) {
         this.images.push({ 
-           previewImageSrc: "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.selectednameProperties.name+"/"+ response[i], 
-           thumbnailImageSrc:  "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.selectednameProperties.name+"/"+ response[i], 
+           previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectednameProperties.name+"/"+ response[i], 
+           thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectednameProperties.name+"/"+ response[i], 
            alt: "Description for Image "+i+", title: Title "+i
           }); 
        }
@@ -319,6 +314,7 @@ deleteImage(){
   if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectednameProperties.name !== undefined){
     this.propertyService.deleteImage(this.selectednameProperties.name  , this.selectImage.file).subscribe({
       next: (response)=>{
+        this.getPropertyInformationUpdate();
         this.messageService.add(
           {
             severity: 'info',
@@ -375,9 +371,58 @@ addNewPicture(){
     this.messageService.add({severity: 'info', summary: 'Имота който се опитвате да качите няма име!', detail: ''});
   }
 }
+
+ updateProperty(){
+  
+      this.propertyService.updateProperty(this.property).subscribe({
+        next: (response)=>{
+          this.messageService.add(
+            {
+              severity: 'info',
+              summary: response.message}
+          );
+        }
+      });
+ }
 displayModal: boolean = false;
 openGalleryModal() {
   this.displayModal = true;
   // Можете да добавите и допълнителна логика, ако е необходимо.
 }
+
+getAllPlaces(){
+  this.placeService.getAllPlaces().subscribe({
+    next: (response)=>{
+      this.cities = response;
+    }
+  })
+}
+
+getAllPlacesWithoutArea(){
+  this.placeService.getAllPlacesWithoutArea().subscribe({
+    next: (response)=>{
+      this.citiesWithoutArea = response;
+    }
+  })
+}
+
+getNeighberhood(){
+      
+  if(this.selectedCity !== undefined){
+    this.placeService.getAllNeiberhood(this.selectedCity.id).subscribe({
+      next: (response) =>
+      {
+        this.neighborhoods = response;
+        if(response.length == 0){
+          this.neighberhoodListVisible = true;
+        }
+        else{
+          this.neighberhoodListVisible = false;
+        }
+        
+      }
+    })
+  }
+}
+
 }

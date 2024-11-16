@@ -1,31 +1,28 @@
-
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
 <p-toast></p-toast>
-<h1>
-    {{property.nameProperty}}
-</h1>
-
 <div class="galery">
-    <p-galleria [numVisible]="2" [value]="images"
+    <p-galleria [value]="images"
      [showItemNavigatorsOnHover]="true" 
      [showItemNavigators]="true" 
      [circular]="true"
+     [showItemNavigators]="true" 
+     [showThumbnails]="false" 
+     [showIndicators]="true" 
+     [showIndicatorsOnItem]="true" 
       > 
          <ng-template  pTemplate="item" let-item > 
              <img 
                  [src]="item.previewImageSrc"  
                  [alt]="item.alt"  
                  [title]="item.title"  
-                 style="width: auto; height: 300px;" 
+                 style=" width:calc(199vw * 0.5); height: auto; " 
                  (click)="openGalleryModal()"
              /> 
          </ng-template> 
-         <ng-template pTemplate="thumbnail" let-item width="20px"> 
+         <ng-template pTemplate="thumbnail" let-item width="20px" > 
              <div class="grid grid-nogutter justify-content-center"> 
-                 <img 
-                     [src]="item.thumbnailImageSrc"  
-                     [alt]="item.alt"  
-                     [title]="item.title"  
-                     width=10% /> 
+                <img [src]="item.thumbnailImageSrc" style="display: block;" />
              </div> 
          </ng-template> 
    
@@ -36,29 +33,57 @@
        [showItemNavigators]="true" [circular]="true">
        <ng-template pTemplate="item" let-item>
          <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
-           style="width: auto; height: 600px;" />
+           style="    width:calc(199vw * 0.4); height: auto" />
        </ng-template>
      </p-galleria>
     </p-dialog>
+    <div class="body">
+    <div class="headerProperty header">
+        {{property.nameProperty}}
+    </div>
+    <div class="textProperty text">
+        Град:  {{property.town}}
+    </div>
+    <div class="textProperty text1">
+        кв {{property.neighborhood}}
+    </div>
+    <div class="textProperty text">
+        Тип: {{property.type}}
+    </div>
+    <div class="textProperty text2">
+        Цена:  €{{property.price}} EUR 
+    </div>
+    <div class="textProperty text3">
+        Цена на квадратен метър: €{{property.pricePerQuadrature}} EUR
+    </div>
+    <div class="textProperty text4">
+        Площ:  {{property.quadrature}} кв/м 
+    </div>
+    <div class="textProperty text5">
+       Стройтелство: {{property.construction}} 
+    </div>
+    <div class="textProperty text6">
+        Тип стройтелство: {{property.typeOfConstruction}} 
+     </div>
+     <div class="textProperty text7">
+        Акт: {{ property.akt}}
+     </div>
+    <div class="textProperty text8">
+        Година на стройтелство: {{property.yearOfConstruction}}
+    </div>
+    <div class="textProperty text9">
+        Етаж: {{property.floar}} Етажи {{property.floars}}
+    </div>
+    <p-scrollPanel [style]="{ width: 'calc(180vw * 0.5)', height: '450px' }" class="text10">
+        <div class="textProperty ">
+            Описание:
+        </div>
+        <div class="description">
+            <p>{{property.description}}</p>
+        </div>
 
-    <p>
-        {{property.town}}
-    </p>
-
-
-    <p>
-        {{property.type}}
-    </p>
-
-    <p>
-        {{property.typeOfConstruction}}
-    </p>
-
-    <p>
-        {{property.description}}
-    </p>
-    <p-button label="Направи запитване" (click)="openDialogInquery()"></p-button>
-
+    </p-scrollPanel>
+    
     <p-dialog header="Направи запитване" 
         [(visible)]="dialogMakeInquiry" 
         position="center" >
@@ -80,3 +105,121 @@
             </textarea>
         <p-button  label="Направи запитване" (click)="createInquery()"></p-button>
     </p-dialog>
+    <img  class="img-buttomInqiyre" src="/assets/images/buttonInqiyre.png" (click)="openDialogInquery()">
+    </div>
+    <div class="line2"></div>
+</div>
+
+
+
+<!-- HTML for Phone Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <p-toast></p-toast>
+    <div class="galery">
+        <p-galleria [value]="images"
+         [showItemNavigatorsOnHover]="true" 
+         [showItemNavigators]="true" 
+         [circular]="true"
+         [showItemNavigators]="true" 
+         [showThumbnails]="false" 
+         [showIndicators]="true" 
+         [showIndicatorsOnItem]="true" 
+          > 
+             <ng-template  pTemplate="item" let-item > 
+                 <img 
+                     [src]="item.previewImageSrc"  
+                     [alt]="item.alt"  
+                     [title]="item.title"  
+                     style=" width: calc(199vw * 0.5); height: auto; " 
+                     (click)="openGalleryModal()"
+                 /> 
+             </ng-template> 
+             <ng-template pTemplate="thumbnail" let-item width="20px" > 
+                 <div class="grid grid-nogutter justify-content-center"> 
+                    <img [src]="item.thumbnailImageSrc" style="display: block;" />
+                 </div> 
+             </ng-template> 
+       
+         </p-galleria> 
+     </div>
+     <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+         <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+           [showItemNavigators]="true" [circular]="true">
+           <ng-template pTemplate="item" let-item>
+             <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+               style="    width: calc(199vw * 0.4); height: auto" />
+           </ng-template>
+         </p-galleria>
+        </p-dialog>
+        <div class="body">
+        <div class="headerProperty header">
+            {{property.nameProperty}}
+        </div>
+        <div class="textProperty text">
+            Град:  {{property.town}}
+        </div>
+        <div class="textProperty text1">
+            кв {{property.neighborhood}}
+        </div>
+        <div class="textProperty text">
+            Тип: {{property.type}}
+        </div>
+        <div class="textProperty text2">
+            Цена:  €{{property.price}} EUR 
+        </div>
+        <div class="textProperty text3">
+            Цена на квадратен метър: €{{property.pricePerQuadrature}} EUR
+        </div>
+        <div class="textProperty text4">
+            Площ:  {{property.quadrature}} кв/м 
+        </div>
+        <div class="textProperty text5">
+           Стройтелство: {{property.construction}} 
+        </div>
+        <div class="textProperty text6">
+            Тип стройтелство: {{property.typeOfConstruction}} 
+         </div>
+         <div class="textProperty text7">
+            Акт: {{ property.akt}}
+         </div>
+        <div class="textProperty text8">
+            Година на стройтелство: {{property.yearOfConstruction}}
+        </div>
+        <div class="textProperty text9">
+            Етаж: {{property.floar}} Етажи: {{property.floars}}
+        </div>
+        <p-scrollPanel [style]="{ width: 'calc(180vw * 0.5)', height: '450px' }" class="text10">
+            <div class="textProperty ">
+                Описание:
+            </div>
+            <div class="description">
+                <p>{{property.description}}</p>
+            </div>
+    
+        </p-scrollPanel>
+        
+        <p-dialog header="Направи запитване" 
+            [(visible)]="dialogMakeInquiry" 
+            position="center" >
+            <p>firstName</p>
+            <input type="text" pInputText [(ngModel)]="firstName" />
+            <p>lastName</p>
+            <input type="text" pInputText [(ngModel)]="lastName" />
+            <p>email</p>
+            <input type="text" pInputText [(ngModel)]="email" />
+            <p>phone</p>
+            <input type="text" pInputText [(ngModel)]="phone" />
+            <p></p>
+            <textarea class="float-lable"
+                    rows="5"
+                    cols="30" 
+                    pInputTextarea 
+                    id="float-input" 
+                    [(ngModel)]="comment">           
+                </textarea>
+            <p-button  label="Направи запитване" (click)="createInquery()"></p-button>
+        </p-dialog>
+        <img  class="img-buttomInqiyre" src="/assets/images/buttonInqiyre.png" (click)="openDialogInquery()">
+        </div>
+        <div class="line2"></div>
+    </div>

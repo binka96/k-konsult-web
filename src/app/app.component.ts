@@ -41,7 +41,7 @@ export class AppComponent implements OnInit{
   items: MenuItem[] | undefined;
   title = 'k-konsult-web';
   typeProperties: string = "cat";
-  username: string = "SIGN IN";
+  username: string = "ВХОД";
   access: string  = "";
   isMobile: boolean;
   isTablet: boolean;
@@ -57,38 +57,40 @@ export class AppComponent implements OnInit{
     this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
-    this.sesstion();
-    this.items = [
-      { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
-      { label: "Имоти" ,  routerLink: "/Properties/all" , 
-        items: [{label: "Продажби" , routerLink: "/Properties/Продажби" ,  items:[
-          {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен"},
-          {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен"},
-          {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен"},
-          {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин"},
-          {label: "Къща" , routerLink: "/Properties/Продажби/Къща"},
-          {label: "Офис" , routerLink: "/Properties/Продажби/Офис"},
-          {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж"},
-        ]} , {label: "Наеми" , routerLink: "/Properties/Наеми", items:[
-          {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен"},
-          {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен"},
-          {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен"},
-          {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин"},
-          {label: "Къща" , routerLink: "/Properties/Наеми/Къща"},
-          {label: "Офис" , routerLink: "/Properties/Наеми/Офис"},
-          {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж"},
-        ]}]
-      },
-      { label: 'Запитвания', routerLink: "/Inquery" },
-      { label: "Блог"  , routerLink: "/Blog"},
-      { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партньори" ,routerLink: "/Partners"}
-    ];
+    if (typeof window !== 'undefined') {
+      this.sesstion();
+      this.items = [
+        { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
+        { label: "Имоти" ,  routerLink: "/Properties/all" , 
+          items: [{label: "Продажби" , routerLink: "/Properties/Продажби" ,  items:[
+            {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен"},
+            {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен"},
+            {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен"},
+            {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин"},
+            {label: "Къща" , routerLink: "/Properties/Продажби/Къща"},
+            {label: "Офис" , routerLink: "/Properties/Продажби/Офис"},
+            {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж"},
+          ]} , {label: "Наеми" , routerLink: "/Properties/Наеми", items:[
+            {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен"},
+            {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен"},
+            {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен"},
+            {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин"},
+            {label: "Къща" , routerLink: "/Properties/Наеми/Къща"},
+            {label: "Офис" , routerLink: "/Properties/Наеми/Офис"},
+            {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж"},
+          ]}]
+        },
+        { label: 'Запитвания', routerLink: "/Inquery" },
+        { label: "Блог"  , routerLink: "/Blog"},
+        { label: "За нас"  , routerLink: "/Contact"},
+        { label: "Партньори" ,routerLink: "/Partners"}
+      ];
   }
+    }
 
 
   reloadApplication() {
-    // window.location.reload();
+     window.location.reload();
   }
 
   loggin(){
@@ -125,6 +127,9 @@ export class AppComponent implements OnInit{
           { label: "Статия" ,routerLink: "/Article"},
           { label: 'Добави потребител', routerLink: "/Registration" },
           { label: 'Моят профил', routerLink: "/MyProfile" },
+          { label: 'Изход' ,  command: () => {
+            this.logginOut();},
+            routerLink: "/"  }
         ]
       }
     ]
@@ -132,7 +137,7 @@ export class AppComponent implements OnInit{
   logginOut(){
     this.tokenService.clearToken();
     localStorage.removeItem('currentUsername');
-    this.username = "SIGN IN";
+    this.username = "ВХОД";
     this.items = [
       { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
       { label: "Имоти" ,  routerLink: "/Properties/all" , 
@@ -161,13 +166,15 @@ export class AppComponent implements OnInit{
     ];
   }
   sesstion(){
-    const currentUsername = "localStorage.getItem('currentUsername');"
+    if(localStorage.getItem('currentUsername')!== undefined){
+    const currentUsername = localStorage.getItem('currentUsername');
     if(this.tokenService.getToken()!==undefined && this.tokenService.getToken()!== null&&currentUsername!==null){
     this.userService.sessionRequest(currentUsername.toString()).subscribe({
       next: (response)=>{
         this.access = response.Access
         this.username = response.Username;
         if(this.username!==null && this.username!==undefined && this.username!==""){
+        this.username = currentUsername;
         this.loggin() ;
         this.router.navigate(['/']);
         }else{
@@ -189,6 +196,6 @@ export class AppComponent implements OnInit{
        });
       }
     });
-  }}
+  }}}
 }
 

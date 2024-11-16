@@ -1,34 +1,32 @@
-<h1>
-    {{article.title}}
-</h1>
-
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
 <div class="galery">
-    <p-galleria [numVisible]="2" [value]="images"
-     [showItemNavigatorsOnHover]="true" 
-     [showItemNavigators]="true" 
-     [circular]="true"
-      > 
-         <ng-template  pTemplate="item" let-item > 
-             <img 
-                 [src]="item.previewImageSrc"  
-                 [alt]="item.alt"  
-                 [title]="item.title"  
-                 style="width: auto; height: 300px;" 
-                 (click)="openGalleryModal()"
-             /> 
-         </ng-template> 
-         <ng-template pTemplate="thumbnail" let-item width="20px"> 
-             <div class="grid grid-nogutter justify-content-center"> 
+        <p-galleria [value]="images"
+         [showItemNavigatorsOnHover]="true" 
+         [showItemNavigators]="true" 
+         [circular]="true"
+         [showItemNavigators]="true" 
+         [showThumbnails]="false" 
+         [showIndicators]="true" 
+         [showIndicatorsOnItem]="true" 
+          > 
+             <ng-template  pTemplate="item" let-item > 
                  <img 
-                     [src]="item.thumbnailImageSrc"  
+                     [src]="item.previewImageSrc"  
                      [alt]="item.alt"  
                      [title]="item.title"  
-                     width=10% /> 
-             </div> 
-         </ng-template> 
-   
-     </p-galleria> 
- </div>
+                     style=" width:calc(199vw * 0.5); height: auto; " 
+                     (click)="openGalleryModal()"
+                 /> 
+             </ng-template> 
+             <ng-template pTemplate="thumbnail" let-item width="20px" > 
+                 <div class="grid grid-nogutter justify-content-center"> 
+                    <img [src]="item.thumbnailImageSrc" style="display: block;" />
+                 </div> 
+             </ng-template> 
+       
+         </p-galleria> 
+     </div>
  <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
      <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
        [showItemNavigators]="true" [circular]="true">
@@ -38,8 +36,68 @@
        </ng-template>
      </p-galleria>
     </p-dialog>
+    <div class="body">
+        <div class="headerProperty header">
+        {{article.title}}
+    </div>
+    <p-scrollPanel [style]="{ width: 'calc(190vw * 0.5)', height: '950px' }" class="text1">
+        <div class="textProperty text">
+            {{article.content}}
+        </div>
+    </p-scrollPanel>
+    </div>
+    <div class="line2"></div>
+</div>
 
-    <p>
-        {{article.content}}
-    </p>
 
+<!-- HTML for Phone Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <div class="galery">
+            <p-galleria [value]="images"
+             [showItemNavigatorsOnHover]="true" 
+             [showItemNavigators]="true" 
+             [circular]="true"
+             [showItemNavigators]="true" 
+             [showThumbnails]="false" 
+             [showIndicators]="true" 
+             [showIndicatorsOnItem]="true" 
+              > 
+                 <ng-template  pTemplate="item" let-item > 
+                     <img 
+                         [src]="item.previewImageSrc"  
+                         [alt]="item.alt"  
+                         [title]="item.title"  
+                         style=" width:calc(199vw * 0.5); height: auto; " 
+                         (click)="openGalleryModal()"
+                     /> 
+                 </ng-template> 
+                 <ng-template pTemplate="thumbnail" let-item width="20px" > 
+                     <div class="grid grid-nogutter justify-content-center"> 
+                        <img [src]="item.thumbnailImageSrc" style="display: block;" />
+                     </div> 
+                 </ng-template> 
+           
+             </p-galleria> 
+         </div>
+     <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+         <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+           [showItemNavigators]="true" [circular]="true">
+           <ng-template pTemplate="item" let-item>
+             <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+               style="width: auto; height: 600px;" />
+           </ng-template>
+         </p-galleria>
+        </p-dialog>
+        <div class="body">
+            <div class="headerProperty header">
+            {{article.title}}
+        </div>
+        <p-scrollPanel [style]="{ width: 'calc(190vw * 0.5)', height: '450px' }" class="text1">
+            <div class="textProperty text">
+                {{article.content}}
+            </div>
+        </p-scrollPanel>
+        </div>
+        <div class="line2"></div>
+    </div>
+    

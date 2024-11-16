@@ -12,6 +12,8 @@ import { ArticleService } from '../Service/article.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 @Component({
   selector: 'app-root-news',
   standalone: true,
@@ -23,6 +25,7 @@ import { TokenService } from '../Service/token.service';
             FormsModule , 
             DividerModule , 
             DialogModule ,
+            ScrollPanelModule
   ],
   providers: [ PropertyService ,  ArticleService ,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
@@ -39,9 +42,24 @@ export class News implements OnInit{
     title: '',
     content: ''
   }
-  constructor (private propertyService: PropertyService , private route: ActivatedRoute , private articleService: ArticleService){
-  
-  }
+ 
+
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+  constructor(private propertyService: PropertyService , 
+              private route: ActivatedRoute , 
+              private articleService: ArticleService,    
+              private deviceService: DeviceDetectorService  ) {
+
+              this.isMobile = this.deviceService.isMobile();
+              this.isTablet = this.deviceService.isTablet();
+              this.isDesktop = this.deviceService.isDesktop();
+              }
+
+
+
+
   ngOnInit(){
     const articleTitle  = this.route.snapshot.paramMap.get('articleTitle');
     if(articleTitle!== undefined && articleTitle!== null){
@@ -64,8 +82,8 @@ export class News implements OnInit{
         this.images = [];
         for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
-             thumbnailImageSrc:  "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
+             previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
+             thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
          }

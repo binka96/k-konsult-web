@@ -16,6 +16,8 @@ import { PropertyInfoDto } from '../Interface/propertyinformation.interface';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 @Component({
   selector: 'app-root-property-information',
   standalone: true,
@@ -28,7 +30,8 @@ import { TokenService } from '../Service/token.service';
             DividerModule , 
             DialogModule ,
             InputTextModule ,
-            ToastModule  ],
+            ToastModule ,
+            ScrollPanelModule ],
             
   providers: [ PropertyService , InquiryService, MessageService  , 
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
@@ -76,12 +79,24 @@ export class PropertyInformation implements OnInit{
     jdprConferm: false
   }  ;
   date: Date = new Date();
-  constructor (private propertyService: PropertyService , 
-               private route: ActivatedRoute , 
-               private inqueryService : InquiryService , 
-               private messageService: MessageService ){
-  
-  }
+
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+  constructor(private propertyService: PropertyService , 
+    private route: ActivatedRoute , 
+    private inqueryService : InquiryService , 
+    private messageService: MessageService,
+              private deviceService: DeviceDetectorService  ) {
+
+              this.isMobile = this.deviceService.isMobile();
+              this.isTablet = this.deviceService.isTablet();
+              this.isDesktop = this.deviceService.isDesktop();
+              }
+
+
+
+
   ngOnInit(){
     const propertyName  = this.route.snapshot.paramMap.get('propertyName');
     if(propertyName!== undefined && propertyName!== null){
@@ -104,8 +119,8 @@ export class PropertyInformation implements OnInit{
         this.images = [];
         for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
-             thumbnailImageSrc:  "http://192.168.182.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
+             previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
+             thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
          }

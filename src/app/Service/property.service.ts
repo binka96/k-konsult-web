@@ -7,8 +7,8 @@ import { TokenService } from "./token.service";
 
 @Injectable()
 export class PropertyService{
-    Url ='http://192.168.182.130:8080/K-Konsult/Property'
-    UrlFile = 'http://192.168.182.130:8080/K-Konsult/file'
+    Url ='http://192.168.236.130:8080/K-Konsult/Property'
+    UrlFile = 'http://192.168.236.130:8080/K-Konsult/file'
     constructor (private httpClient: HttpClient , 
         private tokenService: TokenService
     ){    }
@@ -84,5 +84,13 @@ export class PropertyService{
 
     getPropertiesByCategory(category : string): Observable<PropertyInfoDto[]>{
         return this.httpClient.get<PropertyInfoDto[]>(`${this.Url}/Get/PropertiesByCategory/category=${category}`);
+    }
+
+    updateProperty(propertyDto: PropertyDto): Observable<{message: string}>{
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+          Authorization: `Bearer ${token}`
+        });
+        return this.httpClient.put<{message: string}>(`${this.Url}/Update` , propertyDto ,  {headers});
     }
 }

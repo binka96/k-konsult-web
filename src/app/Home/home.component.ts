@@ -50,22 +50,25 @@ export class Home implements OnInit{
 
    @HostListener('window:scroll', [])
    onWindowScroll() {
-     const windowHeight = window.innerHeight;
- 
-     this.elements.forEach(element => {
-       const { top } = element.getBoundingClientRect();
-       if (top < windowHeight - 50 || this.isMobile) { 
-         element.classList.add('active');
-         element.classList.add('active1');
-         element.classList.add('active2');
-         element.classList.add('active3');
-       } else {
-         element.classList.remove('active'); // Remove active class when the element is not in view
-         element.classList.remove('active1');
-         element.classList.remove('active2');
-         element.classList.remove('active3');
+       // Проверка дали кодът се изпълнява в браузър
+       if (typeof document !== 'undefined') {
+           const windowHeight = window.innerHeight;
+   
+           this.elements.forEach(element => {
+               const { top } = element.getBoundingClientRect();
+               if (top < windowHeight - 50 || this.isMobile) { 
+                   element.classList.add('active');
+                   element.classList.add('active1');
+                   element.classList.add('active2');
+                   element.classList.add('active3');
+               } else {
+                   element.classList.remove('active'); // Remove active class when the element is not in view
+                   element.classList.remove('active1');
+                   element.classList.remove('active2');
+                   element.classList.remove('active3');
+               }
+           });
        }
-     });
    }
 
 

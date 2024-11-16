@@ -5,16 +5,19 @@
     <label class="text">Статии</label>  
 <p-toast></p-toast>
 <p-tabView>
+    
         <p-tabPanel header="Създай статия">
         <div class="addArticle">
         <p-button class="buttonAddImage" (click)="addPicture()" />
+        <div class="file">
         <p-dialog header="Добави снимка" 
             [(visible)]="dialogAddImage" 
-            position="center" >
+            position="center"
+            [style]="{ width: 'calc(90vw * 0.5)', height: '450px' }" >
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://192.168.182.130:8080/K-Konsult/file/upload/{{article_title}}" 
+            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article_title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -28,7 +31,7 @@
                 </ng-template>
             </p-fileUpload>
 
-        </p-dialog>
+        </p-dialog></div>
         <div class="textbody nameArtcletb">Име на статия:</div>
         <input class="nameArtcleBox" type="text " pInputText [(ngModel)]="article_title" />
         <div class="textbody descriptionArticletb">Описание:</div>
@@ -55,14 +58,15 @@
             (onChange)="getArticleContent()"/>
         
         <p-button class="buttonAddNewPicture" (click)="addNewPicture()" />
-            
+        <div class="file">   
         <p-dialog header="Добави снимка" 
             [(visible)]="dialogAddNewImage" 
-            position="center" >
+            position="center"
+            [style]="{ width: 'calc(90vw * 0.5)', height: '450px' }" >
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://192.168.182.130:8080/K-Konsult/file/upload/{{article.title}}" 
+            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article.title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -76,7 +80,7 @@
                 </ng-template>
             </p-fileUpload>
 
-        </p-dialog>
+        </p-dialog></div>
     <div class="galery">
        <p-galleria [numVisible]="2" [value]="images"
             [showItemNavigatorsOnHover]="true" 
@@ -109,26 +113,28 @@
           [showItemNavigators]="true" [circular]="true">
           <ng-template pTemplate="item" let-item>
             <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
-              style="width: auto; height: 600px;" />
+            style="width: calc(150vw * 0.5); height: auto;" />
           </ng-template>
         </p-galleria>
       </p-dialog>
     
     <p-button class="buttonDeletePicture" (click)="deleteImageDialog()" />
+    <div class="file">
     <p-dialog header="Изтрий снимка" 
     [(visible)]="deleteImageDialogVisivle" 
-    position="center" >
+    position="center"
+    [style]="{ width: 'calc(50vw * 0.5)', height: '450px' }" >
         
         <p-listbox 
         [options]="imagesList" 
         [(ngModel)]="selectImage"
         optionLabel="file" 
         [filter]="true" 
-        [style]="{ width: '15rem' }" 
-        [listStyle]="{'max-height': '220px'}" />
+        [style]="{ width: 'calc( 40.0vw * 0.5)' }" 
+        [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" />
         
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
-        </p-dialog>
+        </p-dialog></div>
         <div class="textbody descriptionArticle">Описание на статията:</div>
 
         <textarea  class="descriptionArticleTextAreaUpdate"
@@ -142,19 +148,202 @@
     </div>
     </p-tabPanel>
     <p-tabPanel header="Изтрий статия" (click)="getArticles()">
-        <p>Имот</p>
-        <p-listbox 
+        <div class="deleteArticle" >
+        <div class="textbody">Cтатия: </div>
+        <p-listbox class="lbArticles"
             [options]="articlesList" 
             [(ngModel)]="selectedArticles"
             optionLabel="name" 
             [filter]="true" 
-            [style]="{ width: '15rem' }" 
-            [listStyle]="{'max-height': '220px'}" 
+            [style]="{ width: 'calc( 40.0vw * 0.3)' }" 
+            [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" 
+            (onChange)="getArticleContent()"/>
+            <p-scrollPanel [style]="{ width: '100%', height: '450px' }" class="articleContent">
+        <div class="articleContent"> {{article.content}}</div>
+
+            </p-scrollPanel>
+        <p-button class="buttonDelete" (click)="deleteArticle()">
+            <img src="/assets/images/deleteArticle.png" (click)="deleteArticle()">
+        </p-button>
+    </div>
+    </p-tabPanel>
+</p-tabView>
+</div>
+
+
+<!-- HTML for Phone Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label class="text">Статии</label>  
+<p-toast></p-toast>
+<p-tabView>
+        <p-tabPanel header="Създай статия">
+        <div class="addArticle">
+        <p-button class="buttonAddImage" (click)="addPicture()" />
+        <div class="file">
+        <p-dialog header="Добави снимка" 
+            [(visible)]="dialogAddImage" 
+            position="center" 
+            [style]="{ width: 'calc(160vw * 0.5)', height: '450px' }" >
+
+            <p-fileUpload 
+            name="demo[]" 
+            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article_title}}" 
+            (onUpload)="onUpload($event)" 
+            [multiple]="true" 
+            accept="image/*" 
+            maxFileSize="1000000">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">
+                            {{ file.name }} - {{ file.size }} bytes
+                        </li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+
+        </p-dialog></div>
+        <div class="textbody nameArtcletb">Име на статия:</div>
+        <input class="nameArtcleBox" type="text " pInputText [(ngModel)]="article_title" [style]="{'max-height': 'calc(20.5vw * 0.4)'}" />
+        <div class="textbody descriptionArticletb">Описание:</div>
+        <textarea class="descriptionArticleTextArea"
+            rows="5"
+            cols="30" 
+            pInputTextarea 
+            [(ngModel)]="article_content">
+        </textarea>
+        
+        <p-button class="buttonAddArticle" (click)="createArticle()"/>
+    </div>
+    </p-tabPanel>
+    <p-tabPanel header="Промени статия" (click)="getArticles()">
+        <div class="updateArticlePanel">
+        <div class="textbody property">Статия:</div>
+        <p-listbox class="propertylist"
+            [options]="articlesList" 
+            [(ngModel)]="selectedArticles"
+            optionLabel="name" 
+            [filter]="true" 
+            [style]="{ width: 'calc( 80.0vw * 0.6)' }" 
+            [listStyle]="{'height': 'calc( 85.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}" 
             (onChange)="getArticleContent()"/>
         
-        <label> {{article.content}}</label>
+        <div class="file">
+        <p-dialog header="Добави снимка" 
+            [(visible)]="dialogAddNewImage" 
+            position="center"
+            [style]="{ width: 'calc(160vw * 0.5)', height: '450px' }"  >
+
+            <p-fileUpload 
+            name="demo[]" 
+            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article.title}}" 
+            (onUpload)="onUpload($event)" 
+            [multiple]="true" 
+            accept="image/*" 
+            maxFileSize="1000000">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">
+                            {{ file.name }} - {{ file.size }} bytes
+                        </li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+
+        </p-dialog></div>
+    <div class="galery">
+        <div class="textbody">Снимки:</div>
+       <p-galleria [numVisible]="2" [value]="images"
+            [showItemNavigatorsOnHover]="true" 
+            [showItemNavigators]="true" 
+            [circular]="true"
+             > 
+                <ng-template  pTemplate="item" let-item > 
+                    <img 
+                        [src]="item.previewImageSrc"  
+                        [alt]="item.alt"  
+                        [title]="item.title"  
+                        style="width: calc(153vw * 0.5); height: auto;  border-radius: calc(2.0vw * 0.5);" 
+                        (click)="openGalleryModal()"
+                    /> 
+                </ng-template> 
+                <ng-template pTemplate="thumbnail" let-item width="20px"> 
+                    <div class="grid grid-nogutter justify-content-center "> 
+                        <img 
+                            [src]="item.thumbnailImageSrc"  
+                            [alt]="item.alt"  
+                            [title]="item.title"  
+                            width=10% /> 
+                    </div> 
+                </ng-template> 
+          
+            </p-galleria> 
+    </div>
+    <p-dialog header="Галерия" [(visible)]="displayModal" [modal]="true" [responsive]="true" maximizable="true">
+        <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
+          [showItemNavigators]="true" [circular]="true">
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+              style="width: calc(150vw * 0.5); height: auto;" />
+          </ng-template>
+        </p-galleria>
+      </p-dialog>
+    
+      <p-button class="buttonAddNewPicture" (click)="addNewPicture()" >
+        <img class="img_update2"  src="/assets/images/addPicturePhone.png" (click)="addNewPicture()">
+       </p-button>   
+        <p-button class="buttonDeletePicture" (click)="deleteImageDialog()" >
+            <img class="img_update2"  src="/assets/images/deleteImagePhone.png" (click)="deleteImageDialog()">
+      </p-button>
+      <div class="file">
+    <p-dialog header="Изтрий снимка" 
+    [(visible)]="deleteImageDialogVisivle" 
+    position="center" 
+    [style]="{ width: 'calc(170vw * 0.5)', height: '450px' }" >
         
-        <p-button label="Изтрий статия!" (click)="deleteArticle()"/>
+        <p-listbox 
+        [options]="imagesList" 
+        [(ngModel)]="selectImage"
+        optionLabel="file" 
+        [filter]="true" 
+        [style]="{ width: 'calc( 110.0vw * 0.6)' }" 
+        [listStyle]="{'height': 'calc( 105.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}"  />
+        <p></p>
+        <p-button label="Изтрии снимка" (click)="deleteImage()" />
+        </p-dialog></div>
+        <div class="textbody descriptionArticle">Описание на статията:</div>
+
+        <textarea  class="descriptionArticleTextAreaUpdate"
+        rows="5"
+        cols="30" 
+        pInputTextarea 
+        [(ngModel)]="article.content">
+        </textarea>
+        
+        <p-button class="buttonUpdateArticle" (click)="updateArticle()">
+            <img class="img_update2"  src="/assets/images/updateArticlePhone.png" (click)="deleteImageDialog()">
+        </p-button>
+    </div>
+    </p-tabPanel>
+    <p-tabPanel header="Изтрий статия" (click)="getArticles()">
+        <div class="deleteArticle" >
+        <div class="textbody">Cтатия: </div>
+        <p-listbox class="lbArticles"
+            [options]="articlesList" 
+            [(ngModel)]="selectedArticles"
+            optionLabel="name" 
+            [filter]="true" 
+            [style]="{ width: 'calc( 80.0vw * 0.6)' }" 
+            [listStyle]="{'height': 'calc( 85.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}" 
+            (onChange)="getArticleContent()"/>
+            <p-scrollPanel [style]="{ width: '100%', height: 'calc( 125.0vw * 0.4)' }" class="articleContent">
+        <div class="articleContent"> {{article.content}}</div>
+            </p-scrollPanel>
+        <p-button class="buttonDelete" (click)="deleteArticle()">
+            <img class="img_update2" src="/assets/images/deleteArticle.png" (click)="deleteArticle()">
+        </p-button>
+    </div>
     </p-tabPanel>
 </p-tabView>
 </div>

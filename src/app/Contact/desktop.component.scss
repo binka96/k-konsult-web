@@ -13,7 +13,7 @@
   
 
     .text3 , .circlePic1 , .circlePic2 , .text4 , .text5 , .pic30, .pic44, .pic43, .pic31, .pic32 , .pic42 , .pic29 , .text6 , .text7 , .text8 {
-        opacity: 0;
+        opacity: 1;
         transform: translateY(20px);
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }    
@@ -31,10 +31,8 @@
         background-position: center;
         background-attachment: fixed; // Добавя паралакс ефект
         position: relative;
-        top: -10px;
-        left: -9px;
         height: calc(190vw * 0.4);
-        width: calc(198.5vw * 0.5);
+        width: calc(200vw * 0.5);
     }
 
     .text {
@@ -43,7 +41,7 @@
         background-position: center;
         position: relative;
         top: calc(5vw * 0.4);
-        left: calc(90vw * 0.4);
+        left: calc(50vw * 0.4);
         height: calc(60vw * 0.4);
         width: calc(93.5vw * 0.5);
     }
@@ -53,12 +51,21 @@
         font-size: calc(4.0vw * 0.4);
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5);
         position: relative;
-        top: calc(10vw * -0.4);
-        left: calc(125.5vw * 0.4);
+        top: calc(10vw * 0.4);
+        left: calc(25.5vw * 0.4);
+    }
+
+    .text5header {
+        color: white;
+        font-size: calc(4.0vw * 0.4);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5);
+        position: relative;
+        top: calc(10vw * 0.4);
+        left: calc(135.5vw * 0.4);
     }
 
     .textlabel {
-        width: calc(93vw * 0.4);
+        width: calc(73vw * 0.4);
     }
 
     .lineOringe {
@@ -66,10 +73,8 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(1.1vw * -0.5);
-        left: calc(1.0vw * -0.5);
         height: calc(1.5vw * 0.4);
-        width: calc(198.5vw * 0.5);
+        width: calc(200vw * 0.5);
     }
 
     .background2 {
@@ -77,10 +82,8 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: -12px;
-        left: -9px;
         height: calc(490vw * 0.4);
-        width: calc(198.5vw * 0.5);
+        width: calc(200vw * 0.5);
     }
 
     .lineGrey {
@@ -159,7 +162,7 @@
     top: calc(80vw * -0.4);
     left: -1.9px;
     height:  calc(135vw * 0.4); // височина (смята ширината на екрана * 0,4)
-    width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     //z-index: -1;
     }
 
@@ -261,7 +264,7 @@
     top: calc(355vw * 0.4);
     left: -1.9px;
     height:  calc(135vw * 0.4); // височина (смята ширината на екрана * 0,4)
-    width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     //z-index: -1;
     }
     .text6{

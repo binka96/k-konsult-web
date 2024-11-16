@@ -5,7 +5,7 @@
     .addArticle{
         position: relative;
         height: calc(174.5vw * 0.5);
-        max-width: calc(198.5vw * 0.5);
+        max-width: calc(200vw * 0.5);
     }
     .lane-left{
         background-image: url('/assets/images/Home/Line.png');
@@ -212,11 +212,40 @@
     left: calc(56vw * 0.5);
     z-index: 1;
 }
+.deleteArticle{
+    position: relative;
+    height: calc(110.5vw * 0.5);
+    max-width: calc(200vw * 0.5);
+}
 
-/*::ng-deep .p-button {
+.lbArticles{
+    position: relative;
+    top: calc(5vw * 0.5);
+    left: calc(0vw * 0.5);
+}
+
+.articleContent{
+    position: relative;
+    top: calc(5vw * 0.5);
+    left: calc(0vw * 0.5);
+}
+
+.articleContent{
+    font-size: calc( 4.0vw * 0.3);
+    text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+}
+
+.buttonDelete{
+    position: relative;
+    top: calc(10vw * 0.5);
+    left: calc(50vw * 0.5);
+}
+.file{
+    ::ng-deep .p-button {
     display: flex;
     object-fit: contain;
     background-color: blue;
     border: none;
-}*/
+  }
+ }
 }
