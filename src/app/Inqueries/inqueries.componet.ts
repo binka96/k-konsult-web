@@ -19,6 +19,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenService } from '../Service/token.service';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { PropertyDto } from '../Interface/property.interface';
+import { async } from 'rxjs';
 
 
 @Component({
@@ -47,8 +48,8 @@ export class Inqueries implements OnInit {
               private inqueryService : InquiryService ) {}
   inquies: InquiriesDto [] = [];
   propertydto : PropertyDto | undefined;
-  ngOnInit() {
-    this.getAllInquery();
+  async ngOnInit() {
+    await this.getAllInquery();
   }
 
   getAllInquery(){

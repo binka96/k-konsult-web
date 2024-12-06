@@ -9,6 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenubarModule } from 'primeng/menubar';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+import { GalleriaModule } from 'primeng/galleria';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root-home',
@@ -16,11 +18,9 @@ import { AnimateOnScrollModule } from 'primeng/animateonscroll';
   imports: [RouterOutlet ,
             RouterLink,
             RouterLinkActive,
-            MenubarModule ,
-            MegaMenuModule ,
             ButtonModule ,
             CommonModule,
-            AnimateOnScrollModule
+            GalleriaModule,
   ],
   providers: [MessageService ],
   templateUrl: './home.component.html',
@@ -32,44 +32,45 @@ export class Home implements OnInit{
   isMobile: boolean;
   isTablet: boolean;
   isDesktop: boolean;
+  images: any[] = [];
   constructor( private router: Router ,  
                private messageService: MessageService,
-               private deviceService: DeviceDetectorService)
+               private deviceService: DeviceDetectorService,
+               private titles: Title, 
+               private meta: Meta)
   {
     this.isMobile = this.deviceService.isMobile();
     this.isTablet = this.deviceService.isTablet();
     this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
-    this.elements = Array.from(document.querySelectorAll(' .header2,  .grey-area2, .grey-area3, .grey-area4, .group30 , .group31, .group32 , .group43 , .group42  , .group29 , .img-buttomInqiyre'));
+    this.image();
+    this.titles.setTitle('К-Консулт');
+    this.setMetaTags();
   }
   
+  image(){
+    this.images = [
+      {previewImageSrc: "assets/DariaResidence/image_1.jpg"},
+      {previewImageSrc: "assets/DariaResidence/image_2.jpg"},
+      {previewImageSrc: "assets/DariaResidence/image_3.jpg"}, 
+      {previewImageSrc: "assets/DariaResidence/image_4.jpg"},
+      {previewImageSrc: "assets/DariaResidence/image_5.jpg"}
 
-   // Масив с елементите
-   elements: HTMLElement[] = [];
+    ]
+  }
 
-   @HostListener('window:scroll', [])
-   onWindowScroll() {
-       // Проверка дали кодът се изпълнява в браузър
-       if (typeof document !== 'undefined') {
-           const windowHeight = window.innerHeight;
-   
-           this.elements.forEach(element => {
-               const { top } = element.getBoundingClientRect();
-               if (top < windowHeight - 50 || this.isMobile) { 
-                   element.classList.add('active');
-                   element.classList.add('active1');
-                   element.classList.add('active2');
-                   element.classList.add('active3');
-               } else {
-                   element.classList.remove('active'); // Remove active class when the element is not in view
-                   element.classList.remove('active1');
-                   element.classList.remove('active2');
-                   element.classList.remove('active3');
-               }
-           });
-       }
-   }
+  setMetaTags() {
+    this.meta.addTag({
+      name: 'keywords',
+      content: 'K-Konsult, агенция за имоти, имоти, продажба на имоти, наем на имоти, имоти София, апартаменти под наем, продажба на апартаменти, търговски имоти, ново строителство, имоти за инвестиции, краткосрочен и дългосрочен наем'
+  });
+  this.meta.addTag({
+      name: 'description',
+      content: 'Открийте идеалните имоти в София с K-Konsult – вашата партньорска агенция за недвижими имоти. Предлагаме продажба и наем на апартаменти, жилища и търговски обекти. Свържете се с нас за имоти, които отговарят на вашите нужди.'
+  });
+}
+
 
 
 }

@@ -7,8 +7,8 @@ import { TokenService } from "./token.service";
 
 @Injectable()
 export class PropertyService{
-    Url ='http://192.168.236.130:8080/K-Konsult/Property'
-    UrlFile = 'http://192.168.236.130:8080/K-Konsult/file'
+    Url ='https://k-konsult-server.online:80/K-Konsult/Property'
+    UrlFile = 'https://k-konsult-server.online:80/K-Konsult/file'
     constructor (private httpClient: HttpClient , 
         private tokenService: TokenService
     ){    }
@@ -55,24 +55,24 @@ export class PropertyService{
         });
         return this.httpClient.delete<{message: string}>(`${this.Url}/Delete/property=${propertyName}`  ,  {headers});
     }
-    getListofImages(propertyName: string): Observable<string[]>{
-        return this.httpClient.get<string[]>(`${this.UrlFile}/Get/files/${propertyName}`);
+    getListofImages(type : string , propertyName: string ): Observable<string[]>{
+        return this.httpClient.get<string[]>(`${this.UrlFile}/Get/files/${type}/${propertyName}`);
     }
 
-    deleteImage(propertyName: string , fileName: string): Observable<{message: string}>{
+    deleteImage(type : string ,propertyName: string  ,  fileName: string): Observable<{message: string}>{
         const token = this.tokenService.getToken();
         const headers = new HttpHeaders({
           Authorization: `Bearer ${token}`
         });
-        return this.httpClient.delete<{message: string}>(`${this.UrlFile}/images/${propertyName}/${fileName}` , {headers});
+        return this.httpClient.delete<{message: string}>(`${this.UrlFile}/images/${type}/${propertyName}/${fileName}` , {headers});
     }
 
-    deleteFolder(propertyName: string ): Observable<{message: string}>{
+    deleteFolder(type : string , propertyName: string ): Observable<{message: string}>{
         const token = this.tokenService.getToken();
         const headers = new HttpHeaders({
           Authorization: `Bearer ${token}`
         });
-        return this.httpClient.delete<{message: string}>(`${this.UrlFile}/delete-directory/${propertyName}` ,  {headers});
+        return this.httpClient.delete<{message: string}>(`${this.UrlFile}/delete-directory/${type}/${propertyName}` ,  {headers});
     }
     getPropertiesByType(type : string): Observable<PropertyInfoDto[]>{
         return this.httpClient.get<PropertyInfoDto[]>(`${this.Url}/Get/PropertiesByType/type=${type}`);
@@ -92,5 +92,9 @@ export class PropertyService{
           Authorization: `Bearer ${token}`
         });
         return this.httpClient.put<{message: string}>(`${this.Url}/Update` , propertyDto ,  {headers});
+    }
+
+    getPropertyByAd(ad: string): Observable<PropertyInfoDto[]>{
+        return this.httpClient.get<PropertyDto[]>(`${this.Url}/Get/PropertiesByAd/ad=${ad}`);
     }
 }

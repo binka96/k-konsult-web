@@ -2,12 +2,8 @@
 <div *ngIf="isDesktop" class="desktop"  >
     <div class = "header">
         <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">
-        <p-menubar [model]="items">
+        <p-menubar [model]="items" >
         </p-menubar>
-        <p-button class="enter-button "routerLink="/Log">
-            <img  class="img-buttom" src="/assets/images/enterButton.png">
-        </p-button>
-        <label class="enterText">{{ username }}</label>
     </div>
     <router-outlet></router-outlet>
     <div class="footer">
@@ -27,14 +23,10 @@
 <!-- HTML for Phone Aplication -->
 <div *ngIf="isMobile" class="phone"  >
     <div class = "header">
-        <p-slideMenu  #menu [model]="items"  [popup]="true"  >
+        <p-slideMenu  #menu [model]="items"  [popup]="true"  backLabel="Back" aria-label="1">
         </p-slideMenu>
         <button class="menubar" type="button" pButton icon="pi pi-list"  (click)="menu.toggle($event)"></button>
-        <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">
-        <p-button class="enter-button" routerLink="/Log" >
-            <img  class="img-buttom" src="/assets/images/enterButton.png">
-            <label class="enterText">{{ username }}</label>
-        </p-button>
+        <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">  
     </div>
     <router-outlet />
     <div class="footer">

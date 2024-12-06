@@ -60,20 +60,23 @@
         font-size: calc(4.0vw * 0.4);
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5);
         position: relative;
-        top: calc(10vw * 0.4);
-        left: calc(135.5vw * 0.4);
+        top: calc(20vw * 0.4);
+        left: calc(25.5vw * 0.4);
     }
 
     .textlabel {
-        width: calc(73vw * 0.4);
+        width: calc(87vw * 0.4);
     }
 
+    .textlabel1 {
+        width: calc(93vw * 0.4);
+    }
     .lineOringe {
         background-image: url('/assets/images/Home/Line.png');
         background-size: cover;
         background-position: center;
         position: relative;
-        height: calc(1.5vw * 0.4);
+        height: calc(0.5vw * 0.4);
         width: calc(200vw * 0.5);
     }
 
@@ -93,17 +96,19 @@
         position: relative;
         top: calc(11vw * 0.5);
         left: calc(1.0vw * -0.5);
-        height: calc(1.5vw * 0.4);
+        height: calc(0.2vw * 0.4);
         width: calc(35.5vw * 0.5);
     }
 
-    .text3 {
-        color: white;
-        font-size: calc(11.0vw * 0.5);
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5);
+    .ourService {
+        background-image: url('/assets/images/OurServiceImage.png');
+        background-size: cover;
+        background-position: center;
         position: relative;
-        top: calc(5.5vw * 0.4);
+        top: calc(0.5vw * 0.4);
         left: calc(44.5vw * 0.4);
+        height: calc(33.5vw * 0.4);
+        width: calc(77.5vw * 0.5);
     }
 
     .lineGrey1 {
@@ -111,10 +116,10 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(1.5vw * -0.5);
-        left: calc(113.0vw * 0.5);
-        height: calc(1.5vw * 0.4);
-        width: calc(85.5vw * 0.5);
+        top: calc(15.5vw * -0.5);
+        left: calc(118.0vw * 0.5);
+        height: calc(0.3vw * 0.4);
+        width: calc(80.5vw * 0.5);
     }
 
     .circlePic1 {
@@ -144,10 +149,10 @@
 
     .text4{
         color: white;
-        font-size: calc( 5.0vw * 0.4);
+        font-size: calc( 4.0vw * 0.4);
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5); //сянка 0.5 индекс
         position: absolute;
-        top: calc(45.5vw * 0.4);
+        top: calc(65.5vw * 0.4);
         left: calc(144.5vw * 0.4);
         width: calc(94.5vw * 0.4);
    }
@@ -157,9 +162,8 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed; // Добавя паралакс ефект
-
-
-    top: calc(80vw * -0.4);
+    position: relative;
+    top: calc(35vw * -0.8);
     left: -1.9px;
     height:  calc(135vw * 0.4); // височина (смята ширината на екрана * 0,4)
     width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
@@ -168,12 +172,12 @@
 
     .text5{
         color: white;
-        font-size: calc( 6.0vw * 0.5);
+        font-size: calc( 4.0vw * 0.4);
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5); //сянка 0.5 индекс
         position: absolute;
-        top: calc(120.5vw * 0.4);
+        top: calc(5.5vw * 0.4);
         left: calc(100.5vw * 0.4);
-        width: calc(124.5vw * 0.4);
+        width: calc(104.5vw * 0.4);
    }
    .pic30{
     background-image: url('/assets/images/pic30.png');
@@ -263,35 +267,36 @@
     position: absolute;
     top: calc(355vw * 0.4);
     left: -1.9px;
-    height:  calc(135vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    height:  calc(105vw * 0.4); // височина (смята ширината на екрана * 0,4)
     width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     //z-index: -1;
     }
-    .text6{
-        color: white;
-        font-size: calc( 10.0vw * 0.8);
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5); //сянка 0.5 индекс
-        position: absolute;
-        top: calc(50.5vw * 0.4);
-        left: calc(10.5vw * 0.4);
-        width: calc(204.5vw * 0.4);
-   }
-   .text7{
-        color: white;
-        font-size: calc( 10.0vw * 0.8);
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5); //сянка 0.5 индекс
-        position: absolute;
-        top: calc(72.5vw * 0.4);
-        left: calc(10.5vw * 0.4);
-        width: calc(204.5vw * 0.4);
+    .textImage2{
+        background-image: url('/assets/images/textImage2.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(70.5vw * 0.4);
+        left: calc(14.5vw * 0.4);
+        height: calc(40.5vw * 0.4);
+        width: calc(177.5vw * 0.5);
     }
-    .text8{
-        color: white;
-        font-size: calc( 10.0vw * 0.8);
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 4.5); //сянка 0.5 индекс
-        position: absolute;
-        top: calc(95.5vw * 0.4);
-        left: calc(10.5vw * 0.4);
-        width: calc(204.5vw * 0.4);
+
+    .line2{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .img-buttomInqiyre{
+        position: relative;
+        top: calc(57.5vw * 0.5);
+        left: calc(25vw * 0.5);;
+        height:  calc(46.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(150vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: 1;
     }
 }

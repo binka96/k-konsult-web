@@ -17,7 +17,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article_title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article_title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -33,7 +33,10 @@
 
         </p-dialog></div>
         <div class="textbody nameArtcletb">Име на статия:</div>
-        <input class="nameArtcleBox" type="text " pInputText [(ngModel)]="article_title" />
+        <input class="nameArtcleBox" type="text " pInputText [(ngModel)]="article_title"
+        [style]="{'max-height': 'calc(20.5vw * 0.4)'}"
+        pattern="^[a-zA-Z0-9a-яА-Я0-9]*$" 
+        title="Моля, въведете само букви и цифри." (keypress)="preventSpecialCharacters($event)" />
         <div class="textbody descriptionArticletb">Описание:</div>
         <textarea class="descriptionArticleTextArea"
             rows="5"
@@ -66,7 +69,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article.title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -132,7 +135,7 @@
         [filter]="true" 
         [style]="{ width: 'calc( 40.0vw * 0.5)' }" 
         [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" />
-        
+        <img  [style]="{ width: 'calc(50vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{article.title}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog></div>
         <div class="textbody descriptionArticle">Описание на статията:</div>
@@ -159,8 +162,13 @@
             [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" 
             (onChange)="getArticleContent()"/>
             <p-scrollPanel [style]="{ width: '100%', height: '450px' }" class="articleContent">
-        <div class="articleContent"> {{article.content}}</div>
-
+                <textarea class="articleContent"
+                disabled="true"
+                rows="40"
+                cols="71" 
+         
+                [(ngModel)]="article.content">
+            </textarea>
             </p-scrollPanel>
         <p-button class="buttonDelete" (click)="deleteArticle()">
             <img src="/assets/images/deleteArticle.png" (click)="deleteArticle()">
@@ -189,7 +197,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article_title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article_title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -237,7 +245,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="http://192.168.236.130:8080/K-Konsult/file/upload/{{article.title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.title}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -310,6 +318,7 @@
         [style]="{ width: 'calc( 110.0vw * 0.6)' }" 
         [listStyle]="{'height': 'calc( 105.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}"  />
         <p></p>
+        <img  [style]="{ width: 'calc(150vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{article.title}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog></div>
         <div class="textbody descriptionArticle">Описание на статията:</div>
@@ -338,7 +347,13 @@
             [listStyle]="{'height': 'calc( 85.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}" 
             (onChange)="getArticleContent()"/>
             <p-scrollPanel [style]="{ width: '100%', height: 'calc( 125.0vw * 0.4)' }" class="articleContent">
-        <div class="articleContent"> {{article.content}}</div>
+        <textarea class="articleContent"
+            disabled="true"
+            rows="40"
+            cols="40" 
+ 
+            [(ngModel)]="article.content">
+        </textarea>
             </p-scrollPanel>
         <p-button class="buttonDelete" (click)="deleteArticle()">
             <img class="img_update2" src="/assets/images/deleteArticle.png" (click)="deleteArticle()">

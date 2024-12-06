@@ -28,6 +28,7 @@ import { TokenService } from '../Service/token.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { PlaceService } from '../Service/place.service';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { isRegExp } from 'node:util/types';
 
 
 
@@ -80,6 +81,10 @@ export class Property implements OnInit {
       {"type": "Едностаен"},
       {"type": "Двустаен"},
       {"type": "Тристаен"},
+      {"type": "Студио"},
+      {"type": "Четиристаен"},
+      {"type": "Мезонет"},
+      {"type": "Гарсониера"},
       {"type": "Магазин"},
       {"type": "Къща"},
       {"type": "Офис"},
@@ -97,14 +102,21 @@ export class Property implements OnInit {
       {"type": "Наеми"},
     ]
     selectedCategory : any;
-    price !: number ;
-    pricePerQuadrature !: number ;
-    quadrature !: number ;
+    price : number = 0;
+    pricePerQuadrature : number = 0 ;
+    quadrature : number =0 ;
     construction !: string;
     typeOfConstructions: any[] = [
       {"type": "Ново строителство"},
       {"type": "Старо строителство"},
     ]
+
+    ad: any[]=[
+      {"offer": "DARIA RESIDENCE"},
+      {"offer": "EXCLUSIVE"},
+      {"offer": "Обикновена обява"},
+    ]
+    selectad: any;
     selectedTypeOfConstruction : any;
     akt!: string
     description!: string;
@@ -120,7 +132,7 @@ export class Property implements OnInit {
   nameProperties: any[] = []
   selectednameProperties!: any;
   property: PropertyDto ={
-    nameProperty: "", type: "", town: "", neighborhood: "",
+    nameProperty: "", type: "",
     category: '',
     price: 0,
     pricePerQuadrature: 0,
@@ -132,10 +144,18 @@ export class Property implements OnInit {
     yearOfConstruction: 0,
     floar: 0,
     floars: 0,
-    elevator: false,
     owenerName: '',
     ownerLastName: '',
-    ownerPhone: ''
+    ownerPhone: '',
+    ad: '',
+    place: {
+      id: 0,
+      name: ''
+    },
+    neighborhood: {
+      id: 0,
+      name: ''
+    }
   };
   imagesList : any[] = [];
   selectImage: any = "";
@@ -167,26 +187,39 @@ export class Property implements OnInit {
     this.getPropertyInformationUpdate();
 
   }else{
-    this.messageService.add({severity: 'info', summary: 'Имата който се опитвате да качите няма име!', detail: ''});
     this.dialogAddNewImage=false;
     this.getPropertyInformationUpdate();
   }
 
 }
 
+preventSpecialCharacters(event: KeyboardEvent) {
+  const regex = new RegExp("^[a-zA-Z0-9a-яА-Я\\s.]*$");
+  if (!regex.test(event.key)) {
+      event.preventDefault();
+  }
+}
+
 createProperty(){
   if(this.nameProperty!== undefined && this.selectedType !== undefined && this.selectedCity!== undefined &&
-    this.selectedNeighborhood !== undefined && this.selectedCategory !== undefined && this.price!== undefined &&
+    this.selectedCategory !== undefined && this.price!== undefined &&
     this.pricePerQuadrature !== undefined && this.quadrature !== undefined && this.construction !== undefined &&
     this.selectedTypeOfConstruction!== undefined && this.akt !== undefined && this.description !== undefined &&
     this.yearOfConstruction !== undefined && this.floor !== undefined && this.floors !== undefined &&
-    this.elevator !== undefined && this.ownerName !== undefined && this.ownerLastName !== undefined &&
-    this.ownerPhone !== undefined ){
+    this.ownerName !== undefined && this.ownerLastName !== undefined &&
+    this.ownerPhone !== undefined && this.selectad !== undefined){
 
       this.property.nameProperty = this.nameProperty;
       this.property.type = this.selectedType.type;
-      this.property.town = this.selectedCity.name;
-      this.property.neighborhood = this.selectedNeighborhood.name;
+      this.property.place.id = this.selectedCity.id;
+      this.property.place.name = this.selectedCity.name;
+      if(this.selectedNeighborhood!==undefined){
+        this.property.neighborhood = this.selectedNeighborhood;
+      }
+      else{
+        this.property.neighborhood.id=0
+        this.property.neighborhood.name="null"
+      }
       this.property.category = this.selectedCategory.type;
       this.property.price = this.price;
       this.property.pricePerQuadrature = this.pricePerQuadrature;
@@ -198,10 +231,10 @@ createProperty(){
       this.property.yearOfConstruction =  this.yearOfConstruction;
       this.property.floar = this.floor;
       this.property.floars = this.floors;
-      this.property.elevator = this.elevator;
       this.property.owenerName  = this.ownerName;
       this.property.ownerLastName = this.ownerLastName;
       this.property.ownerPhone = this.ownerPhone;
+      this.property.ad = this.selectad.offer;
       this.propertyService.createProperty(this.property).subscribe({
         next: (response)=>{
           this.messageService.add(
@@ -259,20 +292,19 @@ getPropertyInformationUpdate(){
       next: (response)=>{
         this.property = response;
         this.selectedType = this.property.type;
-        this.selectedCity  = this.property.town;
+        this.selectedCity  = this.property.place;
         this.selectedNeighborhood = this.property.neighborhood;
-        this.selectedCategory = this.property.category;
         this.selectedTypeOfConstruction = this.property.typeOfConstruction;
       }
     }
   );
-  this.propertyService.getListofImages(this.selectednameProperties.name).subscribe({
+  this.propertyService.getListofImages("property",this.selectednameProperties.name).subscribe({
     next: (response)=>{
       this.images = [];
       for (let i = 0; i < response.length; i++) {
         this.images.push({ 
-           previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectednameProperties.name+"/"+ response[i], 
-           thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectednameProperties.name+"/"+ response[i], 
+           previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.selectednameProperties.name+"/"+ response[i], 
+           thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.selectednameProperties.name+"/"+ response[i], 
            alt: "Description for Image "+i+", title: Title "+i
           }); 
        }
@@ -292,7 +324,7 @@ deleteProperty(){
               summary: response.message
             }
           );
-          this.propertyService.deleteFolder(this.selectednameProperties.name).subscribe({
+          this.propertyService.deleteFolder("property",this.selectednameProperties.name).subscribe({
             next: (response)=>{
               this.getAllPrpoperty(); 
             }
@@ -312,7 +344,7 @@ deleteProperty(){
 }
 deleteImage(){
   if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectednameProperties.name !== undefined){
-    this.propertyService.deleteImage(this.selectednameProperties.name  , this.selectImage.file).subscribe({
+    this.propertyService.deleteImage("property",this.selectednameProperties.name  , this.selectImage.file).subscribe({
       next: (response)=>{
         this.getPropertyInformationUpdate();
         this.messageService.add(
@@ -320,7 +352,7 @@ deleteImage(){
             severity: 'info',
             summary: response.message
           });
-          this.propertyService.getListofImages(this.selectednameProperties.name).subscribe({
+          this.propertyService.getListofImages("property" ,this.selectednameProperties.name).subscribe({
             next: (response)=>{
               this.imagesList = [];
               for (let i = 0; i < response.length; i++) {
@@ -345,7 +377,7 @@ deleteImageDialog(){
   
   if(this.selectednameProperties.name !== undefined){
     this.deleteImageDialogVisivle = true;
-    this.propertyService.getListofImages(this.selectednameProperties.name).subscribe({
+    this.propertyService.getListofImages("property",this.selectednameProperties.name).subscribe({
       next: (response)=>{
         this.imagesList = [];
         for (let i = 0; i < response.length; i++) {
@@ -373,7 +405,9 @@ addNewPicture(){
 }
 
  updateProperty(){
-  
+  if(this.selectad!==undefined && this.selectedCategory!==undefined){
+      this.property.category = this.selectedCategory.type;
+      this.property.ad = this.selectad.offer;
       this.propertyService.updateProperty(this.property).subscribe({
         next: (response)=>{
           this.messageService.add(
@@ -383,6 +417,15 @@ addNewPicture(){
           );
         }
       });
+    }
+    else{
+      this.messageService.add(
+        {
+          severity: 'error',
+          summary: "Не е избран тип обява и категория!;"
+        }
+      );
+    }
  }
 displayModal: boolean = false;
 openGalleryModal() {
@@ -407,7 +450,8 @@ getAllPlacesWithoutArea(){
 }
 
 getNeighberhood(){
-      
+  this.selectedNeighborhood = { name: '', id : 0};;
+  this.property.neighborhood = { name: '', id : 0};
   if(this.selectedCity !== undefined){
     this.placeService.getAllNeiberhood(this.selectedCity.id).subscribe({
       next: (response) =>
@@ -415,6 +459,7 @@ getNeighberhood(){
         this.neighborhoods = response;
         if(response.length == 0){
           this.neighberhoodListVisible = true;
+          this.selectedNeighborhood.name = "null";
         }
         else{
           this.neighberhoodListVisible = false;
@@ -424,5 +469,40 @@ getNeighberhood(){
     })
   }
 }
+
+
+calculatePricePerQuadrature() {
+  if (this.quadrature > 0 && this.price >0 ) { // Проверяваме дали quadrature не е нула
+    this.pricePerQuadrature = this.price / this.quadrature;
+  } else {
+    this.pricePerQuadrature = 0; // Предотвратяваме деление на нула
+  }
+}
+
+onPriceChange() {
+  this.calculatePricePerQuadrature();
+}
+
+onQuadratureChange() {
+  this.calculatePricePerQuadrature();
+}
+
+calculatePricePerQuadratureProperty(){
+  if (this.property!==undefined && this.property.price>0 && this.property.quadrature> 0 ) { // Проверяваме дали quadrature не е нула
+    this.property.pricePerQuadrature = this.property.price / this.property.quadrature;
+  } else {
+    this.property.pricePerQuadrature = 0; // Предотвратяваме деление на нула
+  }
+}
+
+onPriceChangeProperty(){
+  this.calculatePricePerQuadratureProperty();
+}
+
+onQuadratureChangeProperty() {
+  this.calculatePricePerQuadratureProperty();
+}
+
+
 
 }

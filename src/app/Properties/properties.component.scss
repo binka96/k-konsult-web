@@ -1,2 +1,19 @@
 @import 'desktop.component';
 @import 'phone.component';
+
+@keyframes slide {
+    0% {
+        transform: translateX(-11020%); // Започва извън екрана от дясно
+    }
+    100% {
+        transform: translateX(10%); // Завършва извън екрана от ляво
+    }
+
+    
+}
+
+.property-item-exclusive {
+    flex: flex;// Уверете се, че елементите не растат или се свиват
+
+    animation: slide 800s linear infinite; /* Animation */
+}

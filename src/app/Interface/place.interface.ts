@@ -1,5 +1,5 @@
 export interface PlaceDto
 {
-    int : number;
+    id : number;
     name: string;
 }

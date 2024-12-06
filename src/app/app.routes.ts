@@ -13,6 +13,8 @@ import { Registration } from './Registration/registration.componet';
 import { Inqueries } from './Inqueries/inqueries.componet';
 import { PropertyInformation } from './PropertyInformation/property-information.component';
 import { News } from './News/news.component';
+import { Daria } from './Daria/daria.component';
+import { Place } from './Place/place.component';
 
 export const routes: Routes = [
     {title: "Вход", path: 'Log', component: LogIn },
@@ -27,9 +29,14 @@ export const routes: Routes = [
     {title: "Регистрация", path: 'Registration', component: Registration },
     {title: "Заявки", path: 'Inqueries', component: Inqueries },
     {title: "Имот", path: 'PropertyInformation/:propertyName', component: PropertyInformation },
+    {title: "Имот", path: 'PropertyInformation', component: PropertyInformation },
+    {title: "Имот", path: 'PropertyInformation/Тристаен%20апартамент%20107кв.м.', component: PropertyInformation },
     {title: "Статия", path: 'news/:articleTitle', component: News },
     {title: "Имоти", path: 'Properties/:category', component: Properties },
+    {title: "Имоти", path: 'Properties/all', component: Properties },
     {title: "Имоти", path: 'Properties/:category/:type', component: Properties },
+    {title: "DariaResidance", path: 'Daria', component: Daria },
+    {title: "Градове и квартали", path: 'Place', component: Place },
 
 
 ];

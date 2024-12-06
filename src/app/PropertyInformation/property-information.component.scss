@@ -1,2 +1,12 @@
 @import 'desktop.component';
 @import 'phone.component'; 
+
+
+.dialog{
+    ::ng-deep .p-button {
+        display: flex;
+        object-fit: contain;
+        background-color: rgb(0, 80, 252);
+        border: none;
+    }
+}

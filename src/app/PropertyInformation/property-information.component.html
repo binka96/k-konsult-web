@@ -1,4 +1,21 @@
+<head>
+    <meta charset="utf-8">
+    <title>{{property.nameProperty}}</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{property.nameProperty}}" />
+    <meta property="og:description" content="Място: {{property.place.name}}, Цена: €{{property.price}} EUR" />
+    <meta property="og:image" content="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/image1.png" /> <!-- Тук ще зададете URL на основното изображение на имота -->
+    
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{property.nameProperty}}" />
+    <meta name="twitter:description" content="Място: {{property.place.name}}, Цена: €{{property.price}} EUR" />
+    <meta name="twitter:image" content="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/image1.png" /> <!-- Тук ще зададете URL на основното изображение на имота -->
+</head>
 <!-- HTML for Desktop Aplication-->
+
 <div *ngIf="isDesktop" class="desktop"  >
 <p-toast></p-toast>
 <div class="galery">
@@ -42,10 +59,11 @@
         {{property.nameProperty}}
     </div>
     <div class="textProperty text">
-        Град:  {{property.town}}
+        Място:   {{property.place.name}}
     </div>
     <div class="textProperty text1">
-        кв {{property.neighborhood}}
+        квартал:  
+        <div  *ngIf="property.neighborhood"> {{property.neighborhood.name}} </div>
     </div>
     <div class="textProperty text">
         Тип: {{property.type}}
@@ -57,45 +75,51 @@
         Цена на квадратен метър: €{{property.pricePerQuadrature}} EUR
     </div>
     <div class="textProperty text4">
-        Площ:  {{property.quadrature}} кв/м 
+        Площ:  {{property.quadrature}} m²
     </div>
     <div class="textProperty text5">
-       Стройтелство: {{property.construction}} 
+        Тип строителство: {{property.construction}} 
     </div>
     <div class="textProperty text6">
-        Тип стройтелство: {{property.typeOfConstruction}} 
+        Строителство: {{property.typeOfConstruction}} 
      </div>
      <div class="textProperty text7">
-        Акт: {{ property.akt}}
+        Етап на строеж: {{ property.akt}}
      </div>
     <div class="textProperty text8">
-        Година на стройтелство: {{property.yearOfConstruction}}
+        Година на строителство: {{property.yearOfConstruction}}
     </div>
     <div class="textProperty text9">
-        Етаж: {{property.floar}} Етажи {{property.floars}}
+        Етаж: {{property.floar}} 
     </div>
-    <p-scrollPanel [style]="{ width: 'calc(180vw * 0.5)', height: '450px' }" class="text10">
+    <div class="textProperty text9">
+        Брой етажи: {{property.floars}}
+    </div>
+    <p-scrollPanel [style]="{ width: 'calc(180vw * 0.5)', height: '500px' }" class="text10">
         <div class="textProperty ">
             Описание:
         </div>
-        <div class="description">
-            <p>{{property.description}}</p>
-        </div>
-
+        <textarea class="description"
+        disabled="true"
+        rows="30"
+        cols="60" 
+         
+        [(ngModel)]="property.description">
+        </textarea>
     </p-scrollPanel>
     
-    <p-dialog header="Направи запитване" 
+    <p-dialog header="Направи запитване"   class="dialog"
         [(visible)]="dialogMakeInquiry" 
         position="center" >
-        <p>firstName</p>
+        <p>Име</p>
         <input type="text" pInputText [(ngModel)]="firstName" />
-        <p>lastName</p>
+        <p>Фамилия</p>
         <input type="text" pInputText [(ngModel)]="lastName" />
-        <p>email</p>
+        <p>Имейл</p>
         <input type="text" pInputText [(ngModel)]="email" />
-        <p>phone</p>
+        <p>Телефон</p>
         <input type="text" pInputText [(ngModel)]="phone" />
-        <p></p>
+        <p>Коментар</p>
         <textarea class="float-lable"
                 rows="5"
                 cols="30" 
@@ -156,10 +180,10 @@
             {{property.nameProperty}}
         </div>
         <div class="textProperty text">
-            Град:  {{property.town}}
+            Място:   {{property.place.name}}
         </div>
-        <div class="textProperty text1">
-            кв {{property.neighborhood}}
+        <div class="textProperty text1" >
+            квартал:  <div  *ngIf="property.neighborhood"> {{property.neighborhood.name}} </div>
         </div>
         <div class="textProperty text">
             Тип: {{property.type}}
@@ -171,45 +195,49 @@
             Цена на квадратен метър: €{{property.pricePerQuadrature}} EUR
         </div>
         <div class="textProperty text4">
-            Площ:  {{property.quadrature}} кв/м 
+            Площ:  {{property.quadrature}} m²
         </div>
         <div class="textProperty text5">
-           Стройтелство: {{property.construction}} 
+           Тип строителство: {{property.construction}} 
         </div>
         <div class="textProperty text6">
-            Тип стройтелство: {{property.typeOfConstruction}} 
+            Строителство: {{property.typeOfConstruction}} 
          </div>
          <div class="textProperty text7">
-            Акт: {{ property.akt}}
+            Етап на строеж: {{ property.akt}}
          </div>
         <div class="textProperty text8">
-            Година на стройтелство: {{property.yearOfConstruction}}
+            Година на строителство: {{property.yearOfConstruction}}
         </div>
         <div class="textProperty text9">
-            Етаж: {{property.floar}} Етажи: {{property.floars}}
+            Етаж: {{property.floar}} Брой етажи: {{property.floars}}
         </div>
-        <p-scrollPanel [style]="{ width: 'calc(180vw * 0.5)', height: '450px' }" class="text10">
+        <p-scrollPanel [style]="{ width: 'calc(190vw * 0.5)', height: '450px' }" class="text10">
             <div class="textProperty ">
                 Описание:
             </div>
-            <div class="description">
-                <p>{{property.description}}</p>
-            </div>
+        <textarea class="description"
+        disabled="true"
+        rows="40"
+        cols="45" 
+         
+        [(ngModel)]="property.description">
+        </textarea>
     
         </p-scrollPanel>
         
-        <p-dialog header="Направи запитване" 
+        <p-dialog header="Направи запитване" class="dialog"
             [(visible)]="dialogMakeInquiry" 
             position="center" >
-            <p>firstName</p>
+            <p>Име</p>
             <input type="text" pInputText [(ngModel)]="firstName" />
-            <p>lastName</p>
+            <p>Фамилия</p>
             <input type="text" pInputText [(ngModel)]="lastName" />
-            <p>email</p>
+            <p>Имейл</p>
             <input type="text" pInputText [(ngModel)]="email" />
-            <p>phone</p>
+            <p>Телефон</p>
             <input type="text" pInputText [(ngModel)]="phone" />
-            <p></p>
+            <p>Коментар</p>
             <textarea class="float-lable"
                     rows="5"
                     cols="30" 

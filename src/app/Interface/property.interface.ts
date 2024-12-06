@@ -1,8 +1,11 @@
+import { NeighborhoodDto } from "./neighborhood.interface";
+import { PlaceDto } from "./place.interface";
+
 export interface PropertyDto {
 nameProperty: string,
 type: string,
-town: string,
-neighborhood: string,
+place: PlaceDto,
+neighborhood: NeighborhoodDto,
 category: string,
 price: number,
 pricePerQuadrature: number,
@@ -14,8 +17,8 @@ description: string,
 yearOfConstruction: number,
 floar: number,
 floars: number,
-elevator: boolean,
 owenerName: string,
 ownerLastName: string,
-ownerPhone: string
+ownerPhone: string,
+ad: string;
 }

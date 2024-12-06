@@ -17,7 +17,7 @@
                
                 <p-fileUpload 
                 name="demo[]" 
-                url="http://192.168.236.130:8080/K-Konsult/file/upload/{{nameProperty}}" 
+                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{nameProperty}}" 
                 (onUpload)="onUpload($event)" 
                 [multiple]="true" 
                 accept="image/*" 
@@ -36,7 +36,10 @@
     </div>
     <div class="addProperty">
         <div class="textbody">Име на имота:</div>
-        <input class="textPropertyName" type="text" pInputText [(ngModel)]="nameProperty" />
+        <input class="textPropertyName" type="text" pInputText [(ngModel)]="nameProperty" 
+        pattern="^[a-zA-Z0-9a-яА-Я0-9]*$" 
+        title="Моля, въведете само букви и цифри."
+        (keypress)="preventSpecialCharacters($event)" />
         <div class="textbody tybediv">Тип на имота:</div>
         <p-listbox 
             class="tybelb"        
@@ -46,7 +49,7 @@
             [filter]="true" 
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '150px'}" />
-        <div class="textbody towndiv">Град:</div>
+        <div class="textbody towndiv">Място: </div>
         <p-cascadeSelect class="townlb"
         [options]="cities" 
         [(ngModel)]="selectedCity" 
@@ -77,6 +80,7 @@
         <p-inputNumber class="pricetb" 
                     [(ngModel)]="price" 
                     inputId="locale-user" 
+                    (ngModelChange)="onPriceChange()"
                     [minFractionDigits]="2"
                     [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
                     'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }" />
@@ -90,20 +94,28 @@
         <div class="textbody quadratureText">Площ:</div>
         <p-inputNumber class="quadraturetb"
                     [(ngModel)]="quadrature" 
+                    (ngModelChange)="onQuadratureChange()" 
                     inputId="locale-user" 
                     [minFractionDigits]="2" 
                     [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
                     'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }" />
-        <div class="textbody constructionText">Строителство:</div>
+        <div class="textbody constructionText">Тип строителство:</div>
         <input class="constructionTb" type="text" pInputText [(ngModel)]="construction" />
-        <div class="textbody typeOfConstructionsText">Тип Строителство: </div>
+        <div class="textbody typeOfConstructionsText">Строителство: </div>
         <p-listbox class="typeOfConstructionslb"
         [options]="typeOfConstructions" 
         [(ngModel)]="selectedTypeOfConstruction" 
         optionLabel="type" 
         [style]="{ width: '22rem' , 'border-color': 'black' }" 
         [listStyle]="{'max-height': '220px' , 'font-size': 'calc( 4.0vw * 0.4)' ,  }" />
-        <div class="textbody aktText">Акт:</div>
+        <div class="textbody specialOffers">Tип обява: </div>
+        <p-listbox class="specialOfferslb"
+        [options]="ad" 
+        [(ngModel)]="selectad" 
+        optionLabel="offer" 
+        [style]="{ width: '22rem' , 'border-color': 'black' }" 
+        [listStyle]="{'max-height': '220px' , 'font-size': 'calc( 4.0vw * 0.4)' ,  }" />
+        <div class="textbody aktText">Етап на строеж:</div>
         <input class="aktTb" type="text" pInputText [(ngModel)]="akt" />
         <div class="textbody yearOfConstructionText">Година:</div>
         <p-inputNumber  class="yearOfConstructionTb"
@@ -117,7 +129,7 @@
                 [(ngModel)]="floor" 
                 [inputStyle]="{'font-size': 'calc( 4.0vw * 0.4)' , 'max-width': 'calc(45vw * 0.4)' , 
                     'border-color': 'black' , 'border-radius':'5px' , 'height': 'calc(6.5vw * 0.4)' }"  /> 
-        <div class="textbody floorsText">Етажи:</div>
+        <div class="textbody floorsText">Брой етажи:</div>
         <p-inputNumber class="floorsTb"
            inputId="integeronly" 
            [(ngModel)]="floors" 
@@ -138,14 +150,13 @@
         <input class="ownerPhoneTB" type="text" pInputText [(ngModel)]="ownerPhone" />
         <p-button class="buttonAddImage" (click)="addPicture()" />
         <p-button  class="buttonAddProperty" (click)="createProperty()" />
-
     </div>
 
     </p-tabPanel>
     <p-tabPanel header="Промени имот" (click)="getAllPrpoperty()">
         <div class="updateProperty">
         <div class="textbody">Имот:</div>
-        <p-listbox class="textPropertyName"
+        <p-listbox class="lbName"
             [options]="nameProperties" 
             [(ngModel)]="selectednameProperties"
             optionLabel="name" 
@@ -153,6 +164,14 @@
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '150px'}" 
             (onChange)="getPropertyInformationUpdate()"/>
+        <div class="textbody divAd">Тип обява:</div>
+        <div class="divAdInfo">{{ property.ad}}</div>
+        <p-listbox class="adlb"
+        [options]="ad" 
+        [(ngModel)]="selectad" 
+        optionLabel="offer" 
+        [style]="{ width: '15rem' , 'border-color': 'black' }" 
+        [listStyle]="{'max-height': '150px' , 'font-size': 'calc( 4.0vw * 0.3)' ,  }" />
             <p-button class="buttonAddNewPicture" (click)="addNewPicture()" />
             <div class="card flex justify-content-center">
             
@@ -165,7 +184,7 @@
 
                 <p-fileUpload 
                 name="demo[]" 
-                url="http://192.168.236.130:8080/K-Konsult/file/upload/{{property.nameProperty}}" 
+                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{property.nameProperty}}" 
                 (onUpload)="onUpload($event)" 
                 [multiple]="true" 
                 accept="image/*" 
@@ -234,6 +253,7 @@
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '220px'}" />
         <p></p>
+        <img [style]="{ width: 'calc(50vw * 0.4)', height: 'auto' }"  alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog>
         </div>
@@ -241,11 +261,12 @@
         <label class="textBodyUpdateProperty namePropertyTextInfo">{{property.nameProperty}}</label>
         <div class="textbody divType">Тип:</div>
         <label class="textBodyUpdateProperty ltype">{{property.type}}</label>
-        <div class="textbody divTown">Град:</div>
-        <label class="textBodyUpdateProperty lTown">{{property.town}}</label>
+        <div class="textbody divTown">Място: </div>
+        <label class="textBodyUpdateProperty lTown">{{property.place.name}}</label>
         <div class="textbody divNeiberhoods">Квартал:</div>
-        <label class="textBodyUpdateProperty lNeiberhoods">{{property.neighborhood}}</label>
+        <label class="textBodyUpdateProperty lNeiberhoods" *ngIf="property.neighborhood" >{{property.neighborhood.name}}</label>
         <div class="textbody divCategory">Категория:</div>
+        <div class="divCategoryInfo" > {{ property.category}}</div>
         <p-listbox class="lCategory"
         [options]="categories" 
         [(ngModel)]="selectedCategory" 
@@ -255,6 +276,7 @@
         <div class="textbody divPrice">Цена:</div>
         <p-inputNumber class="bPrice"
                     [(ngModel)]="property.price" 
+                    (ngModelChange)="onPriceChangeProperty()"
                     inputId="locale-user" 
                     [minFractionDigits]="2" />
         <div class="textbody divPricePerQuadrature">Цена на кв.м:</div>
@@ -265,13 +287,14 @@
         <div class="textbody divQuadrature">Площ:</div>
         <p-inputNumber class="lQuadrature"
                     [(ngModel)]="property.quadrature" 
+                    (ngModelChange)="onQuadratureChangeProperty()" 
                     inputId="locale-user" 
                     [minFractionDigits]="2" />
-        <div class="textbody divConstruction">Строителство:</div>
+        <div class="textbody divConstruction">Тип cтроителство:</div>
         <input class="lConstruction" type="text" pInputText [(ngModel)]="property.construction" />
-        <div class="textbody divtypeOfConstruction">Тип Строителство:</div>
+        <div class="textbody divtypeOfConstruction">Строителство:</div>
         <label class="textBodyUpdateProperty ltypeOfConstruction">{{property.typeOfConstruction}}</label>
-        <div class="textbody divAkt">Акт:</div>
+        <div class="textbody divAkt">Етап на строеж:</div>
         <input class="lAkt" type="text" pInputText [(ngModel)]="property.akt" />
         <div class="textbody divDescription">Описание на имота:</div>
         <textarea class="lDescription"
@@ -280,7 +303,7 @@
             pInputTextarea 
             [(ngModel)]="property.description">
         </textarea>
-        <div class="textbody divYear">Година на стройтелство:</div>
+        <div class="textbody divYear">Година на строителство:</div>
         <p-inputNumber class="lYear"
             inputId="integeronly" 
             [(ngModel)]="property.yearOfConstruction" /> 
@@ -288,7 +311,7 @@
         <p-inputNumber class="lFloor"
                 inputId="integeronly" 
                 [(ngModel)]="property.floar" /> 
-        <div class="textbody divFloors">Етажи:</div>
+        <div class="textbody divFloors">Брой етажи:</div>
         <p-inputNumber class="lFloors"
            inputId="integeronly" 
            [(ngModel)]="property.floars" /> 
@@ -322,12 +345,15 @@
             <p class="textBodyUpdateProperty">
                 {{property.nameProperty}}
             </p>
-            <p class="textBodyUpdateProperty">
-                {{property.town}} {{property.neighborhood}} {{property.type}}
-            </p>
-            <p class="textBodyUpdateProperty">
-                {{property.description}}
-            </p>
+            <div class="textBodyUpdateProperty" >
+                {{property.place.name}} <div *ngIf="property.neighborhood"> {{property.neighborhood.name}}</div> {{property.type}}
+            </div>
+            <textarea class="textBodyUpdatePropertyArea"
+            disabled="true"
+            rows="40"
+            cols="70" 
+            [(ngModel)]="property.description">
+            </textarea>
         </p-scrollPanel>
         <p></p>
         <p-button class="buttonDeleteImage" (click)="deleteProperty()">
@@ -358,7 +384,7 @@
 
                 <p-fileUpload 
                 name="demo[]" 
-                url="http://192.168.236.130:8080/K-Konsult/file/upload/{{nameProperty}}" 
+                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{nameProperty}}" 
                 (onUpload)="onUpload($event)" 
                 [multiple]="true" 
                 accept="image/*" 
@@ -376,7 +402,11 @@
         </div></div>
     <div class="addProperty">
         <div class="textbody">Име на имота:</div>
-        <input class="textPropertyName" type="text" pInputText [(ngModel)]="nameProperty" [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
+        <input class="textPropertyName" type="text" pInputText [(ngModel)]="nameProperty" 
+        [style]="{'max-height': 'calc(20.5vw * 0.4)'}"
+        pattern="^[a-zA-Z0-9a-яА-Я0-9]*$" 
+        title="Моля, въведете само букви и цифри."
+        (keypress)="preventSpecialCharacters($event)" />
         <div class="textbody tybediv">Тип на имота:</div>
         <p-listbox 
             class="tybelb"        
@@ -385,7 +415,7 @@
             optionLabel="type" 
             [style]="{ width: 'calc(85vw * 0.6)' }" 
             [listStyle]="{'max-height': 'calc(120.5vw * 0.4)'}" />
-        <div class="textbody towndiv">Град:</div>
+        <div class="textbody towndiv">Място: </div>
         <p-cascadeSelect class="townlb"
         [options]="citiesWithoutArea" 
         [(ngModel)]="selectedCity" 
@@ -417,6 +447,7 @@
                     [(ngModel)]="price" 
                     inputId="locale-user" 
                     [minFractionDigits]="2"
+                    (ngModelChange)="onPriceChange()"
                     [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                     [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
                     'border-color': 'black' , 'border-radius':'5px'  }" />
@@ -431,13 +462,14 @@
        <div class="textbody quadratureText">Площ:</div>
         <p-inputNumber class="quadraturetb"
                     [(ngModel)]="quadrature" 
+                    (ngModelChange)="onQuadratureChange()" 
                     inputId="locale-user" 
                     [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                     [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
                     'border-color': 'black' , 'border-radius':'5px'  }" />
-         <div class="textbody constructionText">Строителство:</div>
+         <div class="textbody constructionText">Тип cтроителство:</div>
         <input class="constructionTb" type="text" pInputText [(ngModel)]="construction"  [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
-        <div class="textbody typeOfConstructionsText">Тип Строителство: </div>
+        <div class="textbody typeOfConstructionsText">Строителство: </div>
         <p-listbox class="typeOfConstructionslb"
         [options]="typeOfConstructions" 
         [(ngModel)]="selectedTypeOfConstruction" 
@@ -445,7 +477,7 @@
         [style]="{'max-height': 'calc(81.5vw * 0.4)'}"
         [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
         'border-color': 'black' , 'border-radius':'5px'  }" />
-        <div class="textbody aktText">Акт:</div>
+        <div class="textbody aktText">Етап на строеж:</div>
         <input class="aktTb" type="text" pInputText [(ngModel)]="akt" [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
         <div class="textbody yearOfConstructionText">Година:</div>
         <p-inputNumber  class="yearOfConstructionTb"
@@ -461,7 +493,7 @@
                 [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                 [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
                 'border-color': 'black' , 'border-radius':'5px'  }" />
-       <div class="textbody floorsText">Етажи:</div>
+       <div class="textbody floorsText">Брой етажи:</div>
         <p-inputNumber class="floorsTb"
            inputId="integeronly" 
            [(ngModel)]="floors" 
@@ -483,7 +515,13 @@
         <input class="ownerPhoneTB" type="text" pInputText [(ngModel)]="ownerPhone" [style]="{'max-height': 'calc(20.5vw * 0.4)'}" />
         <p-button class="buttonAddImage" (click)="addPicture()" />
         <p-button  class="buttonAddProperty" (click)="createProperty()" />
-
+        <div class="textbody specialOffers">Tип обява: </div>
+        <p-listbox class="specialOfferslb"
+        [options]="ad" 
+        [(ngModel)]="selectad" 
+        optionLabel="offer" 
+        [style]="{ width: 'calc(180vw *0.5)' , 'border-color': 'black' }" 
+        [listStyle]="{'max-height': 'calc(80vw *0.5)', 'font-size': 'calc( 6.0vw * 0.8)' ,  }" />
     </div>
 
     </p-tabPanel>
@@ -508,7 +546,7 @@
 
                 <p-fileUpload 
                 name="demo[]" 
-                url="http://192.168.236.130:8080/K-Konsult/file/upload/{{property.nameProperty}}" 
+                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{property.nameProperty}}" 
                 (onUpload)="onUpload($event)" 
                 [multiple]="true" 
                 accept="image/*" 
@@ -582,17 +620,19 @@
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '220px'}" />
         <p></p>
+        <img  [style]="{ width: 'calc(150vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog></div>
           <div class="textbody namePropertytb">Име на имота:</div>
         <label class="textBodyUpdateProperty namePropertyTextInfo">{{property.nameProperty}}</label>
        <div class="textbody divType">Тип:</div>
         <label class="textBodyUpdateProperty ltype">{{property.type}}</label>
-         <div class="textbody divTown">Град:</div>
-        <label class="textBodyUpdateProperty lTown">{{property.town}}</label>
+         <div class="textbody divTown">Място: </div>
+        <label class="textBodyUpdateProperty lTown">{{property.place.name}}</label>
         <div class="textbody divNeiberhoods">Квартал:</div>
-        <label class="textBodyUpdateProperty lNeiberhoods">{{property.neighborhood}}</label>
+        <label class="textBodyUpdateProperty lNeiberhoods" *ngIf="property.neighborhood" >{{property.neighborhood.name}}</label>
        <div class="textbody divCategory">Категория:</div>
+       <div class="divCategory">{{property.category}}</div>
         <p-listbox class="lCategory"
         [options]="categories" 
         [(ngModel)]="selectedCategory" 
@@ -603,6 +643,7 @@
         <p-inputNumber class="bPrice"
                     [(ngModel)]="property.price" 
                     inputId="locale-user" 
+                    (ngModelChange)="onPriceChangeProperty()"
                     [minFractionDigits]="2"
                     [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                     [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
@@ -618,25 +659,26 @@
         <div class="textbody divQuadrature">Площ:</div>
         <p-inputNumber class="lQuadrature"
                     [(ngModel)]="property.quadrature" 
+                    (ngModelChange)="onQuadratureChangeProperty()" 
                     inputId="locale-user" 
                     [minFractionDigits]="2" [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                     [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                     [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
                     'border-color': 'black' , 'border-radius':'5px'  }" />/>
-        <div class="textbody divConstruction">Строителство:</div>
+        <div class="textbody divConstruction">Тип строителство:</div>
         <input class="lConstruction" type="text" pInputText [(ngModel)]="property.construction" [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
-        <div class="textbody divtypeOfConstruction">Тип Строителство:</div>
+        <div class="textbody divtypeOfConstruction">Строителство:</div>
         <label class="textBodyUpdateProperty ltypeOfConstruction">{{property.typeOfConstruction}}</label>
-        <div class="textbody divAkt">Акт:</div>
+        <div class="textbody divAkt">Етап на строеж:</div>
         <input class="lAkt" type="text" pInputText [(ngModel)]="property.akt" [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
         <div class="textbody divDescription">Описание на имота:</div>
         <textarea class="lDescription"
             rows="20"
-            cols="70" 
+            cols="75" 
             pInputTextarea 
             [(ngModel)]="property.description">
         </textarea>
-        <div class="textbody divYear">Година на стройтелство:</div>
+        <div class="textbody divYear">Година на строителство:</div>
         <p-inputNumber class="lYear"
             inputId="integeronly" 
             [(ngModel)]="property.yearOfConstruction"
@@ -650,7 +692,7 @@
                 [style]="{'max-height': 'calc(21.5vw * 0.4)'}"
                     [inputStyle]="{'font-size': 'calc( 6.0vw * 0.5)' , 'max-width': 'calc(95vw * 0.7)' , 
                     'border-color': 'black' , 'border-radius':'5px'  }"/> 
-        <div class="textbody divFloors">Етажи:</div>
+        <div class="textbody divFloors">Брой етажи:</div>
         <p-inputNumber class="lFloors"
            inputId="integeronly" 
            [(ngModel)]="property.floars" 
@@ -664,6 +706,14 @@
         <div class="textbody divPhone">Телефон на собстеника:</div>
         <input class="lPhone" type="text" pInputText [(ngModel)]="property.ownerPhone" [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
         <p></p>
+        <div class="textbody specialOffersUpdate">Tип обява: </div>
+        <div class="specialOffersUpdate">{{ property.ad}} </div>
+        <p-listbox class="specialOfferslbUpdate"
+        [options]="ad" 
+        [(ngModel)]="selectad" 
+        optionLabel="offer" 
+        [style]="{ width: 'calc(180vw *0.5)' , 'border-color': 'black' }" 
+        [listStyle]="{'max-height': 'calc(80vw *0.5)', 'font-size': 'calc( 6.0vw * 0.8)' ,  }" />
         <p-button class="buttonUpdateProperty" (click)="updateProperty()">
             <img class="img_update"  src="/assets/images/updatePropertyPhone.png" (click)="updateProperty()">
         </p-button> 
@@ -689,13 +739,16 @@
             <p class="textBodyUpdateProperty">
                 {{property.nameProperty}}
             </p>
-            <p class="textBodyUpdateProperty">
-                {{property.town}} {{property.neighborhood}} {{property.type}}
-            </p>
-            <p class="textBodyUpdateProperty">
-                {{property.description}}
-            </p>
-            
+            <div class="textBodyUpdateProperty" >
+                {{property.place.name}} <div *ngIf="property.neighborhood"> {{property.neighborhood.name}}</div> {{property.type}}
+            </div>
+            <textarea class="textBodyUpdateProperty"
+            disabled="true"
+            rows="40"
+            cols="45" 
+             
+            [(ngModel)]="property.description">
+            </textarea>
         </p-scrollPanel>
         <p></p>
         <p-button class="buttonDeleteImage" (click)="deleteProperty()">

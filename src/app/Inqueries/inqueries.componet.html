@@ -19,14 +19,19 @@
                    Коментар: {{item.comment}}
                 </p>
                 <p *ngIf="item.property">
-                    <ng-container *ngIf="item.property as propertydto">
-                        <p>
-                            Имот: {{ propertydto.name }}
-                        </p>
-                    </ng-container>
+                    Имот: {{ item.property.nameProperty }}
                 </p>
-                <p *ngIf="!item.property">
-                    Имотът не е наличен.
+                <p *ngIf="item.property">
+                    Място: {{ item.property.place.name }}
+                </p>
+                <p *ngIf="item.property">
+                    Място: {{ item.property.neighborhood.name }}
+                </p>
+                <p *ngIf="item.property">
+                    Квадратура: {{ item.property.quadrature }}
+                </p>
+                <p *ngIf="item.property">
+                    Цена: {{ item.property.price }}
                 </p>
                 <ng-template pTemplate="footer">
                     <div class="flex gap-3 mt-1">

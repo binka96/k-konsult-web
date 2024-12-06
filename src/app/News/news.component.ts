@@ -77,13 +77,13 @@ export class News implements OnInit{
         }
       }
     );
-    this.propertyService.getListofImages(this.article.title).subscribe({
+    this.propertyService.getListofImages("article",this.article.title).subscribe({
       next: (response)=>{
         this.images = [];
         for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
-             thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
+             previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.article.title+"/"+ response[i], 
+             thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.article.title+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
          }

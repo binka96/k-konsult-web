@@ -18,6 +18,8 @@ import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-root-property-information',
   standalone: true,
@@ -31,7 +33,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
             DialogModule ,
             InputTextModule ,
             ToastModule ,
-            ScrollPanelModule ],
+            ScrollPanelModule,
+            InputTextareaModule ],
             
   providers: [ PropertyService , InquiryService, MessageService  , 
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
@@ -46,8 +49,7 @@ export class PropertyInformation implements OnInit{
   property: PropertyInfoDto = {
     nameProperty: '',
     type: '',
-    town: '',
-    neighborhood: '',
+
     category: '',
     price: 0,
     pricePerQuadrature: 0,
@@ -59,7 +61,15 @@ export class PropertyInformation implements OnInit{
     yearOfConstruction: 0,
     floar: 0,
     floars: 0,
-    elevator: false,
+    ad: '',
+    place: {
+      id: 0,
+      name: ''
+    },
+    neighborhood: {
+      id: 0,
+      name: 'Няма квартал'
+    }
   };
   images: any[] = [];
   firstName : string | undefined;
@@ -87,22 +97,56 @@ export class PropertyInformation implements OnInit{
     private route: ActivatedRoute , 
     private inqueryService : InquiryService , 
     private messageService: MessageService,
-              private deviceService: DeviceDetectorService  ) {
+              private deviceService: DeviceDetectorService ,
+              private titles: Title, 
+              private meta: Meta)  {
 
               this.isMobile = this.deviceService.isMobile();
               this.isTablet = this.deviceService.isTablet();
               this.isDesktop = this.deviceService.isDesktop();
               }
 
-
-
+  setMetaTags() {
+    this.meta.addTag({
+      name: 'keywords',
+      content: this.property.nameProperty + ',' + this.property.price + ','+ this.property.place.name + ',' +this.property.neighborhood
+  });
+  this.meta.addTag({
+      name: 'description',
+      content: this.property.description
+  });
+} 
+propertyName: string | null = null;
 
   ngOnInit(){
-    const propertyName  = this.route.snapshot.paramMap.get('propertyName');
-    if(propertyName!== undefined && propertyName!== null){
-    this.property.nameProperty = propertyName.toString();
+
+
+  this.route.paramMap.subscribe(params => {
+    this.propertyName = params.get('propertyName'); // Get the property name from the route
+    if (this.propertyName) {
+      // Load the property information based on the parameter
+      this.loadPropertyInformation(this.propertyName);
+    } else {
+      // Handle the case when there's no property name
+      this.loadDefaultPropertyInformation();
+    }
+  });
   }
-  this.getPropertyInformation();
+
+
+  loadPropertyInformation(propertyName: string) {
+
+    if(propertyName!== undefined && propertyName!== null){
+      this.property.nameProperty = propertyName.toString();
+      this.getPropertyInformation();
+      this.titles.setTitle(this.property.nameProperty);
+      this.setMetaTags();
+    }
+
+  }
+
+  loadDefaultPropertyInformation() {
+    // Logic to load default or general property information
   }
 
   getPropertyInformation(){
@@ -114,13 +158,13 @@ export class PropertyInformation implements OnInit{
         }
       }
     );
-    this.propertyService.getListofImages(this.property.nameProperty).subscribe({
+    this.propertyService.getListofImages("property" , this.property.nameProperty).subscribe({
       next: (response)=>{
         this.images = [];
         for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
-             thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.property.nameProperty+"/"+ response[i], 
+             previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.property.nameProperty+"/"+ response[i], 
+             thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.property.nameProperty+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
          }

@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import {SlideMenuModule} from 'primeng/slidemenu';
 import { ToastModule } from 'primeng/toast';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -50,85 +51,117 @@ export class AppComponent implements OnInit{
                private messageService: MessageService,
                private tokenService: TokenService ,
                private userService: UserService  , 
-               private deviceService: DeviceDetectorService)
+               private deviceService: DeviceDetectorService , 
+               private titles: Title, 
+               private meta: Meta)
   {
     this.isMobile = this.deviceService.isMobile();
     this.isTablet = this.deviceService.isTablet();
     this.isDesktop = this.deviceService.isDesktop();
   }
   ngOnInit(){
+    
     if (typeof window !== 'undefined') {
+      this.titles.setTitle('К-Консулт');
+      this.setMetaTags();
       this.sesstion();
       this.items = [
         { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
-        { label: "Имоти" ,  routerLink: "/Properties/all" , 
-          items: [{label: "Продажби" , routerLink: "/Properties/Продажби" ,  items:[
-            {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен"},
-            {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен"},
-            {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен"},
-            {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин"},
-            {label: "Къща" , routerLink: "/Properties/Продажби/Къща"},
-            {label: "Офис" , routerLink: "/Properties/Продажби/Офис"},
-            {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж"},
-          ]} , {label: "Наеми" , routerLink: "/Properties/Наеми", items:[
-            {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен"},
-            {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен"},
-            {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен"},
-            {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин"},
-            {label: "Къща" , routerLink: "/Properties/Наеми/Къща"},
-            {label: "Офис" , routerLink: "/Properties/Наеми/Офис"},
-            {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж"},
+        { label: "Имоти" ,  routerLink: "/Properties/all" , command: () => {this.reloadApplication();} , 
+          items: [{label: "Продажби" , routerLink: "/Properties/Продажби" , command: () => {this.reloadApplication();},   items:[
+            {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен" , command: () => {this.reloadApplication();}},
+            {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен" , command: () => {this.reloadApplication();}},
+            {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен", command: () => {this.reloadApplication();}},
+            {label: "Четиристаен" , routerLink: "/Properties/Продажби/Четиристаен" , command: () => {this.reloadApplication();}},
+            {label: "Студио" , routerLink: "/Properties/Продажби/Студио" , command: () => {this.reloadApplication();}},
+            {label: "Мезонет" , routerLink: "/Properties/Продажби/Мезонет", command: () => {this.reloadApplication();}},
+            {label: "Гарсониера" , routerLink: "/Properties/Продажби/Гарсониера", command: () => {this.reloadApplication();}},
+            {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин", command: () => {this.reloadApplication();}},
+            {label: "Къща" , routerLink: "/Properties/Продажби/Къща",  command: () => {this.reloadApplication();}},
+            {label: "Офис" , routerLink: "/Properties/Продажби/Офис",  command: () => {this.reloadApplication();}},
+            {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж",  command: () => {this.reloadApplication();}},
+          ]} , {label: "Наеми" , routerLink: "/Properties/Наеми", command: () => {this.reloadApplication();}, items:[
+            {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен" , command: () => {this.reloadApplication();}},
+            {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен", command: () => {this.reloadApplication();}},
+            {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен" , command: () => {this.reloadApplication();}},
+            {label: "Четиристаен" , routerLink: "/Properties/Наеми/Четиристаен" , command: () => {this.reloadApplication();}},
+            {label: "Студио" , routerLink: "/Properties/Наеми/Студио" , command: () => {this.reloadApplication();}},
+            {label: "Мезонет" , routerLink: "/Properties/Наеми/Мезонет", command: () => {this.reloadApplication();}},
+            {label: "Гарсониера" , routerLink: "/Properties/Наеми/Гарсониера", command: () => {this.reloadApplication();}},
+            {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин", command: () => {this.reloadApplication();}},
+            {label: "Къща" , routerLink: "/Properties/Наеми/Къща",  command: () => {this.reloadApplication();}},
+            {label: "Офис" , routerLink: "/Properties/Наеми/Офис",  command: () => {this.reloadApplication();}},
+            {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж",  command: () => {this.reloadApplication();}},
           ]}]
         },
+        { label: "DARIA RESIDENCE", routerLink: "/Daria"},
         { label: 'Запитвания', routerLink: "/Inquery" },
         { label: "Блог"  , routerLink: "/Blog"},
         { label: "За нас"  , routerLink: "/Contact"},
-        { label: "Партньори" ,routerLink: "/Partners"}
-      ];
+        { label: "Партньори" ,routerLink: "/Partners"},
+       ];
   }
     }
 
-
+    setMetaTags() {
+      this.meta.addTag({ name: 'keywords', content: 'К-Консулт, агенция за имоти, К-Консулт агенция за имоти, имоти, продажба на имоти, наем на имоти, имоти софия, наеми софия, ' + 'Избиране на имот, Агенция за имоти' });
+      this.meta.addTag({ name: 'description', content: '"Открийте идеалните имоти в София с K-Konsult – вашата партньорска агенция за недвижими имоти. Предлагаме продажба и наем на апартаменти, жилища и търговски обекти. Разгледайте нашето ново строителство и имоти за инвестиции. Свържете се с нас за краткосрочен и дългосрочен наем на имоти, които отговарят на вашите нужди.' });
+  }
+  
   reloadApplication() {
-     window.location.reload();
+    let currentUrl = this.router.url;
+     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigateByUrl(currentUrl);
+      });
   }
 
   loggin(){
     this.items = [
       { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
-      { label: "Имоти" ,  routerLink: "/Properties/all" , 
-        items: [{label: "Продажби" , routerLink: "/Properties/Продажби" ,  items:[
-          {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен"},
-          {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен"},
-          {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен"},
-          {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин"},
-          {label: "Къща" , routerLink: "/Properties/Продажби/Къща"},
-          {label: "Офис" , routerLink: "/Properties/Продажби/Офис"},
-          {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж"},
+      { label: "Имоти" ,  routerLink: "/Properties/all" , command: () => {this.reloadApplication();},
+        items: [{label: "Продажби" , routerLink: "/Properties/Продажби" , command: () => {this.reloadApplication();},  items:[
+          {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен" , command: () => {this.reloadApplication();}}, 
+          {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен", command: () => {this.reloadApplication();}},
+          {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен" , command: () => {this.reloadApplication();}},
+          {label: "Четиристаен" , routerLink: "/Properties/Продажби/Четиристаен" , command: () => {this.reloadApplication();}},
+          {label: "Студио" , routerLink: "/Properties/Продажби/Студио" , command: () => {this.reloadApplication();}},
+          {label: "Мезонет" , routerLink: "/Properties/Продажби/Мезонет", command: () => {this.reloadApplication();}},
+          {label: "Гарсониера" , routerLink: "/Properties/Продажби/Гарсониера", command: () => {this.reloadApplication();}},
+          {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин", command: () => {this.reloadApplication();}},
+          {label: "Къща" , routerLink: "/Properties/Продажби/Къща" , command: () => {this.reloadApplication();}},
+          {label: "Офис" , routerLink: "/Properties/Продажби/Офис", command: () => {this.reloadApplication();}},
+          {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж", command: () => {this.reloadApplication();}},
+
         ]} , 
-        {label: "Наеми" , routerLink: "/Properties/Наеми", items:[
-          {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен"},
-          {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен"},
-          {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен"},
-          {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин"},
-          {label: "Къща" , routerLink: "/Properties/Наеми/Къща"},
-          {label: "Офис" , routerLink: "/Properties/Наеми/Офис"},
-          {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж"},
+        {label: "Наеми" , routerLink: "/Properties/Наеми",command: () => {this.reloadApplication();}, items:[
+          {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен" , command: () => {this.reloadApplication();}},
+          {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен", command: () => {this.reloadApplication();}},
+          {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен" , command: () => {this.reloadApplication();}},
+          {label: "Четиристаен" , routerLink: "/Properties/Наеми/Четиристаен" , command: () => {this.reloadApplication();}},
+          {label: "Студио" , routerLink: "/Properties/Наеми/Студио" , command: () => {this.reloadApplication();}},
+          {label: "Мезонет" , routerLink: "/Properties/Наеми/Мезонет", command: () => {this.reloadApplication();}},
+          {label: "Гарсониера" , routerLink: "/Properties/Наеми/Гарсониера", command: () => {this.reloadApplication();}},
+          {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин" , command: () => {this.reloadApplication();}},
+          {label: "Къща" , routerLink: "/Properties/Наеми/Къща", command: () => {this.reloadApplication();}},
+          {label: "Офис" , routerLink: "/Properties/Наеми/Офис", command: () => {this.reloadApplication();}},
+          {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж", command: () => {this.reloadApplication();}},
+          
         ]}]
       },
+      { label: "DARIA RESIDENCE", routerLink: "/Daria"},
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
       { label: "Партньори" ,routerLink: "/Partners"},
-      { label: "Управлениие",
+      { label: "Управление", 
         items: [
           { label: 'Имоти', routerLink: "/Property" },
           { label: 'Завки',  routerLink: "/Inqueries"},
           { label: "Статия" ,routerLink: "/Article"},
           { label: 'Добави потребител', routerLink: "/Registration" },
           { label: 'Моят профил', routerLink: "/MyProfile" },
-          { label: 'Изход' ,  command: () => {
-            this.logginOut();},
+          { label: 'Градове и квартали', routerLink:"/Place"},
+          { label: 'Изход' ,  command: () => {this.logginOut();},
             routerLink: "/"  }
         ]
       }
@@ -140,29 +173,40 @@ export class AppComponent implements OnInit{
     this.username = "ВХОД";
     this.items = [
       { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
-      { label: "Имоти" ,  routerLink: "/Properties/all" , 
-        items: [{label: "Продажби" , routerLink: "/Properties/Продажби" ,  items:[
-          {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен"},
-          {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен"},
-          {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен"},
-          {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин"},
-          {label: "Къща" , routerLink: "/Properties/Продажби/Къща"},
-          {label: "Офис" , routerLink: "/Properties/Продажби/Офис"},
-          {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж"},
-        ]} , {label: "Наеми" , routerLink: "/Properties/Наеми", items:[
-          {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен"},
-          {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен"},
-          {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен"},
-          {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин"},
-          {label: "Къща" , routerLink: "/Properties/Наеми/Къща"},
-          {label: "Офис" , routerLink: "/Properties/Наеми/Офис"},
-          {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж"},
+      { label: "Имоти" ,  routerLink: "/Properties/all"  ,command: () => {this.reloadApplication();}, 
+        items: [{label: "Продажби" , routerLink: "/Properties/Продажби" , command: () => {this.reloadApplication();}, items:[
+          {label: "Едностаен" , routerLink: "/Properties/Продажби/Едностаен" , command: () => {this.reloadApplication();}},
+          {label: "Двустаен" , routerLink: "/Properties/Продажби/Двустаен", command: () => {this.reloadApplication();}},
+          {label: "Тристаен" , routerLink: "/Properties/Продажби/Тристаен", command: () => {this.reloadApplication();}},
+          {label: "Четиристаен" , routerLink: "/Properties/Продажби/Четиристаен" , command: () => {this.reloadApplication();}},
+          {label: "Студио" , routerLink: "/Properties/Продажби/Студио" , command: () => {this.reloadApplication();}},
+          {label: "Мезонет" , routerLink: "/Properties/Продажби/Мезонет", command: () => {this.reloadApplication();}},
+          {label: "Гарсониера" , routerLink: "/Properties/Продажби/Гарсониера", command: () => {this.reloadApplication();}},
+          {label: "Магазин" , routerLink: "/Properties/Продажби/Магазин", command: () => {this.reloadApplication();}},
+          {label: "Къща" , routerLink: "/Properties/Продажби/Къща", command: () => {this.reloadApplication();}},
+          {label: "Офис" , routerLink: "/Properties/Продажби/Офис", command: () => {this.reloadApplication();}},
+          {label: "Гараж" , routerLink: "/Properties/Продажби/Гараж", command: () => {this.reloadApplication();}},
+
+        ]} , {label: "Наеми" , routerLink: "/Properties/Наеми", command: () => {this.reloadApplication();},items:[
+          {label: "Едностаен" , routerLink: "/Properties/Наеми/Едностаен" , command: () => {this.reloadApplication();}},
+          {label: "Двустаен" , routerLink: "/Properties/Наеми/Двустаен", command: () => {this.reloadApplication();}},
+          {label: "Тристаен" , routerLink: "/Properties/Наеми/Тристаен", command: () => {this.reloadApplication();}},
+          {label: "Четиристаен" , routerLink: "/Properties/Наеми/Четиристаен" , command: () => {this.reloadApplication();}},
+          {label: "Студио" , routerLink: "/Properties/Наеми/Студио" , command: () => {this.reloadApplication();}},
+          {label: "Мезонет" , routerLink: "/Properties/Наеми/Мезонет", command: () => {this.reloadApplication();}},
+          {label: "Гарсониера" , routerLink: "/Properties/Наеми/Гарсониера", command: () => {this.reloadApplication();}},
+          {label: "Магазин" , routerLink: "/Properties/Наеми/Магазин", command: () => {this.reloadApplication();}},
+          {label: "Къща" , routerLink: "/Properties/Наеми/Къща", command: () => {this.reloadApplication();}},
+          {label: "Офис" , routerLink: "/Properties/Наеми/Офис", command: () => {this.reloadApplication();}},
+          {label: "Гараж" , routerLink: "/Properties/Наеми/Гараж", command: () => {this.reloadApplication();}},
+
         ]}]
       },
+      { label: "DARIA RESIDENCE", routerLink: "/Daria"},
       { label: 'Запитвания', routerLink: "/Inquery" },
       { label: "Блог"  , routerLink: "/Blog"},
       { label: "За нас"  , routerLink: "/Contact"},
-      { label: "Партньори" ,routerLink: "/Partners"}
+      { label: "Партньори" ,routerLink: "/Partners"},
     ];
   }
   sesstion(){
@@ -188,7 +232,6 @@ export class AppComponent implements OnInit{
         }
       },
       error: (error) =>{
-        console.error('Error retrieving greeting:', error);
         this.messageService.add({
           severity: 'error',
           summary: "Сесията е изтекла , логнете се отново!",
@@ -197,5 +240,7 @@ export class AppComponent implements OnInit{
       }
     });
   }}}
+
+
 }
 

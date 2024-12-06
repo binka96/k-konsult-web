@@ -41,9 +41,13 @@
         {{article.title}}
     </div>
     <p-scrollPanel [style]="{ width: 'calc(190vw * 0.5)', height: '950px' }" class="text1">
-        <div class="textProperty text">
-            {{article.content}}
-        </div>
+        <textarea class="textProperty text"
+        disabled="true"
+        rows="40"
+        cols="95" 
+
+        [(ngModel)]="article.content">
+    </textarea>
     </p-scrollPanel>
     </div>
     <div class="line2"></div>
@@ -93,9 +97,13 @@
             {{article.title}}
         </div>
         <p-scrollPanel [style]="{ width: 'calc(190vw * 0.5)', height: '450px' }" class="text1">
-            <div class="textProperty text">
-                {{article.content}}
-            </div>
+            <textarea class="textProperty text"
+            disabled="true"
+            rows="100"
+            cols="38" 
+    
+            [(ngModel)]="article.content">
+        </textarea>
         </p-scrollPanel>
         </div>
         <div class="line2"></div>

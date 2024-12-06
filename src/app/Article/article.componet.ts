@@ -84,6 +84,13 @@ export class Article implements OnInit {
   ngOnInit() {
   }
 
+  preventSpecialCharacters(event: KeyboardEvent) {
+    const regex = new RegExp("^[a-zA-Z0-9a-яА-Я\\s.]*$");
+    if (!regex.test(event.key)) {
+        event.preventDefault();
+    }
+  }
+
   createArticle(){
     if(this.article_title!== undefined && this.article_content !== undefined){
       this.article.title = this.article_title;
@@ -129,13 +136,13 @@ export class Article implements OnInit {
             this.article = response;
           }
         });
-        this.propertyService.getListofImages(this.selectedArticles.name).subscribe({
+        this.propertyService.getListofImages("article" , this.selectedArticles.name).subscribe({
           next: (response)=>{
             this.images = [];
             for (let i = 0; i < response.length; i++) {
               this.images.push({ 
-                 previewImageSrc: "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
-                 thumbnailImageSrc:  "http://192.168.236.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
+                 previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.name+"/"+ response[i], 
+                 thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.name+"/"+ response[i], 
                  alt: "Description for Image "+i+", title: Title "+i
                 }); 
              }
@@ -153,7 +160,7 @@ export class Article implements OnInit {
               severity: 'info',
               summary: response.message
             });
-            this.propertyService.deleteFolder(this.selectedArticles.name).subscribe({
+            this.propertyService.deleteFolder("article" ,this.selectedArticles.name).subscribe({
               next: (response)=>{
               }
             });
@@ -192,7 +199,6 @@ export class Article implements OnInit {
     }else{
       this.dialogAddNewImage=false;
       this.getArticleContent();
-      this.messageService.add({severity: 'info', summary: 'Имата който се опитвате да качите няма име!'});
     }
   }
 
@@ -212,7 +218,7 @@ export class Article implements OnInit {
 
   deleteImage(){
     if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedArticles.name !== undefined){
-      this.propertyService.deleteImage(this.selectedArticles.name  , this.selectImage.file).subscribe({
+      this.propertyService.deleteImage("article", this.selectedArticles.name  , this.selectImage.file).subscribe({
         next: (response)=>{
           this.getArticleContent();
           this.messageService.add(
@@ -220,7 +226,7 @@ export class Article implements OnInit {
               severity: 'info',
               summary: response.message
             });
-            this.propertyService.getListofImages(this.selectedArticles.name).subscribe({
+            this.propertyService.getListofImages( "article", this.selectedArticles.name).subscribe({
               next: (response)=>{
                 this.imagesList = [];
                 for (let i = 0; i < response.length; i++) {
@@ -245,7 +251,7 @@ export class Article implements OnInit {
     
     if(this.selectedArticles.name !== undefined){
       this.deleteImageDialogVisivle = true;
-      this.propertyService.getListofImages(this.selectedArticles.name).subscribe({
+      this.propertyService.getListofImages("article" ,this.selectedArticles.name).subscribe({
         next: (response)=>{
           this.imagesList = [];
           for (let i = 0; i < response.length; i++) {

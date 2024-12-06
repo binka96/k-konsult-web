@@ -52,6 +52,8 @@ export class Properties implements OnInit{
   title = 'k-konsult-web-properties';
   properties: PropertyInfoDto[] = [];
   propertiesFilter: PropertyInfoDto[] = [];
+  propertiesExclusive: PropertyInfoDto[] = [];
+
   pageText: string = "";
   selectedType : any;
   text2 : any = {};
@@ -79,7 +81,7 @@ export class Properties implements OnInit{
   }
   
   ngOnInit(){
-    const p_type  = this.route.snapshot.paramMap.get('type');
+      const p_type  = this.route.snapshot.paramMap.get('type');
     const p_category  = this.route.snapshot.paramMap.get('category');
     if(p_category==="all"){
       this.pageText = "Всички имоти"
@@ -108,6 +110,7 @@ export class Properties implements OnInit{
     this.getAllPlaces();
     this.getAllPlacesWithoutArea();
     this.neighberhoodListVisible = true;
+    this.propertyExcusive();
     this.cdr.detectChanges();
   }
   
@@ -154,23 +157,26 @@ export class Properties implements OnInit{
         const property = this.properties[i];
         
         // Check for selectedCity's name and ensure it's not null or undefined
-        const matchesCity = this.selectedCity!==undefined && this.selectedCity.name !== null 
-                            && property.town === this.selectedCity.name;
+        const matchesCity = this.selectedCity !== undefined && this.selectedCity.name !== null 
+                            ? property.place.id === this.selectedCity.id 
+                            : true; // If no city is selected, consider it a match
 
         // Check for selectedNeighborhood's neighborhood and ensure it's not null or undefined
-        const matchesNeighborhood = this.selectedNeighborhood!==undefined && this.selectedNeighborhood.name !== null 
-                                    && property.neighborhood === this.selectedNeighborhood.name;
+        const matchesNeighborhood = this.selectedNeighborhood !== undefined && property.neighborhood !== null 
+                                    ? property.neighborhood.id === this.selectedNeighborhood.id 
+                                    : true; // If no neighborhood is selected, consider it a match
 
-        const matchesPrice = (this.priceFrom === undefined || property.price > this.priceFrom) &&
-                             (this.priceTo === undefined || property.price < this.priceTo);
+        // Check for price range
+        const matchesPriceFrom = this.priceFrom === undefined || property.price >= this.priceFrom;
+        const matchesPriceTo = this.priceTo === undefined || property.price <= this.priceTo;
 
         // Determine if the property should be pushed based on the selected filters
-        if (matchesCity && matchesPrice && 
-           (this.selectedNeighborhood === undefined || matchesNeighborhood)) {
+        if (matchesCity && matchesNeighborhood && matchesPriceFrom &&  matchesPriceTo) {
             this.propertiesFilter.push(property);
         }
     }
 }
+
 
   clearFilters(){
     this.selectedCity = undefined;
@@ -217,6 +223,37 @@ export class Properties implements OnInit{
         })
       }
     }
+
+    propertyExcusive(){
+      this.propertyService.getPropertyByAd("EXCLUSIVE").subscribe({
+          next: (response)=>{
+              this.propertiesExclusive=response;
+              this.sizeofpropertyExcusive();
+          }
+      });
+    }
+
+    sizeofpropertyExcusive(){
+      let size = 0;
+      if(this.propertiesExclusive.length>0)
+      {
+      while (size <= 110) {
+        let i=0;
+        for ( i = 0; i < this.propertiesExclusive.length; i++) {
+            if (size >= 110) {
+                break; // Излизане от цикъла, ако размерът е достигнал 30
+            }
+            this.propertiesExclusive.push(this.propertiesExclusive[i]);
+            size = this.propertiesExclusive.length; // Актуализиране на размера
+        }
+        if (size >= 110) {
+          break; // Излизане от цикъла, ако размерът е достигнал 30
+      }
+    }
+    }
+    }
+
+    
 }
 
 
