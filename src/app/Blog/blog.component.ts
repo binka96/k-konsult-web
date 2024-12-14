@@ -14,6 +14,7 @@ import { TokenService } from '../Service/token.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-root-blog',
   standalone: true,
@@ -43,7 +44,9 @@ export class Blog implements OnInit{
   constructor(
     private articleService: ArticleService ,
     private propertyService: PropertyService ,
-    private deviceService: DeviceDetectorService) {
+    private deviceService: DeviceDetectorService , 
+    private titles: Title, 
+    private meta: Meta) {
       this.isMobile = this.deviceService.isMobile();
       this.isTablet = this.deviceService.isTablet();
       this.isDesktop = this.deviceService.isDesktop();
@@ -51,12 +54,27 @@ export class Blog implements OnInit{
   ngOnInit(){
     this.getAllArticle();
     this.setSlideNumber();
+    this.setMetaTags();
    }
-
+   
    private setSlideNumber() {
     const slideNumber = this.articles.length;
     document.documentElement.style.setProperty('--slide-number', slideNumber.toString());
   }
+
+
+  setMetaTags() {
+    this.titles.setTitle("Блог за имоти");
+    this.meta.addTag({
+        name: 'keywords',
+        content: 'статии за имоти, статии за инфестиция, статия , статии , интерсни статии, инвестиция в бъдещето , имоти'
+    });
+    this.meta.addTag({
+        name: 'description',
+        content: 'Открийте идеалните имоти в София с K-Konsult – вашата партньорска агенция за недвижими имоти. Предлагаме продажба и наем на апартаменти, жилища и търговски обекти. Свържете се с нас за имоти, които отговарят на вашите нужди.'
+      });
+}
+
 
   getAllArticle(){
     this.articleService.getAllArticle().subscribe({

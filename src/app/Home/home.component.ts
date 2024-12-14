@@ -60,6 +60,8 @@ export class Home implements OnInit{
     ]
   }
 
+
+
   setMetaTags() {
     this.meta.addTag({
       name: 'keywords',
@@ -69,6 +71,7 @@ export class Home implements OnInit{
       name: 'description',
       content: 'Открийте идеалните имоти в София с K-Konsult – вашата партньорска агенция за недвижими имоти. Предлагаме продажба и наем на апартаменти, жилища и търговски обекти. Свържете се с нас за имоти, които отговарят на вашите нужди.'
   });
+
 }
 
 

@@ -45,11 +45,10 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class PropertyInformation implements OnInit{
 
-  title = 'k-konsult-web-property';
-  property: PropertyInfoDto = {
+    property: PropertyInfoDto = {
+    propertyId: 0 ,
     nameProperty: '',
     type: '',
-
     category: '',
     price: 0,
     pricePerQuadrature: 0,
@@ -98,7 +97,7 @@ export class PropertyInformation implements OnInit{
     private inqueryService : InquiryService , 
     private messageService: MessageService,
               private deviceService: DeviceDetectorService ,
-              private titles: Title, 
+              private title: Title, 
               private meta: Meta)  {
 
               this.isMobile = this.deviceService.isMobile();
@@ -106,26 +105,29 @@ export class PropertyInformation implements OnInit{
               this.isDesktop = this.deviceService.isDesktop();
               }
 
-  setMetaTags() {
-    this.meta.addTag({
-      name: 'keywords',
-      content: this.property.nameProperty + ',' + this.property.price + ','+ this.property.place.name + ',' +this.property.neighborhood
-  });
-  this.meta.addTag({
-      name: 'description',
-      content: this.property.description
-  });
-} 
-propertyName: string | null = null;
+
+propertyid: number | null = null;
 
   ngOnInit(){
 
+    this.meta.removeTag('property="og:description"');
+    this.meta.removeTag('property="og:image"');
+    this.meta.removeTag('property="og:url"');
+    this.meta.removeTag('property="og:type"');
+    this.meta.removeTag('name="twitter:description"');
 
-  this.route.paramMap.subscribe(params => {
-    this.propertyName = params.get('propertyName'); // Get the property name from the route
-    if (this.propertyName) {
+    this.route.params.subscribe(params => {
+      this.propertyid = Number(params['propertyName']);
+    if (this.propertyid) {
       // Load the property information based on the parameter
-      this.loadPropertyInformation(this.propertyName);
+      this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
+      this.meta.addTag({ property: 'og:image', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${this.propertyid.toString()}/image1.png` });
+      this.meta.addTag({ property: 'og:url', content: `https://k-konsult.bg/PropertyInformation/${this.propertyid.toString()}` });
+      this.meta.addTag({ property: 'og:type', content: 'website' });
+      this.meta.addTag({ name: 'twitter:description', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${this.propertyid.toString()}/image1.png` });
+      this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
+      this.loadPropertyInformation(this.propertyid);
+
     } else {
       // Handle the case when there's no property name
       this.loadDefaultPropertyInformation();
@@ -134,40 +136,47 @@ propertyName: string | null = null;
   }
 
 
-  loadPropertyInformation(propertyName: string) {
+  loadPropertyInformation(propertyid: number) {
 
-    if(propertyName!== undefined && propertyName!== null){
-      this.property.nameProperty = propertyName.toString();
+    if(propertyid!== undefined && propertyid!== null){
+      this.property.propertyId = propertyid;
       this.getPropertyInformation();
-      this.titles.setTitle(this.property.nameProperty);
-      this.setMetaTags();
+      
+      
     }
 
   }
 
   loadDefaultPropertyInformation() {
+    
     // Logic to load default or general property information
   }
 
   getPropertyInformation(){
-    if(this.property.nameProperty !== undefined){
-    this.propertyService.getGetPropertyInformationByName(this.property.nameProperty).subscribe(
+    if(this.property.propertyId !== undefined && this.property.propertyId !== null){
+    this.propertyService.getGetPropertyInformationById(this.property.propertyId).subscribe(
       {
         next: (response)=>{
           this.property = response;
+          this.meta.addTag({ property: 'og:title', content: this.property.nameProperty });
+
+          this.meta.addTag({ name: 'twitter:title', content: this.property.nameProperty });
+
+      
         }
       }
     );
-    this.propertyService.getListofImages("property" , this.property.nameProperty).subscribe({
+    this.propertyService.getListofImages("property" , this.property.propertyId.toString()).subscribe({
       next: (response)=>{
-        this.images = [];
-        for (let i = 0; i < response.length; i++) {
+        this.images = response;
+        /*for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.property.nameProperty+"/"+ response[i], 
-             thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.property.nameProperty+"/"+ response[i], 
+             previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.property.propertyId+"/"+ response[i], 
+             thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.property.propertyId+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
-         }
+            //this.setMetaTags();
+         }*/
       }
     });
   
@@ -186,7 +195,7 @@ openDialogInquery(){
 createInquery(){
     
   if(this.firstName!== undefined && this.lastName !== undefined && this.email !==undefined && this.phone!== undefined 
-    && this.comment !== undefined && this.property.nameProperty !== undefined){
+    && this.comment !== undefined && this.property.propertyId !== undefined){
     this.new_inquiry.name = this.firstName;
     this.new_inquiry.lastName = this.lastName;
     this.new_inquiry.email = this.email;
@@ -205,7 +214,7 @@ createInquery(){
 
     }
     this.new_inquiry.time = this.date.getHours()+":"+this.date.getMinutes()+":00"
-    this.inqueryService.createInqueryForProperty(this.new_inquiry , this.property.nameProperty ).subscribe({
+    this.inqueryService.createInqueryForProperty(this.new_inquiry , this.property.propertyId ).subscribe({
       next: (response)=>{
         this.messageService.add({
           severity: 'info',

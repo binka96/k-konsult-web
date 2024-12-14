@@ -34,16 +34,22 @@ export class ArticleService{
         return this.httpClient.get<ArticleDto[]>(`${this.Url}/Get/AllArticle`)
     }
 
-    getArticleByTitle(title: string): Observable<ArticleDto>{
+    /*getArticleByTitle(title: string): Observable<ArticleDto>{
         return this.httpClient.get<ArticleDto>(`${this.Url}/Get/ArticleTitle/title=${title}` , );
+    }*/
+
+
+
+    getArticleById(id: number): Observable<ArticleDto>{
+        return this.httpClient.get<ArticleDto>(`${this.Url}/Get/ArticleId/ArticleId=${id}` , );
     }
 
-    deleteArticle(title: string): Observable<{message: string}>{
+    deleteArticle(id: number): Observable<{message: string}>{
         const token = this.tokenService.getToken();
         const headers = new HttpHeaders({
           Authorization: `Bearer ${token}`
         });
-        return this.httpClient.delete<{message: string}>(`${this.Url}/Delete/title=${title}` , {headers});
+        return this.httpClient.delete<{message: string}>(`${this.Url}/Delete/id=${id}` , {headers});
     }
 
     updateArticle(article : ArticleDto): Observable<{message: string}>{

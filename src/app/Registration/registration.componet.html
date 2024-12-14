@@ -1,6 +1,7 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
-    <p-toast></p-toast>
+  <router-outlet></router-outlet>
+  <p-toast></p-toast>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text">Регистрация на потребител</label>  
@@ -22,6 +23,7 @@
 
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <p-toast></p-toast>
     <div class="lane-left"></div>
     <div class="lane-right"></div>

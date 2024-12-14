@@ -82,6 +82,10 @@ export class Daria implements OnInit {
         name: 'description',
         content: 'Открийте DARIA RESIDANCE – съвременна жилищна сграда в София, предлагаща луксозни апартаменти и уникални възможности за инвестиции. Свържете се с K-Konsult за повече информация.'
     });
+    this.meta.updateTag({ property: 'og:image', content: `/assets/images/DariaBackground.png` });
+    this.meta.updateTag({ name: 'twitter:image', content: `/assets/images/DariaBackground.png` });
+  
+    this.meta.updateTag({ property: 'og:type', content: 'website' });
 }
 
 }

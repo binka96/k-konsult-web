@@ -1,5 +1,6 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet>
     <div [ngStyle]="background" class="background">
         <label class="text">Намери своя нов дом днес</label>
         <p-cascadeSelect class="townLB"
@@ -44,8 +45,8 @@
         <p-dataView [value]="propertiesExclusive" >
             <ng-template pTemplate="list" let-propertiesExclusive >
                 <div class="properties-container-exclusive">
-                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" [routerLink]="['/PropertyInformation/',  item.nameProperty]">
-                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.nameProperty}}/image1.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" [routerLink]="['/PropertyInformation/',  item.propertyId]">
+                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
                         <div class="text-card-exclusive">
                             {{item.price}} € 
                         </div>
@@ -72,8 +73,8 @@
         <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
-                    <div *ngFor="let item of propertiesFilter" class="property-item" [routerLink]="['/PropertyInformation/',  item.nameProperty]">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.nameProperty}}/image1.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                    <div *ngFor="let item of propertiesFilter" class="property-item" [routerLink]="['/PropertyInformation/',  item.propertyId]">
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
                         <div class="text-card">
                             {{item.price}} € 
                         </div>
@@ -89,9 +90,11 @@
         </p-dataView>
         <div class="lane"></div>
     </div>
+</router-outlet>
 </div>
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet>
     <div [ngStyle]="background"  class="background">
         <label class="text">Намери своя нов дом днес</label>
         <p-cascadeSelect class="townLB"
@@ -136,8 +139,8 @@
         <p-dataView [value]="propertiesExclusive" >
             <ng-template pTemplate="list" let-propertiesExclusive>
                 <div class="properties-container-exclusive">
-                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" [routerLink]="['/PropertyInformation/',  item.nameProperty]"  >
-                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.nameProperty}}/image1.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" [routerLink]="['/PropertyInformation/',  item.propertyId]"  >
+                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
                         <div class="text-card-exclusive">
                             {{item.price}} € 
                         </div>
@@ -161,8 +164,8 @@
         <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
-                    <div *ngFor="let item of propertiesFilter" class="property-item" [routerLink]="['/PropertyInformation/',  item.nameProperty]">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.nameProperty}}/image1.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                    <div *ngFor="let item of propertiesFilter" class="property-item" [routerLink]="['/PropertyInformation/',  item.propertyId]">
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
                         <div class="text-card">
                             {{item.price}} € 
                         </div>
@@ -178,4 +181,5 @@
         </p-dataView>
         <div class="lane"></div>
     </div>
+</router-outlet>
 </div>

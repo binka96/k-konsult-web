@@ -77,7 +77,7 @@ export class Article implements OnInit {
               }
   article_title !: string;
   article_content !: string;
-  article: ArticleDto = { title: "" , content: ""}
+  article: ArticleDto = { articleId: 0 , title: "" , content: ""}
   articlesList: any[] = [];
   selectedArticles !: any; 
   articles : ArticleDto[]  = [];
@@ -121,28 +121,28 @@ export class Article implements OnInit {
       next: (response)=>{
         this.articlesList = [];
         for(let i=0 ; i<response.length;i++){
-          this.articlesList.push({name: response[i].title})
+          this.articlesList.push({articleId: response[i].articleId})
         }
       }
     });
   }
 
   getArticleContent(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name !== null){
-      this.articleService.getArticleByTitle(this.selectedArticles.name).subscribe(
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId !== null){
+      this.articleService.getArticleById(this.selectedArticles.articleId).subscribe(
         {
           next: (response)=>
           {
             this.article = response;
           }
         });
-        this.propertyService.getListofImages("article" , this.selectedArticles.name).subscribe({
+        this.propertyService.getListofImages("article" , this.selectedArticles.articleId).subscribe({
           next: (response)=>{
             this.images = [];
             for (let i = 0; i < response.length; i++) {
               this.images.push({ 
-                 previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.name+"/"+ response[i], 
-                 thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.name+"/"+ response[i], 
+                 previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.articleId+"/"+ response[i], 
+                 thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.articleId+"/"+ response[i], 
                  alt: "Description for Image "+i+", title: Title "+i
                 }); 
              }
@@ -152,15 +152,15 @@ export class Article implements OnInit {
   }
 
   deleteArticle(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name !== null){
-      this.articleService.deleteArticle(this.selectedArticles.name).subscribe({
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId !== null){
+      this.articleService.deleteArticle(this.selectedArticles.articleId).subscribe({
         next: (response)=>{
           this.messageService.add(
             {
               severity: 'info',
               summary: response.message
             });
-            this.propertyService.deleteFolder("article" ,this.selectedArticles.name).subscribe({
+            this.propertyService.deleteFolder("article" ,this.selectedArticles.articleId).subscribe({
               next: (response)=>{
               }
             });
@@ -171,7 +171,7 @@ export class Article implements OnInit {
   }
 
   updateArticle(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name !== null){
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId !== null){
       this.articleService.updateArticle(this.article).subscribe({
         next: (response)=>{
           this.messageService.add(
@@ -203,7 +203,7 @@ export class Article implements OnInit {
   }
 
   addNewPicture(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name!==""){
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId!==""){
       this.dialogAddNewImage = true;
     }else{
       this.messageService.add({severity: 'info', summary: 'Имота който се опитвате да качите няма име!', detail: ''});
@@ -217,8 +217,8 @@ export class Article implements OnInit {
 
 
   deleteImage(){
-    if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedArticles.name !== undefined){
-      this.propertyService.deleteImage("article", this.selectedArticles.name  , this.selectImage.file).subscribe({
+    if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedArticles.articleId !== undefined){
+      this.propertyService.deleteImage("article", this.selectedArticles.articleId  , this.selectImage.file).subscribe({
         next: (response)=>{
           this.getArticleContent();
           this.messageService.add(
@@ -226,7 +226,7 @@ export class Article implements OnInit {
               severity: 'info',
               summary: response.message
             });
-            this.propertyService.getListofImages( "article", this.selectedArticles.name).subscribe({
+            this.propertyService.getListofImages( "article", this.selectedArticles.articleId).subscribe({
               next: (response)=>{
                 this.imagesList = [];
                 for (let i = 0; i < response.length; i++) {
@@ -249,9 +249,9 @@ export class Article implements OnInit {
   
   deleteImageDialog(){
     
-    if(this.selectedArticles.name !== undefined){
+    if(this.selectedArticles.articleId !== undefined){
       this.deleteImageDialogVisivle = true;
-      this.propertyService.getListofImages("article" ,this.selectedArticles.name).subscribe({
+      this.propertyService.getListofImages("article" ,this.selectedArticles.articleId).subscribe({
         next: (response)=>{
           this.imagesList = [];
           for (let i = 0; i < response.length; i++) {

@@ -1,5 +1,6 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
+<router-outlet>
 <div class="galery">
         <p-galleria [value]="images"
          [showItemNavigatorsOnHover]="true" 
@@ -51,11 +52,13 @@
     </p-scrollPanel>
     </div>
     <div class="line2"></div>
+</router-outlet>
 </div>
 
 
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet>
     <div class="galery">
             <p-galleria [value]="images"
              [showItemNavigatorsOnHover]="true" 
@@ -107,5 +110,6 @@
         </p-scrollPanel>
         </div>
         <div class="line2"></div>
+    </router-outlet>
     </div>
     

@@ -1,5 +1,6 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
     <p-toast></p-toast>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
@@ -63,6 +64,7 @@
 </div>
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <p-toast></p-toast>
     <div class="lane-left"></div>
     <div class="lane-right"></div>

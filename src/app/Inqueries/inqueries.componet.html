@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <p-toast></p-toast>
 <p-dataView #dv [value]="inquies" [rows]="5" [paginator]="true">
     <ng-template pTemplate="list" let-inquies>
@@ -25,7 +26,7 @@
                     Място: {{ item.property.place.name }}
                 </p>
                 <p *ngIf="item.property">
-                    Място: {{ item.property.neighborhood.name }}
+                    Квартал: {{ item.property.neighborhood.name }}
                 </p>
                 <p *ngIf="item.property">
                     Квадратура: {{ item.property.quadrature }}

@@ -2,6 +2,7 @@ import { NeighborhoodDto } from "./neighborhood.interface";
 import { PlaceDto } from "./place.interface";
 
 export interface PropertyInfoDto {
+    propertyId: number;
     nameProperty: string,
     type: string,
     place: PlaceDto,

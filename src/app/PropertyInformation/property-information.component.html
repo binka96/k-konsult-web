@@ -1,24 +1,14 @@
-<head>
-    <meta charset="utf-8">
-    <title>{{property.nameProperty}}</title>
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{{property.nameProperty}}" />
-    <meta property="og:description" content="Място: {{property.place.name}}, Цена: €{{property.price}} EUR" />
-    <meta property="og:image" content="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/image1.png" /> <!-- Тук ще зададете URL на основното изображение на имота -->
-    
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{property.nameProperty}}" />
-    <meta name="twitter:description" content="Място: {{property.place.name}}, Цена: €{{property.price}} EUR" />
-    <meta name="twitter:image" content="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/image1.png" /> <!-- Тук ще зададете URL на основното изображение на имота -->
-</head>
-<!-- HTML for Desktop Aplication-->
 
 <div *ngIf="isDesktop" class="desktop"  >
-<p-toast></p-toast>
+   
+
+
+    <p-toast></p-toast>
+    <router-outlet>
 <div class="galery">
+
+
+
     <p-galleria [value]="images"
      [showItemNavigatorsOnHover]="true" 
      [showItemNavigators]="true" 
@@ -30,11 +20,9 @@
       > 
          <ng-template  pTemplate="item" let-item > 
              <img 
-                 [src]="item.previewImageSrc"  
-                 [alt]="item.alt"  
-                 [title]="item.title"  
-                 style=" width:calc(199vw * 0.5); height: auto; " 
-                 (click)="openGalleryModal()"
+                src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.propertyId}}/{{item}}"  
+                style=" width:calc(199vw * 0.5); height: auto; " 
+                (click)="openGalleryModal()"
              /> 
          </ng-template> 
          <ng-template pTemplate="thumbnail" let-item width="20px" > 
@@ -49,7 +37,8 @@
      <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
        [showItemNavigators]="true" [circular]="true">
        <ng-template pTemplate="item" let-item>
-         <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
+         <img  src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.propertyId}}/{{item}}"  
+
            style="    width:calc(199vw * 0.4); height: auto" />
        </ng-template>
      </p-galleria>
@@ -131,14 +120,16 @@
     </p-dialog>
     <img  class="img-buttomInqiyre" src="/assets/images/buttonInqiyre.png" (click)="openDialogInquery()">
     </div>
-    <div class="line2"></div>
+    <div class="line2"></div> </router-outlet>
 </div>
 
 
 
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    
     <p-toast></p-toast>
+    <router-outlet>
     <div class="galery">
         <p-galleria [value]="images"
          [showItemNavigatorsOnHover]="true" 
@@ -151,9 +142,7 @@
           > 
              <ng-template  pTemplate="item" let-item > 
                  <img 
-                     [src]="item.previewImageSrc"  
-                     [alt]="item.alt"  
-                     [title]="item.title"  
+                    src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.propertyId}}/{{item}}"  
                      style=" width: calc(199vw * 0.5); height: auto; " 
                      (click)="openGalleryModal()"
                  /> 
@@ -170,8 +159,8 @@
          <p-galleria [numVisible]="1" [value]="images" [showItemNavigatorsOnHover]="true"
            [showItemNavigators]="true" [circular]="true">
            <ng-template pTemplate="item" let-item>
-             <img [src]="item.previewImageSrc" [alt]="item.alt" [title]="item.title"
-               style="    width: calc(199vw * 0.4); height: auto" />
+             <img  src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.propertyId}}/{{item}}"  
+                  style="    width: calc(199vw * 0.4); height: auto" />
            </ng-template>
          </p-galleria>
         </p-dialog>
@@ -250,4 +239,5 @@
         <img  class="img-buttomInqiyre" src="/assets/images/buttonInqiyre.png" (click)="openDialogInquery()">
         </div>
         <div class="line2"></div>
+    </router-outlet>
     </div>

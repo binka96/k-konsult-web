@@ -1,4 +1,5 @@
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text2">Статии за имоти</label> 
@@ -9,7 +10,7 @@
             <div class="content-wrapper">
                 <p-card [header]="item.title">
                     <ng-template pTemplate="header">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{item.title}}/image1.png" [routerLink]="['/news/',  item.title ]" />
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{item.articleId}}/image1.png" [routerLink]="['/news/',  item.articleId ]" />
                     </ng-template>
                 </p-card>
             </div>
@@ -20,6 +21,7 @@
 
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text2">Статии за имоти</label>  
@@ -30,7 +32,7 @@
                 <div class="content-wrapper">
                     <p-card [header]="item.title">
                         <ng-template pTemplate="header">
-                            <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{item.title}}/image1.png" [routerLink]="['/news/',  item.title ]" />
+                            <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{item.articleId}}/image1.png" [routerLink]="['/news/',  item.articleId ]" />
                         </ng-template>
                     </p-card>
                 </div>

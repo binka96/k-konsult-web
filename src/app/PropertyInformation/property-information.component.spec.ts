@@ -17,7 +17,7 @@ describe('PropertyInformation', () => {
   it(`should have the 'k-konsult-web' title`, () => {
     const fixture = TestBed.createComponent(PropertyInformation);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('k-konsult-web');
+    expect("Title").toEqual('k-konsult-web');
   });
 
   it('should render title', () => {

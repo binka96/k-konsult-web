@@ -1,5 +1,6 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
     <div class="background">
         <div class="text">Нашите Партньори</div>
     </div>
@@ -15,6 +16,7 @@
 </div>
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <div class="background">
         <div class="text">Нашите Партньори</div>
     </div>

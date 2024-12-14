@@ -131,7 +131,10 @@ export class Property implements OnInit {
 
   nameProperties: any[] = []
   selectednameProperties!: any;
+  propertyIds: any[] = [];
+  selectedpropertyId!: any;
   property: PropertyDto ={
+    propertyId: 0,
     nameProperty: "", type: "",
     category: '',
     price: 0,
@@ -160,6 +163,7 @@ export class Property implements OnInit {
   imagesList : any[] = [];
   selectImage: any = "";
   properties: string[] = [];
+  propertiesIds: number[] = [];
   activeIndex: number = 0;
   constructor(private messageService: MessageService , 
               private propertyService: PropertyService ,
@@ -256,7 +260,7 @@ createProperty(){
 }
 
 
-getAllPrpoperty(){
+/*getAllPrpopertiesId(){
   this.propertyService.getAllProperty().subscribe(
     {
       next: (response)=>{
@@ -270,9 +274,27 @@ getAllPrpoperty(){
       }
     }
   );
+}*/
+
+
+
+getAllPrpopertiesId(){
+  this.propertyService.getAllPropertyIds().subscribe(
+    {
+      next: (response)=>{
+        this.propertiesIds = [];
+        this.propertiesIds = response;
+        this.propertyIds = [];
+        for(let i=0;i<this.propertiesIds.length;i++){
+          
+          this.propertyIds.push({propertyId: this.propertiesIds[i]});
+        }
+      }
+    }
+  );
 }
 
-getPropertyInformation(){
+/*getPropertyInformation(){
   if(this.selectednameProperties.name !== undefined){
   this.propertyService.getGetPropertyByName(this.selectednameProperties.name).subscribe(
     {
@@ -283,11 +305,25 @@ getPropertyInformation(){
   );
 
 }
+}*/
+
+getPropertyInformation(){
+  if(this.selectedpropertyId.propertyId !== undefined){
+  this.propertyService.getGetPropertyById(this.selectedpropertyId.propertyId).subscribe(
+    {
+      next: (response)=>{
+        this.property = response;
+      }
+    }
+  );
+
+}
 }
 
+
 getPropertyInformationUpdate(){
-  if(this.selectednameProperties.name !== undefined){
-  this.propertyService.getGetPropertyByName(this.selectednameProperties.name).subscribe(
+  if(this.selectedpropertyId.propertyId !== undefined){
+  this.propertyService.getGetPropertyById(this.selectedpropertyId.propertyId).subscribe(
     {
       next: (response)=>{
         this.property = response;
@@ -298,13 +334,13 @@ getPropertyInformationUpdate(){
       }
     }
   );
-  this.propertyService.getListofImages("property",this.selectednameProperties.name).subscribe({
+  this.propertyService.getListofImages("property",this.selectedpropertyId.propertyId).subscribe({
     next: (response)=>{
       this.images = [];
       for (let i = 0; i < response.length; i++) {
         this.images.push({ 
-           previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.selectednameProperties.name+"/"+ response[i], 
-           thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.selectednameProperties.name+"/"+ response[i], 
+           previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.selectedpropertyId.propertyId+"/"+ response[i], 
+           thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/"+this.selectedpropertyId.propertyId+"/"+ response[i], 
            alt: "Description for Image "+i+", title: Title "+i
           }); 
        }
@@ -314,8 +350,8 @@ getPropertyInformationUpdate(){
 }
 }
 deleteProperty(){
-  if(this.selectednameProperties !== undefined){
-    this.propertyService.deleteProperty(this.selectednameProperties.name).subscribe(
+  if(this.selectedpropertyId !== undefined){
+    this.propertyService.deleteProperty(this.selectedpropertyId.propertyId).subscribe(
       {
         next: (response)=>{
           this.messageService.add(
@@ -324,9 +360,9 @@ deleteProperty(){
               summary: response.message
             }
           );
-          this.propertyService.deleteFolder("property",this.selectednameProperties.name).subscribe({
+          this.propertyService.deleteFolder("property",this.selectedpropertyId.propertyId).subscribe({
             next: (response)=>{
-              this.getAllPrpoperty(); 
+              this.getAllPrpopertiesId(); 
             }
           });
         }
@@ -343,8 +379,8 @@ deleteProperty(){
   }
 }
 deleteImage(){
-  if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectednameProperties.name !== undefined){
-    this.propertyService.deleteImage("property",this.selectednameProperties.name  , this.selectImage.file).subscribe({
+  if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedpropertyId.propertyId !== undefined){
+    this.propertyService.deleteImage("property",this.selectedpropertyId.propertyId  , this.selectImage.file).subscribe({
       next: (response)=>{
         this.getPropertyInformationUpdate();
         this.messageService.add(
@@ -352,7 +388,7 @@ deleteImage(){
             severity: 'info',
             summary: response.message
           });
-          this.propertyService.getListofImages("property" ,this.selectednameProperties.name).subscribe({
+          this.propertyService.getListofImages("property" ,this.selectedpropertyId.propertyId).subscribe({
             next: (response)=>{
               this.imagesList = [];
               for (let i = 0; i < response.length; i++) {
@@ -375,9 +411,9 @@ deleteImage(){
 
 deleteImageDialog(){
   
-  if(this.selectednameProperties.name !== undefined){
+  if(this.selectedpropertyId.propertyId !== undefined){
     this.deleteImageDialogVisivle = true;
-    this.propertyService.getListofImages("property",this.selectednameProperties.name).subscribe({
+    this.propertyService.getListofImages("property",this.selectedpropertyId.propertyId).subscribe({
       next: (response)=>{
         this.imagesList = [];
         for (let i = 0; i < response.length; i++) {
@@ -397,7 +433,7 @@ addPicture(){
 
 
 addNewPicture(){
-  if(this.property.nameProperty!== undefined && this.property.nameProperty!==""){
+  if(this.selectedpropertyId.propertyId!== undefined && this.selectedpropertyId.propertyId!==""){
     this.dialogAddNewImage = true;
   }else{
     this.messageService.add({severity: 'info', summary: 'Имота който се опитвате да качите няма име!', detail: ''});

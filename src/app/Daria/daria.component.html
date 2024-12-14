@@ -1,6 +1,7 @@
 <!-- HTML for Desktop Aplication-->
 
 <div *ngIf="isDesktop" class="desktop"  >
+<router-outlet></router-outlet>
 <p-toast></p-toast>
 <div  class="background">
     <p-toast></p-toast>
@@ -15,7 +16,7 @@
         <ng-template pTemplate="list" let-propertiesFilter>
             <div class="properties-container">
                 <div *ngFor="let item of propertiesFilter" class="property-item">
-                    <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.nameProperty}}/image1.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                    <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
                     <div class="text-card">
                         {{item.price}} € 
                     </div>
@@ -36,6 +37,7 @@
 <!-- HTML for Phone Aplication-->
 
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <p-toast></p-toast>
     <div  class="backgroundPhone">
         <p-toast></p-toast>
@@ -50,7 +52,7 @@
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
                     <div *ngFor="let item of propertiesFilter" class="property-item">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.nameProperty}}/image1.png" [routerLink]="['/PropertyInformation/',  item.nameProperty]" />
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
                         <div class="text-card">
                             {{item.price}} € 
                         </div>

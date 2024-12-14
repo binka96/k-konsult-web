@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import {SlideMenuModule} from 'primeng/slidemenu';
 import { ToastModule } from 'primeng/toast';
-import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -51,9 +50,7 @@ export class AppComponent implements OnInit{
                private messageService: MessageService,
                private tokenService: TokenService ,
                private userService: UserService  , 
-               private deviceService: DeviceDetectorService , 
-               private titles: Title, 
-               private meta: Meta)
+               private deviceService: DeviceDetectorService , )
   {
     this.isMobile = this.deviceService.isMobile();
     this.isTablet = this.deviceService.isTablet();
@@ -62,8 +59,6 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     
     if (typeof window !== 'undefined') {
-      this.titles.setTitle('К-Консулт');
-      this.setMetaTags();
       this.sesstion();
       this.items = [
         { icon: "pi pi-home",styleClass: "custom-icon-color" , routerLink:"/"},
@@ -103,11 +98,7 @@ export class AppComponent implements OnInit{
   }
     }
 
-    setMetaTags() {
-      this.meta.addTag({ name: 'keywords', content: 'К-Консулт, агенция за имоти, К-Консулт агенция за имоти, имоти, продажба на имоти, наем на имоти, имоти софия, наеми софия, ' + 'Избиране на имот, Агенция за имоти' });
-      this.meta.addTag({ name: 'description', content: '"Открийте идеалните имоти в София с K-Konsult – вашата партньорска агенция за недвижими имоти. Предлагаме продажба и наем на апартаменти, жилища и търговски обекти. Разгледайте нашето ново строителство и имоти за инвестиции. Свържете се с нас за краткосрочен и дългосрочен наем на имоти, които отговарят на вашите нужди.' });
-  }
-  
+
   reloadApplication() {
     let currentUrl = this.router.url;
      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

@@ -1,5 +1,8 @@
 <!-- HTML for Desktop Aplication-->
+
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text">Имоти</label>  
@@ -148,18 +151,17 @@
         <input class="ownerLastNameTb" type="text" pInputText [(ngModel)]="ownerLastName" />
         <div class="textbody ownerPhoneText">Телефон на собстеника:</div>
         <input class="ownerPhoneTB" type="text" pInputText [(ngModel)]="ownerPhone" />
-        <p-button class="buttonAddImage" (click)="addPicture()" />
         <p-button  class="buttonAddProperty" (click)="createProperty()" />
     </div>
 
     </p-tabPanel>
-    <p-tabPanel header="Промени имот" (click)="getAllPrpoperty()">
+    <p-tabPanel header="Промени имот" (click)="getAllPrpopertiesId()">
         <div class="updateProperty">
         <div class="textbody">Имот:</div>
         <p-listbox class="lbName"
-            [options]="nameProperties" 
-            [(ngModel)]="selectednameProperties"
-            optionLabel="name" 
+            [options]="propertyIds" 
+            [(ngModel)]="selectedpropertyId"
+            optionLabel="propertyId"
             [filter]="true" 
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '150px'}" 
@@ -184,7 +186,7 @@
 
                 <p-fileUpload 
                 name="demo[]" 
-                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{property.nameProperty}}" 
+                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{property.propertyId}}" 
                 (onUpload)="onUpload($event)" 
                 [multiple]="true" 
                 accept="image/*" 
@@ -253,7 +255,7 @@
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '220px'}" />
         <p></p>
-        <img [style]="{ width: 'calc(50vw * 0.4)', height: 'auto' }"  alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/{{selectImage.file}}"  />
+        <img [style]="{ width: 'calc(50vw * 0.4)', height: 'auto' }"  alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.propertyId}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog>
         </div>
@@ -325,14 +327,14 @@
         <p-button class="buttonUpdateProperty" (click)="updateProperty()"/>
     </div>
     </p-tabPanel>
-    <p-tabPanel header="Изтрий имот" (click)="getAllPrpoperty()">
+    <p-tabPanel header="Изтрий имот" (click)="getAllPrpopertiesId()">
         <p></p>
         <div class="textbody">Имот:</div>
         <p></p>
         <p-listbox 
-            [options]="nameProperties" 
-            [(ngModel)]="selectednameProperties"
-            optionLabel="name" 
+        [options]="propertyIds" 
+        [(ngModel)]="selectedpropertyId"
+        optionLabel="propertyId"
             [filter]="true" 
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '220px'}" 
@@ -368,6 +370,8 @@
 
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text">Имоти</label>  
@@ -513,7 +517,6 @@
         <input class="ownerLastNameTb" type="text" pInputText [(ngModel)]="ownerLastName"  [style]="{'max-height': 'calc(20.5vw * 0.4)'}"/>
         <div class="textbody ownerPhoneText">Телефон на собстеника:</div>
         <input class="ownerPhoneTB" type="text" pInputText [(ngModel)]="ownerPhone" [style]="{'max-height': 'calc(20.5vw * 0.4)'}" />
-        <p-button class="buttonAddImage" (click)="addPicture()" />
         <p-button  class="buttonAddProperty" (click)="createProperty()" />
         <div class="textbody specialOffers">Tип обява: </div>
         <p-listbox class="specialOfferslb"
@@ -525,13 +528,13 @@
     </div>
 
     </p-tabPanel>
-    <p-tabPanel header="Промени имот" (click)="getAllPrpoperty()">
+    <p-tabPanel header="Промени имот" (click)="getAllPrpopertiesId()">
         <div class="updateProperty">
         <div class="textbody">Имот:</div>
         <p-listbox class="textPropertyName1"
-            [options]="nameProperties" 
-            [(ngModel)]="selectednameProperties"
-            optionLabel="name" 
+            [options]="propertyIds" 
+            [(ngModel)]="selectedpropertyId"
+            optionLabel="propertyId"
             [filter]="true" 
             [style]="{ width: 'calc(85vw * 0.6)' }" 
             [listStyle]="{'max-height': 'calc(80.5vw * 0.4)'}"
@@ -546,7 +549,7 @@
 
                 <p-fileUpload 
                 name="demo[]" 
-                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{property.nameProperty}}" 
+                url="https://k-konsult-server.online:80/K-Konsult/file/upload/property/{{property.propertyId}}" 
                 (onUpload)="onUpload($event)" 
                 [multiple]="true" 
                 accept="image/*" 
@@ -620,7 +623,7 @@
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '220px'}" />
         <p></p>
-        <img  [style]="{ width: 'calc(150vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.nameProperty}}/{{selectImage.file}}"  />
+        <img  [style]="{ width: 'calc(150vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{property.propertyId}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog></div>
           <div class="textbody namePropertytb">Име на имота:</div>
@@ -719,14 +722,14 @@
         </p-button> 
     </div>
     </p-tabPanel>
-    <p-tabPanel header="Изтрий имот" (click)="getAllPrpoperty()">
+    <p-tabPanel header="Изтрий имот" (click)="getAllPrpopertiesId()">
         <p></p>
         <div class="textbody">Имот:</div>
         <p></p>
         <p-listbox 
-            [options]="nameProperties" 
-            [(ngModel)]="selectednameProperties"
-            optionLabel="name" 
+            [options]="propertyIds" 
+            [(ngModel)]="selectedpropertyId"
+            optionLabel="propertyId"
             [filter]="true" 
             [style]="{ width: '15rem' }" 
             [listStyle]="{'max-height': '220px'}" 

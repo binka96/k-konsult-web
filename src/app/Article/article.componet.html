@@ -1,5 +1,6 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text">Статии</label>  
@@ -8,7 +9,7 @@
     
         <p-tabPanel header="Създай статия">
         <div class="addArticle">
-        <p-button class="buttonAddImage" (click)="addPicture()" />
+        
         <div class="file">
         <p-dialog header="Добави снимка" 
             [(visible)]="dialogAddImage" 
@@ -54,7 +55,7 @@
         <p-listbox class="propertylist"
             [options]="articlesList" 
             [(ngModel)]="selectedArticles"
-            optionLabel="name" 
+            optionLabel="articleId" 
             [filter]="true" 
             [style]="{ width: 'calc( 40.0vw * 0.3)' }" 
             [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" 
@@ -135,7 +136,7 @@
         [filter]="true" 
         [style]="{ width: 'calc( 40.0vw * 0.5)' }" 
         [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" />
-        <img  [style]="{ width: 'calc(50vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{article.title}}/{{selectImage.file}}"  />
+        <img  [style]="{ width: 'calc(50vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{article.articleId}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog></div>
         <div class="textbody descriptionArticle">Описание на статията:</div>
@@ -156,7 +157,7 @@
         <p-listbox class="lbArticles"
             [options]="articlesList" 
             [(ngModel)]="selectedArticles"
-            optionLabel="name" 
+            optionLabel="articleId" 
             [filter]="true" 
             [style]="{ width: 'calc( 40.0vw * 0.3)' }" 
             [listStyle]="{'height': 'calc( 45.0vw * 0.3)' , 'font-size': 'calc( 4.0vw * 0.3)'}" 
@@ -181,6 +182,7 @@
 
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text">Статии</label>  
@@ -188,8 +190,7 @@
 <p-tabView>
         <p-tabPanel header="Създай статия">
         <div class="addArticle">
-        <p-button class="buttonAddImage" (click)="addPicture()" />
-        <div class="file">
+       <div class="file">
         <p-dialog header="Добави снимка" 
             [(visible)]="dialogAddImage" 
             position="center" 
@@ -231,7 +232,7 @@
         <p-listbox class="propertylist"
             [options]="articlesList" 
             [(ngModel)]="selectedArticles"
-            optionLabel="name" 
+            optionLabel="articleId" 
             [filter]="true" 
             [style]="{ width: 'calc( 80.0vw * 0.6)' }" 
             [listStyle]="{'height': 'calc( 85.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}" 
@@ -318,7 +319,7 @@
         [style]="{ width: 'calc( 110.0vw * 0.6)' }" 
         [listStyle]="{'height': 'calc( 105.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}"  />
         <p></p>
-        <img  [style]="{ width: 'calc(150vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{article.title}}/{{selectImage.file}}"  />
+        <img  [style]="{ width: 'calc(150vw * 0.4)', height: 'auto' }"   alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{article.articleId}}/{{selectImage.file}}"  />
         <p-button label="Изтрии снимка" (click)="deleteImage()" />
         </p-dialog></div>
         <div class="textbody descriptionArticle">Описание на статията:</div>
@@ -341,7 +342,7 @@
         <p-listbox class="lbArticles"
             [options]="articlesList" 
             [(ngModel)]="selectedArticles"
-            optionLabel="name" 
+            optionLabel="articleId" 
             [filter]="true" 
             [style]="{ width: 'calc( 80.0vw * 0.6)' }" 
             [listStyle]="{'height': 'calc( 85.0vw * 0.4)' , 'font-size': 'calc( 8.0vw * 0.5)'}" 
