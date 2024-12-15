@@ -1,0 +1,169 @@
+.phone{
+    ::ng-deep .p-tabview .p-tabview-nav {
+        font-size: calc(8vw * 0.5); /* Change font size */
+        border: none;
+    }
+    
+    .body{
+        position: relative;
+        height: calc(260vw * 0.4); // Задайте желаната ширина
+        width:  calc(200vw * 0.5); 
+    }
+    .lane-left{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(8vw * 0.5);
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(50.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .lane-right{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(7vw * 0.5);
+        left:  calc(140vw * 0.5);;
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(60.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+    .text{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 6.0vw * 0.7);
+        
+        position: relative;
+        top: calc(1.5vw * 0.4);
+        left: calc(70.5vw * 0.4);
+    } 
+
+    .townlb{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        top: calc(10vw * 0.4);
+        left: calc(-3.0vw * 0.4);
+    }
+
+    .nameNeiberHoodlb{
+        position: relative;
+        top: calc(0vw * 0.4);
+        left: calc(15.0vw * 0.4);
+    }
+
+    .neiberhoodLB{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        top: calc(140vw * 0.4);
+        left: calc(-3.0vw * 0.4);
+    }
+
+    ::ng-deep .p-cascadeselect-panel {
+        height: calc(150vw * 0.4); // Задайте желаната ширина
+        width:  calc(110vw * 0.4); 
+        overflow-y: auto;}
+    .text1{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 7.0vw * 0.6);
+        
+    }
+
+    .divName{
+        position: absolute;
+        top: calc(50vw * 0.4);
+        left: calc(-3.0vw * 0.4);
+    }
+
+    .tbName{
+        position: absolute;
+        top: calc(42vw * 0.4);
+        left: calc(105.0vw * 0.4);
+        width: calc(115.0vw * 0.4);
+        height: calc(20.0vw * 0.5);
+    }
+
+    .buttonAddNeighberhod{
+        background-image: url('/assets/images/AddHeihgberhod.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(29vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(140vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(62vw * 0.5);
+        left: calc(20vw * 0.5);
+    }
+    
+
+    .updateHeighberhod{
+        position: absolute;
+        top: calc(115vw * 0.4);
+        left: calc(70.0vw * 0.4);
+    }
+
+    .divReName{
+        position: absolute;
+        top: calc(180vw * 0.4);
+        left: calc(-3.0vw * 0.4);
+    }
+
+    .tbReName{
+        position: absolute;
+        top: calc(170vw * 0.4);
+        left: calc(115.0vw * 0.4);
+        width: calc(115.0vw * 0.4);
+        height: calc(20.0vw * 0.5);
+    }
+
+    .buttonRenameNeighberhod{
+        background-image: url('/assets/images/RenameHeihgberhod.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(29vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(140vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(175vw * 0.5);
+        left: calc(20vw * 0.5);
+    }
+
+    .lane{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(11vw * 0.5);
+        left: calc(10.5vw * -0.5);
+       height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: 1;
+    }
+
+    .updateTown{
+        position: relative;
+        height: calc(250vw * 0.4); // Задайте желаната ширина
+        width:  calc(200vw * 0.5); 
+    }
+
+    .renameTown{
+        position: absolute;
+        top: calc(80vw * 0.4);
+        left: calc(0.0vw * 0.4);
+        width: calc(160.0vw * 0.4);
+        height: calc(20.0vw * 0.5);
+    }
+
+    .buttonRenameTown{
+        background-image: url('/assets/images/RenameTown.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(29vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(140vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(110vw * 0.5);
+        left: calc(20vw * 0.5);
+    }
+  
+}

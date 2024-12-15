@@ -1,24 +1,5 @@
-<!--<p-dataView #dv [value]="articles" [rows]="5" [paginator]="true">
-    <ng-template pTemplate="list" let-articles>
-        <div *ngFor="let item of articles">
-            <p-card [header]="item.title" >
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" />
-                </ng-template>
-                <p>
-                    {{item.content}}
-                </p>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Повече информация" [routerLink]="['/news/',  item.title ]" />
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-    </ng-template>
-</p-dataView> -->
-<!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text2">Статии за имоти</label> 
@@ -29,9 +10,8 @@
             <div class="content-wrapper">
                 <p-card [header]="item.title">
                     <ng-template pTemplate="header">
-                        <img class="picture" alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" [routerLink]="['/news/',  item.title ]" />
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{item.articleId}}/image1.png" [routerLink]="['/news/',  item.articleId ]" />
                     </ng-template>
-                    <p>{{item.content}}</p>
                 </p-card>
             </div>
         </section>
@@ -41,6 +21,7 @@
 
 <!-- HTML for Phone Aplication-->
 <div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
     <div class="lane-left"></div>
     <div class="lane-right"></div>
     <label class="text2">Статии за имоти</label>  
@@ -51,11 +32,8 @@
                 <div class="content-wrapper">
                     <p-card [header]="item.title">
                         <ng-template pTemplate="header">
-                            <img class="picture" alt="Card" src="http://192.168.247.130:8080/K-Konsult/file/Get/images/{{item.title}}/{{item.title}}.png" [routerLink]="['/news/',  item.title ]" />
+                            <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/{{item.articleId}}/image1.png" [routerLink]="['/news/',  item.articleId ]" />
                         </ng-template>
-                        <div style="width: calc(180.5vw * 0.5);">
-                            <label >{{item.content}}</label>
-                        </div>
                     </p-card>
                 </div>
             </section>

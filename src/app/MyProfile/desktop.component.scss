@@ -1,0 +1,155 @@
+.desktop{
+    height:  calc(115.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+    width:  calc(115.5vw * 0.4); ;
+
+    .lane-left{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(8vw * 0.5);
+        left: calc(1vw * -0.5);;
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(60.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .lane-right{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(7vw * 0.5);
+        left:  calc(127vw * 0.5);;
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(70.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+    .text{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 7.0vw * 0.6);
+        
+        position: relative;
+        top: calc(1.5vw * 0.4);
+        left: calc(76.5vw * 0.4);
+    } 
+
+    .text1{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 5.0vw * 0.6);
+        
+        position: relative;
+        top: calc(10.5vw * 0.4);
+        left: calc(50.0vw * 0.4);
+    } 
+    .textBox1{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 4.0vw * 0.4);
+        
+        position: relative;
+        top: calc(1.5vw * 0.4);
+        left: calc(142.0vw * 0.4);
+        border-color: black;
+    }
+
+    .text2{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 5.0vw * 0.6);
+        
+        position: relative;
+        top: calc(8.5vw * 0.4);
+        left: calc(49.0vw * 0.4);
+    } 
+
+    .textBox2{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        
+        position: relative;
+        top: calc(0.5vw * -0.4);
+        left: calc(142.0vw * 0.4);
+        width: calc(55vw * 0.4);
+        height: calc(8.5vw * 0.4);
+        border-radius: 5px;
+    }
+
+    .text3{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 5.0vw * 0.6);
+        
+        position: relative;
+        top: calc(5.5vw * 0.4);
+        left: calc(49.0vw * 0.4);
+    } 
+
+    .textBox3{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        
+        position: relative;
+        top: calc(3.5vw * -0.4);
+        left: calc(142.0vw * 0.4);
+        width: calc(55vw * 0.4);
+        height: calc(8.5vw * 0.4);
+        border-radius: 5px;
+    }
+
+
+    .text4{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        font-size: calc( 5.0vw * 0.6);
+        
+        position: relative;
+        top: calc(3.5vw * 0.4);
+        left: calc(49.0vw * 0.4);
+    } 
+
+    .textBox4{
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
+        
+        position: relative;
+        top: calc(6.5vw * -0.4);
+        left: calc(142.0vw * 0.4);
+        width: calc(55vw * 0.4);
+        height: calc(8.5vw * 0.4);
+        border-radius: 5px;
+    }
+
+    .lane{
+        background-image: url('/assets/images/Home/Line.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(27.5vw * 0.5);
+        left:  calc(1vw * -0.5);;
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .delete-button{
+        background-image: url('/assets/images/deleteAcount.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(25.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(82vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(83vw * 0.5);
+        left: calc(17vw * 0.5);
+    }
+
+    .changePassword-button{
+        background-image: url('/assets/images/changePassword.png');
+        background-size: cover;
+        background-position: center;
+        height:  calc(25.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(83vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        position: absolute;
+        top: calc(83vw * 0.5);
+        left: calc(105vw * 0.5);
+    }
+}

@@ -1,0 +1,71 @@
+<!-- HTML for Desktop Aplication-->
+
+<div *ngIf="isDesktop" class="desktop"  >
+<router-outlet></router-outlet>
+<p-toast></p-toast>
+<div  class="background">
+    <p-toast></p-toast>
+    <label class="text">Жилищна сграда DARIA RESIDANCE  </label>
+</div>
+<div class="property">
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label  class="text2">DARIA RESIDANCE</label>
+    <p></p>
+    <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
+        <ng-template pTemplate="list" let-propertiesFilter>
+            <div class="properties-container">
+                <div *ngFor="let item of propertiesFilter" class="property-item">
+                    <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                    <div class="text-card">
+                        {{item.price}} € 
+                    </div>
+                    <div class="text-card">
+                        {{item.quadrature}} m²
+                    </div>
+                    <p class="text-location" *ngIf="item.neighborhood">
+                        {{item.neighborhood.name}} 
+                    </p>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+    <div class="lane"></div>
+</div>
+</div>
+
+<!-- HTML for Phone Aplication-->
+
+<div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
+    <div  class="backgroundPhone">
+        <p-toast></p-toast>
+        <label class="text">Жилищна сграда DARIA RESIDANCE  </label>
+    </div>
+    <div class="property">
+        <div class="lane-left"></div>
+        <div class="lane-right"></div>
+        <label  class="text2">DARIA RESIDANCE</label>
+        <div class="place"></div>
+        <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
+            <ng-template pTemplate="list" let-propertiesFilter>
+                <div class="properties-container">
+                    <div *ngFor="let item of propertiesFilter" class="property-item">
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                        <div class="text-card">
+                            {{item.price}} € 
+                        </div>
+                        <div class="text-card">
+                            {{item.quadrature}} m²
+                        </div>
+                        <p class="text-location" *ngIf="item.neighborhood">
+                            {{item.neighborhood.name}} 
+                        </p>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+        <div class="lane"></div>
+    </div>
+</div>

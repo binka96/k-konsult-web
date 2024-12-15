@@ -12,6 +12,9 @@ import { ArticleService } from '../Service/article.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { TokenService } from '../Service/token.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-root-news',
   standalone: true,
@@ -23,6 +26,7 @@ import { TokenService } from '../Service/token.service';
             FormsModule , 
             DividerModule , 
             DialogModule ,
+            ScrollPanelModule
   ],
   providers: [ PropertyService ,  ArticleService ,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
@@ -36,36 +40,63 @@ export class News implements OnInit{
   title = 'k-konsult-web-news';
   images: any[] = [];
   article: ArticleDto = {
+    articleId: 0,
     title: '',
     content: ''
   }
-  constructor (private propertyService: PropertyService , private route: ActivatedRoute , private articleService: ArticleService){
-  
-  }
+ 
+
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+  constructor(private propertyService: PropertyService , 
+              private route: ActivatedRoute , 
+              private articleService: ArticleService,    
+              private deviceService: DeviceDetectorService ,
+              private titles: Title, 
+              private meta: Meta ) {
+
+              this.isMobile = this.deviceService.isMobile();
+              this.isTablet = this.deviceService.isTablet();
+              this.isDesktop = this.deviceService.isDesktop();
+              }
+
+
+  articleid: number | null = null; 
+
   ngOnInit(){
-    const articleTitle  = this.route.snapshot.paramMap.get('articleTitle');
-    if(articleTitle!== undefined && articleTitle!== null){
-    this.article.title = articleTitle.toString();
+    this.articleid  = Number(this.route.snapshot.paramMap.get('articleTitle'));
+    if(this.articleid!== undefined && this.articleid!== null){
+    this.article.articleId = this.articleid;
   }
   this.getArticle();
   }
 
   getArticle(){
     if(this.article.title !== undefined){
-    this.articleService.getArticleByTitle(this.article.title).subscribe(
+    this.articleService.getArticleById(this.article.articleId).subscribe(
       {
         next: (response)=>{
           this.article = response;
+          this.meta.addTag({ property: 'og:title', content: this.article.title });
+          this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
+          this.meta.addTag({ property: 'og:image', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${  this.route.snapshot.paramMap.get('articleTitle')}/image1.png` });
+          this.meta.addTag({ property: 'og:url', content: `https://k-konsult.bg/PropertyInformation/${this.route.snapshot.paramMap.get('articleTitle')}` });
+          this.meta.addTag({ property: 'og:type', content: 'website' });
+          this.meta.updateTag({ name: 'twitter:title', content: this.article.title });
+          this.meta.addTag({ name: 'twitter:description', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${this.route.snapshot.paramMap.get('articleTitle')}/image1.png` });
+          this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
+      
         }
       }
     );
-    this.propertyService.getListofImages(this.article.title).subscribe({
+    this.propertyService.getListofImages("article",this.article.articleId.toString()).subscribe({
       next: (response)=>{
         this.images = [];
         for (let i = 0; i < response.length; i++) {
           this.images.push({ 
-             previewImageSrc: "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
-             thumbnailImageSrc:  "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.article.title+"/"+ response[i], 
+             previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.article.articleId+"/"+ response[i], 
+             thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.article.articleId+"/"+ response[i], 
              alt: "Description for Image "+i+", title: Title "+i
             }); 
          }
@@ -80,5 +111,8 @@ export class News implements OnInit{
     this.displayModal = true;
     // Можете да добавите и допълнителна логика, ако е необходимо.
   }
+
+
+  
 }
 

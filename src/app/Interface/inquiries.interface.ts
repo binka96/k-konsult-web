@@ -10,5 +10,5 @@ export interface InquiriesDto{
     date: string;
     time: string;
     jdprConferm: boolean;
-    property: PropertyDto
+    property: PropertyDto;
   }

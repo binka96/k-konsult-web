@@ -20,6 +20,7 @@ import { DividerModule } from 'primeng/divider';
 import { TokenService } from '../Service/token.service';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -56,6 +57,9 @@ export class MyProfile implements OnInit {
   password_old: string | undefined;
   password_new: string | undefined;
   password_new2: string | undefined;
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   dialogDeleteAcount: boolean = false;
   userDto: UserDto = {
     username : "" , password: "" 
@@ -68,8 +72,13 @@ export class MyProfile implements OnInit {
   }
   constructor(private messageService: MessageService , 
               private userService: UserService,
-              private router: Router
-  ) {}
+              private router: Router,
+              private deviceService: DeviceDetectorService
+  ) {
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
+  }
 
   ngOnInit() {
     

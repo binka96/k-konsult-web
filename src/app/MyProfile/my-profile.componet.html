@@ -1,20 +1,40 @@
-<input type="text" pInputText [(ngModel)]="username" />
-<p></p>
-<label >{{name}}</label>
-<p></p>
-<label >{{lastname}}</label>
-<p></p>
-<p-password [(ngModel)]="password_old" [toggleMask]="true" [feedback]="false"/>
-<p></p>
-<p-password [(ngModel)]="password_new" [toggleMask]="true" [feedback]="false"/>
-<p></p>
-<p-password [(ngModel)]="password_new2" [toggleMask]="true" [feedback]="false"/>
-<p></p>
-<p-button label="Изтрий профил" (click)="showDeleteDialog()" />
-<p></p>
-<p-button label="Промени парола" (click)="changePassword()" />
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <div  class="text">МОЯТ ПРОФИЛ</div>
+    <div  class="text1">Потребителско име:</div>
+    <input class="textBox1" type="text" pInputText [(ngModel)]="username" />
+    <div class="text2">Стара парола:</div>
+   <input type="password" class="textBox2 toggleMask: true password-box" [(ngModel)]="password_old" >
+   <div class="text3">Нова паролата:</div>
+    <input type="password" class="textBox3 toggleMask: true password-box" [(ngModel)]="password_new" >
+    <div class="text4">Повтори новата паролата:</div>
+    <input type="password" class="textBox4 toggleMask: true password-box" [(ngModel)]="password_new2" >  
+    <p-button class="delete-button" (click)="showDeleteDialog()" />
+    <p-button class="changePassword-button" (click)="changePassword()" />
+    <div class="lane"></div>
+</div>
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <div  class="text">МОЯТ ПРОФИЛ</div>
+   <div  class="text1">Потребителско име:</div>
+   <input class="textBox1" type="text" pInputText [(ngModel)]="username" />
+   <div class="text2">Стара парола:</div>
+   <input type="password" class="textBox2 toggleMask: true password-box" [(ngModel)]="password_old" >
+<div class="text3">Нова паролата:</div>
+    <input type="password" class="textBox3 toggleMask: true password-box" [(ngModel)]="password_new" >
+         <div class="text4">Повтори новата паролата:</div>
+    <input type="password" class="textBox4 toggleMask: true password-box" [(ngModel)]="password_new2" >  
+    <p-button class="delete-button"  (click)="showDeleteDialog()" />
+    <p-button class="changePassword-button"  (click)="changePassword()" />
+    <div class="lane"></div>
+</div>
 
-<p-dialog header="Изтрий акаунт" 
+
+<p-dialog header="Изтрий акаунт" class="dialog"
 [(visible)]="dialogDeleteAcount" 
 position="center" >
 <p></p>

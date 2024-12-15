@@ -1,19 +1,17 @@
 .phone{
-        
+    overflow-x: hidden;
     .background{
         background-size: cover;
         background-position: top;
         position: relative;
-        top: -10px;
-        left: -9px;
         height:  calc(230vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
 
     .text{
         color: white;
         font-size: calc( 10.0vw * 0.6);
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        
         position: relative;
         top: calc(23vw * 0.4);
         left: calc(25.5vw * 0.4);
@@ -71,11 +69,9 @@
 
     .property{
         position: relative;
-        top: -10px;
-        left: -9px;
         background: white;
         height: auto; // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
 
     .lane-left{
@@ -85,7 +81,7 @@
         position: relative;
         top: calc(8vw * 0.5);
         left: calc(0vw * -0.5);;
-        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(45.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
 
@@ -96,13 +92,14 @@
         position: relative;
         top: calc(7vw * 0.5);
         left:  calc(153vw * 0.5);;
-        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(45.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
     .text2{
-        color: black;
+           color: #000;
+    font-family: Arial, Helvetica, sans-serif;;
         font-size: calc( 7.0vw * 0.6);
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
+        
         position: relative;
         top: calc(2vw * 0.4);
         left: calc(75.5vw * 0.4);
@@ -134,17 +131,17 @@
         font-weight: bold;
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 1.5); //сянка 0.5 индекс
         position: relative;
-        top: calc(-40vw * 0.4);
+        top: calc(-56vw * 0.4);
         left: calc(5.5vw * 0.4);
     }
 
     .text-location{
         border: 10px;
-        color: rgb(184, 184, 184);
+        color: rgb(224, 224, 224);
         font-size: calc( 7.0vw * 0.6);
         text-shadow: 4px 4px 6px rgba(1, 1, 1, 1.5); //сянка 0.5 индекс
         position: relative;
-        top: calc(-55vw * 0.4);
+        top: calc(-56vw * 0.4);
         left: calc(5.5vw * 0.4);
     }
     .lane{
@@ -152,10 +149,78 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(0vw * 0.5);
-        left: calc(0vw * -0.5);;
-        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    ::ng-deep .p-cascadeselect-panel {
+        height: calc(150vw * 0.4); // Задайте желаната ширина
+        width:  calc(110vw * 0.4); ;
+        overflow-y: auto;
+
+    }
+
+    .exclusive{
+        position: relative;
+        height: calc(60.5vw * 0.5);; // височина (смята ширината на екрана * 0,4)
+        width:  calc(200.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .properties-container-exclusive {
+        display: flex;
+        overflow: hidden; // За да скриете елементите, които излизат извън границите
+        position: relative;
+        gap: calc(10vw * 0.4); 
+    }
+    
+
+
+
+    .picture-exclusive{
+        position: relative;
+        top: calc(10vw * 0.4);
+        left: calc(0vw * 0.4);
+        height:  calc(60.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(65.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        border-radius: calc(5vw * 0.4);
+        
+    }
+
+    .text-card-exclusive{
+        border: 10px;
+        color: white;
+        font-size: calc( 5.0vw * 0.4);
+        font-weight: bold;
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 1.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(12vw * -0.4);
+        left: calc(5.5vw * 0.4);
+    }
+
+    .text-location-exclusive{
+        border: 10px;
+        color: rgb(253, 251, 251);
+        font-size: calc( 3.0vw * 0.4);
+        text-shadow: 4px 4px 6px rgba(1, 1, 1, 1.5); //сянка 0.5 индекс
+        position: relative;
+        top: calc(-12vw * 0.4);
+        left: calc(5.5vw * 0.4);
+    }
+
+    .exclusivePicture{
+        background-image: url('/assets/images/picExclusive.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        top: calc(-50vw * 0.4);
+        left: calc(10vw * 0.4);
+        height:  calc(9vw * 0.5);; // височина (смята ширината на екрана * 0,4)
+        width:  calc(50vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: 1;
+    }
+
+    .place{
+        height: 50px;
     }
 
 }

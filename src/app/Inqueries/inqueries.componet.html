@@ -1,10 +1,38 @@
+<router-outlet></router-outlet>
 <p-toast></p-toast>
 <p-dataView #dv [value]="inquies" [rows]="5" [paginator]="true">
     <ng-template pTemplate="list" let-inquies>
         <div *ngFor="let item of inquies">
             <p-card [header]="item.inquiryId" >
                 <p>
-                    {{item.comment}}
+                    Име: {{item.name}}
+                </p>
+                <p>
+                   Фамилия: {{item.lastName}}
+                </p>
+                <p>
+                   Емеил: {{item.email}}
+                </p>
+                <p>
+                   Телефон: {{item.phone}}
+                </p>
+                <p>
+                   Коментар: {{item.comment}}
+                </p>
+                <p *ngIf="item.property">
+                    Имот: {{ item.property.nameProperty }}
+                </p>
+                <p *ngIf="item.property">
+                    Място: {{ item.property.place.name }}
+                </p>
+                <p *ngIf="item.property">
+                    Квартал: {{ item.property.neighborhood.name }}
+                </p>
+                <p *ngIf="item.property">
+                    Квадратура: {{ item.property.quadrature }}
+                </p>
+                <p *ngIf="item.property">
+                    Цена: {{ item.property.price }}
                 </p>
                 <ng-template pTemplate="footer">
                     <div class="flex gap-3 mt-1">

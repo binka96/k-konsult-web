@@ -1,13 +1,11 @@
 <!-- HTML for Desktop Aplication-->
 <div *ngIf="isDesktop" class="desktop"  >
-    <div class="body">
     <div class = "header">
         <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">
-        <p-menubar [model]="items" (click)="reloadApplication()" >
+        <p-menubar [model]="items" >
         </p-menubar>
-        <p-button class="enter-button" routerLink="/Log"></p-button>
     </div>
-    <router-outlet />
+    <router-outlet></router-outlet>
     <div class="footer">
         <div class="house_image"></div>
         <img class="logo_footer"  src="/assets/images/LogoImage.png" routerLink="/">
@@ -21,18 +19,14 @@
         <label class="text6">k.konsult13&#64;gmail.com / kirilova.k.konsult&#64;gmail.com</label>
     </div>
 </div>
-</div>
 <p-toast></p-toast>
 <!-- HTML for Phone Aplication -->
 <div *ngIf="isMobile" class="phone"  >
     <div class = "header">
-        <p-slideMenu  #menu [model]="items"  [popup]="true"  >
+        <p-slideMenu  #menu [model]="items"  [popup]="true"  backLabel="Back" aria-label="1">
         </p-slideMenu>
         <button class="menubar" type="button" pButton icon="pi pi-list"  (click)="menu.toggle($event)"></button>
-        <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">
-        <p-button class="enter-button" routerLink="/Log">
-            <img  class="img-buttom" src="/assets/images/enterButton.png">
-        </p-button>
+        <img class="logo"  src="/assets/images/LogoImage.png" routerLink="/">  
     </div>
     <router-outlet />
     <div class="footer">

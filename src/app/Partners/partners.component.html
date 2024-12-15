@@ -1,3 +1,32 @@
-<h1>
-    Partners page
-</h1>
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
+    <div class="background">
+        <div class="text">Нашите Партньори</div>
+    </div>
+    <div class="backgroundWhite">
+        <div class="partners1"></div>
+        <div class="partners2"></div>
+        <div class="partners3"></div>
+        <div class="backgroundPicture1"></div>
+        <img  class="img-buttomInqiyre" src="/assets/images/buttonInqiyre.png" routerLink="/Inquery">
+    </div>
+    
+    <div class="line2"></div>
+</div>
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
+    <div class="background">
+        <div class="text">Нашите Партньори</div>
+    </div>
+    <div class="backgroundWhite">
+        <div class="partners1"></div>
+        <div class="partners2"></div>
+        <div class="partners3"></div>
+        <div class="backgroundPicture1"></div>
+        <img  class="img-buttomInqiyre" src="/assets/images/buttonInqiyre.png" routerLink="/Inquery">
+    </div>
+    
+    <div class="line2"></div>
+</div>

@@ -24,6 +24,7 @@ import { PropertyService } from '../Service/property.service';
 import { TokenService } from '../Service/token.service';
 import { TokenInterceptor } from '../Service/token-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -62,16 +63,32 @@ export class Article implements OnInit {
   deleteImageDialogVisivle: boolean = false;
   imagesList : any[] = [];
   selectImage: any = "";
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   constructor(private messageService: MessageService,
               private articleService: ArticleService ,
-              private propertyService: PropertyService ) {}
+              private propertyService: PropertyService,
+              private deviceService: DeviceDetectorService  ) {
+
+              this.isMobile = this.deviceService.isMobile();
+              this.isTablet = this.deviceService.isTablet();
+              this.isDesktop = this.deviceService.isDesktop();
+              }
   article_title !: string;
   article_content !: string;
-  article: ArticleDto = { title: "" , content: ""}
+  article: ArticleDto = { articleId: 0 , title: "" , content: ""}
   articlesList: any[] = [];
   selectedArticles !: any; 
   articles : ArticleDto[]  = [];
   ngOnInit() {
+  }
+
+  preventSpecialCharacters(event: KeyboardEvent) {
+    const regex = new RegExp("^[a-zA-Z0-9a-яА-Я\\s.]*$");
+    if (!regex.test(event.key)) {
+        event.preventDefault();
+    }
   }
 
   createArticle(){
@@ -104,28 +121,28 @@ export class Article implements OnInit {
       next: (response)=>{
         this.articlesList = [];
         for(let i=0 ; i<response.length;i++){
-          this.articlesList.push({name: response[i].title})
+          this.articlesList.push({articleId: response[i].articleId})
         }
       }
     });
   }
 
   getArticleContent(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name !== null){
-      this.articleService.getArticleByTitle(this.selectedArticles.name).subscribe(
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId !== null){
+      this.articleService.getArticleById(this.selectedArticles.articleId).subscribe(
         {
           next: (response)=>
           {
             this.article = response;
           }
         });
-        this.propertyService.getListofImages(this.selectedArticles.name).subscribe({
+        this.propertyService.getListofImages("article" , this.selectedArticles.articleId).subscribe({
           next: (response)=>{
             this.images = [];
             for (let i = 0; i < response.length; i++) {
               this.images.push({ 
-                 previewImageSrc: "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
-                 thumbnailImageSrc:  "http://192.168.247.130:8080/K-Konsult/file/Get/images/"+this.selectedArticles.name+"/"+ response[i], 
+                 previewImageSrc: "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.articleId+"/"+ response[i], 
+                 thumbnailImageSrc:  "https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/"+this.selectedArticles.articleId+"/"+ response[i], 
                  alt: "Description for Image "+i+", title: Title "+i
                 }); 
              }
@@ -135,15 +152,15 @@ export class Article implements OnInit {
   }
 
   deleteArticle(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name !== null){
-      this.articleService.deleteArticle(this.selectedArticles.name).subscribe({
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId !== null){
+      this.articleService.deleteArticle(this.selectedArticles.articleId).subscribe({
         next: (response)=>{
           this.messageService.add(
             {
               severity: 'info',
               summary: response.message
             });
-            this.propertyService.deleteFolder(this.selectedArticles.name).subscribe({
+            this.propertyService.deleteFolder("article" ,this.selectedArticles.articleId).subscribe({
               next: (response)=>{
               }
             });
@@ -154,7 +171,7 @@ export class Article implements OnInit {
   }
 
   updateArticle(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name !== null){
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId !== null){
       this.articleService.updateArticle(this.article).subscribe({
         next: (response)=>{
           this.messageService.add(
@@ -176,15 +193,17 @@ export class Article implements OnInit {
     for(let file of event.files) {
         this.uploadedFiles.push(file);
       }
-
-      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+      this.dialogAddNewImage=false;
+      this.getArticleContent();
+      this.messageService.add({severity: 'info', summary: 'File Uploaded'});
     }else{
-      this.messageService.add({severity: 'info', summary: 'Имата който се опитвате да качите няма име!', detail: ''});
+      this.dialogAddNewImage=false;
+      this.getArticleContent();
     }
   }
 
   addNewPicture(){
-    if(this.selectedArticles!== undefined && this.selectedArticles.name!==""){
+    if(this.selectedArticles!== undefined && this.selectedArticles.articleId!==""){
       this.dialogAddNewImage = true;
     }else{
       this.messageService.add({severity: 'info', summary: 'Имота който се опитвате да качите няма име!', detail: ''});
@@ -198,15 +217,16 @@ export class Article implements OnInit {
 
 
   deleteImage(){
-    if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedArticles.name !== undefined){
-      this.propertyService.deleteImage(this.selectedArticles.name  , this.selectImage.file).subscribe({
+    if(this.selectImage!== undefined && this.selectImage.file !== null && this.selectedArticles.articleId !== undefined){
+      this.propertyService.deleteImage("article", this.selectedArticles.articleId  , this.selectImage.file).subscribe({
         next: (response)=>{
+          this.getArticleContent();
           this.messageService.add(
             {
               severity: 'info',
               summary: response.message
             });
-            this.propertyService.getListofImages(this.selectedArticles.name).subscribe({
+            this.propertyService.getListofImages( "article", this.selectedArticles.articleId).subscribe({
               next: (response)=>{
                 this.imagesList = [];
                 for (let i = 0; i < response.length; i++) {
@@ -229,9 +249,9 @@ export class Article implements OnInit {
   
   deleteImageDialog(){
     
-    if(this.selectedArticles.name !== undefined){
+    if(this.selectedArticles.articleId !== undefined){
       this.deleteImageDialogVisivle = true;
-      this.propertyService.getListofImages(this.selectedArticles.name).subscribe({
+      this.propertyService.getListofImages("article" ,this.selectedArticles.articleId).subscribe({
         next: (response)=>{
           this.imagesList = [];
           for (let i = 0; i < response.length; i++) {

@@ -1,0 +1,128 @@
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label class="text">Градове и квартали</label>  
+    <p></p> 
+    <p-tabView  >
+        <p-tabPanel header="Квартали"  >
+            <div class="text">Добави Квартал</div>  
+            <div class="body">
+            <p-cascadeSelect class="townlb"
+            [options]="cities" 
+            [(ngModel)]="selectedCity" 
+            optionGroupLabel="Cname"
+            optionLabel="name"
+            [optionGroupChildren]="['townships', 'place']"
+            placeholder="Град"
+            (click)="getNeighberhood()"
+            [style]="{ width: 'calc(30vw * 0.4)' }" />
+            <div class="text1 divName">Име на квартала:</div>
+            <input class="text1 tbName" type="text" pInputText [(ngModel)]="nameNeiberHood" />
+            <p-button class="buttonAddNeighberhod" (click)="addNeiberhood()"/>
+            <div class="text updateHeighberhod">Прoмени Квартал</div> 
+            <p-dropdown 
+            [disabled]="neighberhoodListVisible"
+            class="neiberhoodLB"
+            [options]="neighborhoods" 
+            [(ngModel)]="selectedNeighborhood"
+            [checkmark]="true"
+            optionLabel="name" 
+            placeholder="Квартал"
+            [filter]="true" 
+            [style]="{ width: 'calc(40vw * 0.4)' }" 
+            (click)="selectNeighberhood()"
+            /> 
+            <div class="text1 divReName">Преименувай квартала:</div>
+            <input class="text1 tbReName" type="text" pInputText [(ngModel)]="nameNeiberHoodRename" />
+            <p-button class="buttonRenameNeighberhod" (click)="updateNeighborhood()"/>
+            
+        </div>
+        <div class="lane"></div>
+        </p-tabPanel>            
+        <p-tabPanel header="Градове"  >
+            <div class="updateTown">
+                <p-cascadeSelect class="townlb"
+                [options]="cities" 
+                [(ngModel)]="selectedCity" 
+                optionGroupLabel="Cname"
+                optionLabel="name"
+                [optionGroupChildren]="['townships', 'place']"
+                placeholder="Град"
+                (click)="getNeighberhood()"
+                [style]="{ width: 'calc(30vw * 0.4)' }" 
+                (click)="seclectTown()"/>
+                <div class="text1 divName">Промени името на града:</div>
+                <input class="text1 renameTown" type="text" pInputText [(ngModel)]="renameTown" />
+                <p-button class="buttonRenameTown" (click)="updateCityName()"/>
+            </div>
+            <div class="lane"></div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+<!-- HTML for Phone Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label class="text">Градове и квартали</label>  
+    <p></p> 
+    <p-tabView  >
+        <p-tabPanel header="Квартали"  >
+            <div class="text">Добави Квартал</div>  
+            <div class="body">
+            <p-cascadeSelect class="townlb"
+            [options]="citiesWithoutArea" 
+            [(ngModel)]="selectedCity" 
+            optionGroupLabel="Cname"
+            optionLabel="name"
+            [optionGroupChildren]="[ 'place']"
+            placeholder="Град"
+            (click)="getNeighberhood()"
+            [style]="{ width: 'calc(110vw * 0.4)' }" />
+            <div class="text1 divName">Име на квартала:</div>
+            <input class="text1 tbName" type="text" pInputText [(ngModel)]="nameNeiberHood" />
+            <p-button class="buttonAddNeighberhod" (click)="addNeiberhood()"/>
+           <div class="text updateHeighberhod">Прoмени Квартал</div> 
+            <p-dropdown 
+            [disabled]="neighberhoodListVisible"
+            class="neiberhoodLB"
+            [options]="neighborhoods" 
+            [(ngModel)]="selectedNeighborhood"
+            [checkmark]="true"
+            optionLabel="name" 
+            placeholder="Квартал"
+            [filter]="true" 
+            [style]="{ width: 'calc(110vw * 0.4)' }" 
+            (click)="selectNeighberhood()"
+            /> 
+            <div class="text1 divReName">Преименувай квартала:</div>
+            <input class="text1 tbReName" type="text" pInputText [(ngModel)]="nameNeiberHoodRename" />
+            <p-button class="buttonRenameNeighberhod" (click)="updateNeighborhood()"/>
+            
+        </div>
+        <div class="lane"></div>
+        </p-tabPanel>            
+        <p-tabPanel header="Градове"  >
+            <div class="updateTown">
+                <p-cascadeSelect class="townlb"
+                [options]="citiesWithoutArea" 
+                [(ngModel)]="selectedCity" 
+                optionGroupLabel="Cname"
+                optionLabel="name"
+                [optionGroupChildren]="[ 'place']"
+                placeholder="Град"
+                (click)="getNeighberhood()"
+                [style]="{ width: 'calc(110vw * 0.4)' }" 
+                (click)="seclectTown()"/>
+                <div class="text1 divName">Промени името на града:</div>
+                <input class="text1 renameTown" type="text" pInputText [(ngModel)]="renameTown" />
+                <p-button class="buttonRenameTown" (click)="updateCityName()"/>
+            </div>
+            <div class="lane"></div>
+        </p-tabPanel>
+    </p-tabView>
+</div>

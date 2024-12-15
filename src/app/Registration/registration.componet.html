@@ -1,13 +1,46 @@
-<p-toast></p-toast>
-<h1>Registration</h1>
-<input type="text" pInputText [(ngModel)]="name" />
-<p></p>
-<input type="text" pInputText [(ngModel)]="lastname" />
-<p></p>
-<input type="text" pInputText [(ngModel)]="username" />
-<p></p>
-<p-password [(ngModel)]="password1" [toggleMask]="true" [feedback]="false"/>
-<p></p>
-<p-password [(ngModel)]="password2" [toggleMask]="true" [feedback]="false"/>
-<p></p>
-<p-button label="Create Registration" (click)="createUser()" />
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isDesktop" class="desktop"  >
+  <router-outlet></router-outlet>
+  <p-toast></p-toast>
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label class="text">Регистрация на потребител</label>  
+    <label class="text1">Потребителско име:</label>
+    <input class="text1Block" type="text" pInputText [(ngModel)]="username" />
+    <label class="text2">Парола:</label>
+    <input type="password" class="text2Block toggleMask: true password-box" [(ngModel)]="password1" >
+    <label class="text3">Повтори паролата:</label>
+    <input type="password" class="text3Block toggleMask: true password-box" [(ngModel)]="password2" >
+    <label class="text4">Име:</label>
+    <input class="text4Block" type="text" pInputText [(ngModel)]="name" />
+    <label class="text5">Фамилия:</label>
+    <input class="text5Block" type="text" pInputText [(ngModel)]="lastname" />
+    <div class="line"></div>
+    <p-button class="registration" (click)="createUser()" />
+
+</div>
+
+
+<!-- HTML for Desktop Aplication-->
+<div *ngIf="isMobile" class="phone"  >
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
+    <div class="lane-left"></div>
+    <div class="lane-right"></div>
+    <label class="text">Регистрация на потребител</label>  
+    <label class="text1">Потребителско име:</label>
+    <input class="text1Block" type="text" pInputText [(ngModel)]="username" />
+    <label class="text2">Парола:</label>
+   <input type="password" class="text2Block toggleMask: true password-box" [(ngModel)]="password1" >
+   <label class="text3">Повтори паролата:</label>
+    <input type="password" class="text3Block toggleMask: true password-box" [(ngModel)]="password2" >
+      <label class="text4">Име:</label>
+    <input class="text4Block" type="text" pInputText [(ngModel)]="name" />
+    <label class="text5">Фамилия:</label>
+    <input class="text5Block" type="text" pInputText [(ngModel)]="lastname" />
+    <div class="line"></div>
+    <p-button class="registration" (click)="createUser()" />
+
+</div>
+
+

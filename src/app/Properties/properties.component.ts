@@ -16,6 +16,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenService } from '../Service/token.service';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { PlaceService } from '../Service/place.service';
+import { AreaDto } from '../Interface/area.interface';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { ChangeDetectorRef } from '@angular/core';
+import { response } from 'express';
 
 @Component({
   selector: 'app-root-properties',
@@ -31,9 +36,10 @@ import { DeviceDetectorService } from 'ngx-device-detector';
             DropdownModule,
             FormsModule,
             InputNumberModule,
-            ScrollPanelModule
+            ScrollPanelModule,
+            CascadeSelectModule
   ],
-  providers: [ PropertyService , 
+  providers: [ PropertyService , PlaceService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     TokenService , TokenInterceptor
   ] , 
@@ -46,47 +52,36 @@ export class Properties implements OnInit{
   title = 'k-konsult-web-properties';
   properties: PropertyInfoDto[] = [];
   propertiesFilter: PropertyInfoDto[] = [];
+  propertiesExclusive: PropertyInfoDto[] = [];
+
   pageText: string = "";
   selectedType : any;
   text2 : any = {};
   background: any = {};
-  cities : any[] = [
-    {"name": "Самоков"},
-    {"name": "Сандански"},
-    {"name": "София"},
-    {"name": "Перник"},
-    {"name": "Дупница"},
-    {"name": "Благовеград"},
-    {"name": "Костенец"},
-    {"name": "Пловдив"},
-  ]
+  cities : any[] = []
+  citiesWithoutArea: any[]=[]
   selectedCity : any;
-  neighborhoods : any[] = [
-    {"neighborhood": "кв Възраждане"},
-    {"neighborhood": "кв Самоково"},
-    {"neighborhood": "кв Младост"},
-    {"neighborhood": "кв Овча купел"},
-    {"neighborhood": "кв Люлин 1"},
-    {"neighborhood": "кв Люлин 2"},
-    {"neighborhood": "кв Люлин 3"},
-    {"neighborhood": "кв Люлин 4"},
-  ]
+  neighborhoods : any[] = [ ]
   selectedNeighborhood : any;
   priceTo: number | undefined;
   priceFrom!: number | undefined;
+  neighberhoodListVisible: boolean = true;
   isMobile: boolean;
   isTablet: boolean;
   isDesktop: boolean;
   constructor (private propertyService: PropertyService ,
                 private route: ActivatedRoute , 
-                private deviceService: DeviceDetectorService
+                private deviceService: DeviceDetectorService,
+                private placeService: PlaceService,
+                private cdr: ChangeDetectorRef
   ){
     this.isMobile = this.deviceService.isMobile();
     this.isTablet = this.deviceService.isTablet();
     this.isDesktop = this.deviceService.isDesktop();
   }
+  
   ngOnInit(){
-    const p_type  = this.route.snapshot.paramMap.get('type');
+      const p_type  = this.route.snapshot.paramMap.get('type');
     const p_category  = this.route.snapshot.paramMap.get('category');
     if(p_category==="all"){
       this.pageText = "Всички имоти"
@@ -112,6 +107,11 @@ export class Properties implements OnInit{
     else if( p_category !== null &&  p_type === null  ){
       this.getAllPropertyByCategory( p_category );
     }
+    this.getAllPlaces();
+    this.getAllPlacesWithoutArea();
+    this.neighberhoodListVisible = true;
+    this.propertyExcusive();
+    this.cdr.detectChanges();
   }
   
 
@@ -157,23 +157,26 @@ export class Properties implements OnInit{
         const property = this.properties[i];
         
         // Check for selectedCity's name and ensure it's not null or undefined
-        const matchesCity = this.selectedCity!==undefined && this.selectedCity.name !== null 
-                            && property.town === this.selectedCity.name;
+        const matchesCity = this.selectedCity !== undefined && this.selectedCity.name !== null 
+                            ? property.place.id === this.selectedCity.id 
+                            : true; // If no city is selected, consider it a match
 
         // Check for selectedNeighborhood's neighborhood and ensure it's not null or undefined
-        const matchesNeighborhood = this.selectedNeighborhood!==undefined && this.selectedNeighborhood.neighborhood !== null 
-                                    && property.neighborhood === this.selectedNeighborhood.neighborhood;
+        const matchesNeighborhood = this.selectedNeighborhood !== undefined && property.neighborhood !== null 
+                                    ? property.neighborhood.id === this.selectedNeighborhood.id 
+                                    : true; // If no neighborhood is selected, consider it a match
 
-        const matchesPrice = (this.priceFrom === undefined || property.price > this.priceFrom) &&
-                             (this.priceTo === undefined || property.price < this.priceTo);
+        // Check for price range
+        const matchesPriceFrom = this.priceFrom === undefined || property.price >= this.priceFrom;
+        const matchesPriceTo = this.priceTo === undefined || property.price <= this.priceTo;
 
         // Determine if the property should be pushed based on the selected filters
-        if (matchesCity && matchesPrice && 
-           (this.selectedNeighborhood === undefined || matchesNeighborhood)) {
+        if (matchesCity && matchesNeighborhood && matchesPriceFrom &&  matchesPriceTo) {
             this.propertiesFilter.push(property);
         }
     }
 }
+
 
   clearFilters(){
     this.selectedCity = undefined;
@@ -185,20 +188,72 @@ export class Properties implements OnInit{
   }
 
 
-    private speeds = [0.3, 0.5, 0.7]; 
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-      const scrollY = window.scrollY;
-      const parallaxElements = document.querySelectorAll('.parallax');
-  
-      parallaxElements.forEach((el: Element, index: number) => {
-        const speed = this.speeds[index] || 0.5; // Вземете скоростта от масива
-        const offset = scrollY * speed;
-  
-        const parallaxElement = el as HTMLElement;
-        parallaxElement.style.transform = `translateY(${offset}px)`;
+
+
+    getAllPlaces(){
+      this.placeService.getAllPlaces().subscribe({
+        next: (response)=>{
+          this.cities = response;
+        }
+      })
+    }
+
+    getAllPlacesWithoutArea(){
+      this.placeService.getAllPlacesWithoutArea().subscribe({
+        next: (response)=>{
+          this.citiesWithoutArea = response;
+        }
+      })
+    }
+    getNeighberhood(){
+      
+      if(this.selectedCity !== undefined){
+        this.placeService.getAllNeiberhood(this.selectedCity.id).subscribe({
+          next: (response) =>
+          {
+            this.neighborhoods = response;
+            if(response.length == 0){
+              this.neighberhoodListVisible = true;
+            }
+            else{
+              this.neighberhoodListVisible = false;
+            }
+            
+          }
+        })
+      }
+    }
+
+    propertyExcusive(){
+      this.propertyService.getPropertyByAd("EXCLUSIVE").subscribe({
+          next: (response)=>{
+              this.propertiesExclusive=response;
+              this.sizeofpropertyExcusive();
+          }
       });
     }
-  
+
+    sizeofpropertyExcusive(){
+      let size = 0;
+      if(this.propertiesExclusive.length>0)
+      {
+      while (size <= 110) {
+        let i=0;
+        for ( i = 0; i < this.propertiesExclusive.length; i++) {
+            if (size >= 110) {
+                break; // Излизане от цикъла, ако размерът е достигнал 30
+            }
+            this.propertiesExclusive.push(this.propertiesExclusive[i]);
+            size = this.propertiesExclusive.length; // Актуализиране на размера
+        }
+        if (size >= 110) {
+          break; // Излизане от цикъла, ако размерът е достигнал 30
+      }
+    }
+    }
+    }
+
+    
 }
+
 

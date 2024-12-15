@@ -1,219 +1,26 @@
 .desktop{
     
-    @keyframes appear-from-left {
-        0% {
-          opacity: 0;
-          transform: translateX(-80px);
-        }
-        100% {
-          opacity: 1;
-          transform: translatex(0);
-        }
-    }
-
-    @keyframes appear-from-up {
-        0% {
-          opacity: 0;
-          transform: translateY(-80px);
-        }
-        100% {
-          opacity: 1;
-          transform: translatey(0);
-        }
-    }
-
-    @keyframes appear-from-right {
-        0% {
-          opacity: 0;
-          transform: translateX( 80px);
-        }
-        100% {
-          opacity: 1;
-          transform: translatex(0);
-        }
-    }
-
-    @keyframes appear-from-down {
-        0% {
-            opacity: 0;
-            transform: translateY(80px);
-          }
-          100% {
-            opacity: 1;
-            transform: translatey(0);
-          }
-    }
-  
-  
-  // Active class for scroll animation
-  .active .header2, .grey-area2 , .grey-area3 , .group30 , .group31 ,.group43 , .group42  {
-    opacity: 0;
-    transform: translateY(20px);
-    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    animation: appear-from-left 1.6s forwards;
-  }    
-
-  .active1 {
-    opacity: 0;
-    transform: translateY(20px);
-    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    animation: appear-from-up 1.6s forwards;
-  }   
-
-  .active2 , .grey-area4 , .group32 ,  .group29{
-    opacity: 0;
-    transform: translateY(20px);
-    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    animation: appear-from-right 1.6s forwards;
-  }   
-
-  .active3 , .img-buttomInqiyre  {
-    opacity: 0;
-    transform: translateY(20px);
-    //transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    animation: appear-from-down 1.6s forwards;
-  }   
-
-    .header1{
+  .header1{
         background-image: url('/assets/images/Home/home_header1.png');
         background-size: cover;
         background-position: center;
         position: relative;
-        top: -9px;
-        left: -9px;
-        height:  calc(150vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        background-attachment: fixed; 
+        height:  calc(130vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(200vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
 
     .text1{
-        animation: appear-from-left 1.5s forwards;
-        animation-delay: 0.0s;
-        color: white;
-        font-size:  calc( 15.0vw * 0.6);
+        background-image: url('/assets/images/textHome.png');
+        background-size: cover;
+        background-position: center;
         position: absolute;
         text-align: center; 
-        top:  calc( 19.5vw * 0.6); // позиция отгоре
+        top:  calc( 23.5vw * 0.6); // позиция отгоре
         left: calc( 12vw * 0.4); // позиция отляво
-        height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(180vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-        text-shadow: 4px 4px 6px rgba(1, 1, 1, 0.5); //сянка 0.5 индекс
-
-    }
-
-    .grey-area1{
-        animation: appear-from-left 1.5s forwards;
-        animation-delay: 0.0s;
-        background-image: url('/assets/images/Home/grey-area1.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(80vw * 0.5);
-        left: calc(18.5vw * 0.5);;
-        height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(160vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-        
-    }
-
-    .text2{
-        animation: appear-from-left 1.5s forwards;
-        animation-delay: 0.0s;
-        color: white;
-        font-size:  calc( 9.0vw * 0.3);
-        position: absolute;
-        text-align: center; 
-        top:  calc( 14.5vw * 0.6); // позиция отгоре
-        left: calc( 15vw * 0.4); // позиция отляво
-        height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(140vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-    .header2{
-        background-image: url('/assets/images/Home/home_header2.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: -9px;
-        left: -9px;
-        height:  calc(190vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(198.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-        z-index: -1;
-    }
-
-    .image1{
-        background-image: url('/assets/images/Home/up_image.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(50vw * 0.5);
-        left: calc(108.5vw * 0.5);;
-        height:  calc(91.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(90vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .image2{
-        background-image: url('/assets/images/Home/down_image.png');
-        background-size: cover;
-        background-position: center;
-        position: absolute;
-        top: calc(10vw * 0.5);
-        left: calc(0vw * 0.5);;
-        height:  calc(91.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(71vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-        
-    }
-
-    .grey-area2{
-        background-image: url('/assets/images/Home/grey-area2.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(30vw * 0.5);
-        left: calc(18.5vw * 0.5);;
         height:  calc(50.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(140vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .text3{
-        color: white;
-        font-size:  calc( 8.0vw * 0.3);
-        position: absolute;
-        text-align: left; 
-        top: calc(4vw * 0.5);
-        left: calc(4.5vw * 0.5);;
-        height:  calc(40.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(130vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .line1{
-        background-image: url('/assets/images/Home/Line.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
-        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .imot-image1{
-        background-image: url('/assets/images/Home/imoti1.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
-        height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .imot-image2{
-        background-image: url('/assets/images/Home/imoti2.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
-        height:  calc(100.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        width:  calc(180vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        
     }
 
     .line2{
@@ -221,126 +28,59 @@
         background-size: cover;
         background-position: center;
         position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
-        height:  calc(1.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        height:  calc(0.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
     }
 
-    .grey-area3{
-        background-image: url('/assets/images/Home/grey_area3.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(5vw * 0.5);
-        left: calc(0.0vw * 0.5);;
-        height:  calc(22.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(128vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
 
-    .grey-area4{
-        background-image: url('/assets/images/Home/grey_area4.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(5vw * 0.5);
-        left: calc(71.5vw * 0.5);;
-        height:  calc(22.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(128vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .text4{
-        color: white;
-        font-size:  calc( 8.0vw * 0.3);
-        position: absolute;
-        text-align: left; 
-        top: calc(4vw * 0.5);
-        left: calc(14.5vw * 0.5);;
-        height:  calc(40.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(130vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .text5{
-        color: white;
-        font-size:  calc( 8.0vw * 0.3);
-        position: absolute;
-        text-align: right; 
-        top: calc(4vw * 0.5);
-        left: calc(4.5vw * 0.5);;
-        height:  calc(40.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(110vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .header3{
-        background-image: url('/assets/images/Home/header3.png');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        top: calc(2vw * -0.5);
-        left: calc(2vw * -0.5);;
-        height:  calc(290.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(199.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .group30{
-        position: relative;
-        top: calc(50vw * 0.5);
-        left: calc(24vw * 0.5);;
-        height:  calc(75.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(49.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .group31{
-        position: relative;
-        top: calc(71.5vw * 0.5);
-        left: calc(28vw * 0.5);;
-        height:  calc(85.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(51.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .group32{
-        position: relative;
-        top: calc(50vw * 0.5);
-        left: calc(30vw * 0.5);;
-        height:  calc(75.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(49.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .group43{
-        position: relative;
-        top: calc(120vw * 0.5);
-        left: calc(123vw * -0.5);;
-        height:  calc(75.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(44.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .group42{
-        position: relative;
-        top: calc(75vw * 0.5);
-        left: calc(79.5vw * 0.5);;
-        height:  calc(85.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(47vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .group29{
-        position: relative;
-        top: calc(49vw * 0.5);
-        left: calc(84vw * 0.5);;
-        height:  calc(75.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
-        width:  calc(50.5vw * 0.5); //щирана (смята ширината на екрана * 0,5)
-    }
-
-    .inqiyre-button{
-        position: relative;
-        top: calc(73.5vw * 0.5);
-        left: calc(25vw * 0.5);;
-    }
-
+ 
     .img-buttomInqiyre{
         position: relative;
-        top: calc(73.5vw * 0.5);
+        top: calc(86.5vw * 0.5);
         left: calc(25vw * 0.5);;
         height:  calc(46.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
         width:  calc(150vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+        z-index: 1;
     }
+
+    .header2{
+        background-image: url('/assets/images/dariaResidenceInfo.png');
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: calc(186.2vw * 0.5);
+        left: calc(0vw * 0.5);;
+        height:  calc(47.5vw * 0.4); // височина (смята ширината на екрана * 0,4)
+        width:  calc(110vw * 0.5); //щирана (смята ширината на екрана * 0,5)
+    }
+
+    .image-slider {
+        display: flex;
+        overflow: hidden;
+        width: calc(200vw * 0.5);; /* Ширината на контейнера */
+        position: relative;
+    }
+    
+    .img-daria {
+        position: relative;
+        width: calc(200vw * 0.5); /* Ширина на изображението */
+        height: auto; /* Автоматична височина */
+        animation: slide 40s linear infinite; /* Анимация */
+    }
+    
+    @keyframes slide {
+        0% {
+            transform: translateX(0%); /* Започва извън екрана от дясно */
+        }
+        100% {
+            transform: translateX(-300%); /* Завършва извън екрана от ляво */
+        }
+    }
+
+    .image-slider::before,
+    .image-slider::after {
+    content: '';
+    flex: 100% 0 100%; /* За да запълнят контейнера */
+}
+
 }

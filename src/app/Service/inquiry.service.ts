@@ -8,7 +8,7 @@ import { TokenService } from "./token.service";
 
 @Injectable()
 export class InquiryService{
-    Url ='http://192.168.247.130:8080/K-Konsult/Inquiry'
+    Url ='https://k-konsult-server.online:80/K-Konsult/Inquiry'
     constructor (private httpClient: HttpClient , 
                  private tokenService: TokenService
     ){    }
@@ -27,8 +27,8 @@ export class InquiryService{
         return this.httpClient.post<{message: string}>(`${this.Url}/Get/CreateInquiry` , inquery)
     }
 
-    createInqueryForProperty(inquery: InquiryDto , propertyName: string): Observable<{message: string}>{
-        return this.httpClient.post<{message: string}>(`${this.Url}/Get/CreateInquiry/PropertyName=${propertyName}` , inquery)
+    createInqueryForProperty(inquery: InquiryDto , id: number): Observable<{message: string}>{
+        return this.httpClient.post<{message: string}>(`${this.Url}/Get/CreateInquiry/PropertyId=${id}` , inquery)
     }
 
 
