@@ -88,4 +88,8 @@ export class Daria implements OnInit {
     this.meta.updateTag({ property: 'og:type', content: 'website' });
 }
 
+goToPropertyInfo(propertyId : number) {
+  window.location.href = 'https://k-konsult.bg/PropertyInformation?propertyName=' + propertyId.toString(); // Заменете с желания URL
+}
+
 }

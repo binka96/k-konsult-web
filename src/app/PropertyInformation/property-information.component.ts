@@ -116,16 +116,17 @@ propertyid: number | null = null;
     this.meta.removeTag('property="og:type"');
     this.meta.removeTag('name="twitter:description"');
 
-    this.route.params.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.propertyid = Number(params['propertyName']);
-    if (this.propertyid) {
-      // Load the property information based on the parameter
       this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
       this.meta.addTag({ property: 'og:image', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${this.propertyid.toString()}/image1.png` });
       this.meta.addTag({ property: 'og:url', content: `https://k-konsult.bg/PropertyInformation/${this.propertyid.toString()}` });
       this.meta.addTag({ property: 'og:type', content: 'website' });
       this.meta.addTag({ name: 'twitter:description', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${this.propertyid.toString()}/image1.png` });
       this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
+      if (this.propertyid) {
+      // Load the property information based on the parameter
+
       this.loadPropertyInformation(this.propertyid);
 
     } else {

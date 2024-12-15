@@ -253,7 +253,9 @@ export class Properties implements OnInit{
     }
     }
 
-    
+    goToPropertyInfo(propertyId : number) {
+      window.location.href = 'https://k-konsult.bg/PropertyInformation?propertyName=' + propertyId.toString(); // Заменете с желания URL
+    }
 }
 
 

@@ -45,8 +45,8 @@
         <p-dataView [value]="propertiesExclusive" >
             <ng-template pTemplate="list" let-propertiesExclusive >
                 <div class="properties-container-exclusive">
-                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" [routerLink]="['/PropertyInformation/',  item.propertyId]">
-                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" (click)="goToPropertyInfo(item.propertyId)" >
+                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" (click)="goToPropertyInfo(item.propertyId)"  />
                         <div class="text-card-exclusive">
                             {{item.price}} € 
                         </div>
@@ -73,8 +73,8 @@
         <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
-                    <div *ngFor="let item of propertiesFilter" class="property-item" [routerLink]="['/PropertyInformation/',  item.propertyId]">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                    <div *ngFor="let item of propertiesFilter" class="property-item" (click)="goToPropertyInfo(item.propertyId)" >
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" (click)="goToPropertyInfo(item.propertyId)"  />
                         <div class="text-card">
                             {{item.price}} € 
                         </div>
@@ -139,8 +139,8 @@
         <p-dataView [value]="propertiesExclusive" >
             <ng-template pTemplate="list" let-propertiesExclusive>
                 <div class="properties-container-exclusive">
-                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" [routerLink]="['/PropertyInformation/',  item.propertyId]"  >
-                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                    <div *ngFor="let item of propertiesExclusive"  class="property-item-exclusive" (click)="goToPropertyInfo(item.propertyId)" >
+                        <img class="picture-exclusive" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" (click)="goToPropertyInfo(item.propertyId)"  />
                         <div class="text-card-exclusive">
                             {{item.price}} € 
                         </div>
@@ -164,8 +164,8 @@
         <p-dataView [value]="propertiesFilter" [rows]="6" [paginator]="true"  [rowsPerPageOptions]="[  6,  25 , 50, 100]" >
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
-                    <div *ngFor="let item of propertiesFilter" class="property-item" [routerLink]="['/PropertyInformation/',  item.propertyId]">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                    <div *ngFor="let item of propertiesFilter" class="property-item" (click)="goToPropertyInfo(item.propertyId)" >
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" (click)="goToPropertyInfo(item.propertyId)"  />
                         <div class="text-card">
                             {{item.price}} € 
                         </div>

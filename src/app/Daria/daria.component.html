@@ -16,7 +16,7 @@
         <ng-template pTemplate="list" let-propertiesFilter>
             <div class="properties-container">
                 <div *ngFor="let item of propertiesFilter" class="property-item">
-                    <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                    <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" (click)="goToPropertyInfo(item.propertyId)"  />
                     <div class="text-card">
                         {{item.price}} € 
                     </div>
@@ -52,7 +52,7 @@
             <ng-template pTemplate="list" let-propertiesFilter>
                 <div class="properties-container">
                     <div *ngFor="let item of propertiesFilter" class="property-item">
-                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" [routerLink]="['/PropertyInformation/',  item.propertyId]" />
+                        <img class="picture" alt="Card" src="https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/{{item.propertyId}}/image1.png" (click)="goToPropertyInfo(item.propertyId)"  />
                         <div class="text-card">
                             {{item.price}} € 
                         </div>
