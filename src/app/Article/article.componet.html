@@ -18,7 +18,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article_title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.articleId}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -70,7 +70,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.articleId}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -198,7 +198,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article_title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.articleId}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 
@@ -246,7 +246,7 @@
 
             <p-fileUpload 
             name="demo[]" 
-            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.title}}" 
+            url="https://k-konsult-server.online:80/K-Konsult/file/upload/article/{{article.articleId}}" 
             (onUpload)="onUpload($event)" 
             [multiple]="true" 
             accept="image/*" 

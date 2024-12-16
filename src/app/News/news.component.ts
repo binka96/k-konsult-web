@@ -66,6 +66,12 @@ export class News implements OnInit{
 
   ngOnInit(){
     this.articleid  = Number(this.route.snapshot.paramMap.get('articleTitle'));
+    this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
+    this.meta.addTag({ property: 'og:image', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/${this.articleid.toString()}/image1.png` });
+    this.meta.addTag({ property: 'og:url', content: `https://k-konsult.bg/news/${this.articleid.toString()}` });
+    this.meta.addTag({ property: 'og:type', content: 'website' });
+    this.meta.addTag({ name: 'twitter:description', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/article/${this.articleid.toString()}/image1.png` });
+    this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
     if(this.articleid!== undefined && this.articleid!== null){
     this.article.articleId = this.articleid;
   }
@@ -79,14 +85,8 @@ export class News implements OnInit{
         next: (response)=>{
           this.article = response;
           this.meta.addTag({ property: 'og:title', content: this.article.title });
-          this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
-          this.meta.addTag({ property: 'og:image', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${  this.route.snapshot.paramMap.get('articleTitle')}/image1.png` });
-          this.meta.addTag({ property: 'og:url', content: `https://k-konsult.bg/PropertyInformation/${this.route.snapshot.paramMap.get('articleTitle')}` });
-          this.meta.addTag({ property: 'og:type', content: 'website' });
           this.meta.updateTag({ name: 'twitter:title', content: this.article.title });
-          this.meta.addTag({ name: 'twitter:description', content: `https://k-konsult-server.online:80/K-Konsult/file/Get/images/property/${this.route.snapshot.paramMap.get('articleTitle')}/image1.png` });
-          this.meta.addTag({ property: 'og:description', content: `Избери своя имот днес.` });
-      
+
         }
       }
     );
